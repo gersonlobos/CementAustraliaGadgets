@@ -1,0 +1,515 @@
+.ui-mobile,.ui-mobile body {
+	height:100%;
+}
+.ui-btn-icon-notext .ui-btn-inner {
+	padding:0;
+	height:100%;
+	box-shadow:none;
+	border:none;
+}
+.ui-content {
+	border-width:0;
+	overflow-x:hidden;
+	padding:0;
+	margin:0;
+}
+.row .large-3,.driveBox.columns {
+	position:relative;
+	width:23.5%;
+	padding:0;
+	margin:5px .5%;
+}
+.columns.driveBox {
+	height: 200px;
+	background-size: 180px;
+	overflow: hidden;
+}
+.ui-listview-filter {
+	border-width:0;
+	overflow:hidden;
+	margin:0;
+	position:relative;
+	z-index:1;
+	background:#e5e5e5;
+	box-shadow:0px 2px 1px -1px rgba(0,0,0,0.1);
+	border-bottom:1px solid #ccc;
+}
+li {
+	background:#FFF;
+	border:1px solid rgba(0,0,0,0.12);
+	overflow:hidden;
+}
+div.ui-input-text input.ui-input-text,div.ui-input-text textarea.ui-input-text,.ui-input-search input.ui-input-text {
+	outline:none;
+	-webkit-outline:none;
+	-webkit-appearance:none;
+	border:none;
+	border-radius:0;
+	-webkit-border-radius:0;
+	font-family:'Open Sans',sans-serif;
+	font-size:13px;
+	line-height:26px;
+}
+div.ui-input-text input.ui-input-text:focus,div.ui-input-text textarea.ui-input-text:focus,.ui-input-search input.ui-input-text:focus {
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	outline:none;
+	-webkit-outline:none;
+	-webkit-appearance:none;
+	border:none;
+	border-radius:0;
+	-webkit-border-radius:0;
+}
+.ui-input-search {
+	border-radius:0px;
+	box-shadow:none;
+	font-size:12px;
+}
+.ui-listview-filter .ui-input-search {
+	margin: 5px 5% 5px;
+	width: auto;
+	display: block;
+	border: 2px solid #83888f;
+	background: #fafafa;
+}
+.ui-listview-filter .ui-input-search.ui-focus {
+	box-shadow:none;
+	border:2px solid #5E2D61;
+	background:#e6ebda;
+}
+.ui-input-search .ui-input-clear,.ui-input-text .ui-input-clear {
+	position:absolute;
+	right:0;
+	top:50%;
+	margin-top:-13px;
+	border:none;
+	background:none;
+	opacity:.4;
+}
+.ui-input-search .ui-input-clear:hover,.ui-input-text .ui-input-clear:hover {
+	opacity:.8;
+}
+.ui-body-c,.ui-body-c input,.ui-body-c select,.ui-body-c textarea,.ui-body-c button {
+	font-family:'Open Sans',sans-serif;
+}
+form.ui-listview-filter,#contentWrapper {
+	-webkit-backface-visibility:hidden;
+	-webkit-transform:translate3d(0,0,0);
+	-webkit-transition:all 0.2s ease,width 0.3s ease;
+	-moz-transition:all 0.2s ease,width 0.3s ease;
+	-o-transition:all 0.2s ease,width 0.3s ease;
+	transition:all 0.2s ease,width 0.3s ease;
+}
+form.ui-listview-filter {
+	top:-4px;
+	display:none;
+}
+#contentWrapper {
+	top:0px;
+}
+#contentWrapper.open {
+	top:45px;
+}
+form.ui-listview-filter.open {
+	top:0px;
+	display:block;
+}
+#btn_search {
+	border: none;
+	text-shadow: 0 1px 1px white;
+	padding: 4px 6px;
+	white-space: nowrap;
+	vertical-align: middle;
+	color: #666;
+/*	background: URL(https://googledrive.com/host/0B2B0zZHcnP-fWWEtZkE0bXk2eEU/DriveListingGridview-img-search.png) center -32px no-repeat #5E2D61; */
+    background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-search.png') center -32px no-repeat #5E2D61;
+	cursor: pointer;
+	margin: 0;
+	margin-right: 0;
+	border-radius: 0;
+	position: absolute;
+	left: 0;
+	z-index: 1000;
+	border: none;
+	box-shadow: 0px 0px 1px rgba(0,0,0,0.1);
+	position: absolute;
+	top: 0;
+	height: 38px;
+	width: 34px;
+	border-right: 1px solid rgba(0,0,0,0.2);
+	box-shadow: 1px 0px 0px rgba(255,255,255,0.3);
+	opacity: 1;
+}
+#btn_search:focus,
+#btn_search:hover {
+/*	background:url(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-search.png) center -32px no-repeat #4d2550; */
+	background:url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-search.png') center -32px no-repeat #4d2550;
+}
+#btn_search.current {
+/*	background:url(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-search.png) center -32px no-repeat #4d2550; */
+	background:url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-search.png') center -32px no-repeat #4d2550;
+
+	opacity:.6;
+}
+.ui-icon,
+.ui-icon-searchfield:after {
+/*	background-image:url(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-search.png); */
+	background-image:url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-search.png');
+	background-repeat:no-repeat;
+	-webkit-border-radius:9px;
+	border-radius:9px;
+	background-color:transparent;
+	border:none;
+	box-shadow:none;
+}
+.thumbHolder {
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	border:0px solid #FFF;
+	display:inline-block;
+	margin:0px 10px 0px 0px;
+	float:left;
+	background-repeat:no-repeat;
+	background-position:center center;
+	vertical-align:middle;
+	text-align:center;
+	overflow:hidden;
+}
+.thumbHolder img {
+	vertical-align:middle;
+	margin:0 auto;
+	padding:0;
+	-webkit-transition:opacity linear .3s;
+	max-width:100%;
+	margin-top:-20px;
+}
+.columns.driveBox .caption_holder {
+	position:absolute;
+	top:165px;
+	height:110px;
+	padding:8px 10px;
+	margin:0;
+	left:0;
+	right:0;
+	-webkit-transition-duration:.3s;
+}
+.columns.driveBox:hover .caption_holder {
+	top:100px;
+}
+
+.thumbHolder:hover img {
+	opacity:1;
+}
+.date_mod,.author_update {
+	font-size:11px;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	padding-top:0;
+	font-weight:400;
+	display:block;
+	color:#666;
+	text-transform:uppercase;
+	line-height:15px;
+	font-family:'Source Sans Pro',sans-serif;
+}
+.docIcon {
+	position:absolute;
+	top:0;
+	left:0;
+	width:20px;
+	height:20px;
+	z-index:900;
+}
+#content.grid .docIcon {
+	display:none;
+}
+.columns.driveBox .caption_holder h2 {
+	margin:0;
+	font-size:18px;
+	line-height:24px;
+	margin:0;
+	padding-top:0;
+	font-weight:normal;
+	overflow:hidden;
+	word-break:break-word;
+	text-overflow:ellipsis;
+	font-family:'Fjalla One',sans-serif;
+	letter-spacing:0;
+	text-transform:uppercase;
+	letter-spacing:0;
+}
+.columns.driveBox.small-6 .caption_holder {
+	position:absolute;
+	top:100px;
+	height:100px;
+	padding:8px 10px;
+	margin:0;
+	left:0;
+	right:0;
+	-webkit-transition-duration:.3s;
+	border-radius:0;
+}
+.columns.driveBox.small-6:hover .caption_holder {
+	top:60px;
+}
+#content.list .thumbHolder {
+	overflow:hidden;
+	box-shadow:none;
+	float:left;
+	width:200px;
+	background:none;
+	border:none;
+	margin:0;
+	height:130px;
+}
+#content.list .thumbHolder img {
+	width:75%;
+	height:130px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#content.list .date_mod, #content.list .author_update {
+	text-transform:uppercase;
+	color:#777;
+	margin:0;
+	padding:0;
+	padding-left:35px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	font-weight:400;
+	line-height:18px;
+	display: block;
+	width:100%;
+	text-align:left;
+}
+#content.list .author_update {
+	margin:0;
+	display:inline-block;
+	overflow:hidden;
+	float:none;
+	padding-left:35px;
+}
+#content.list .columns.driveBox {
+	background:#FFF;
+	padding:0;
+	margin:0 !important;
+	width:100%;
+	overflow:hidden;
+	width:100% !important;
+	border:0;
+	border-bottom:1px solid rgba(0,0,0,0.08);
+	height:auto;
+	border-left:1px solid rgba(0,0,0,0.1);
+	border-right:1px solid rgba(0,0,0,0.1);
+}
+#content.list .columns.driveBox .caption_holder {
+	background:transparent;
+	color:#FFF;
+	padding:0 10px 0 0;
+	margin:0;
+	-webkit-transition-duration:.3s;
+	position:relative;
+	top:0;
+	overflow:hidden;
+	display:block !important;
+	-webkit-backface-visibility:hidden;
+	height:130px;
+	box-shadow:none;
+	border:none;
+}
+#content.list .columns.driveBox .caption_holder:hover {
+	background:#edf0f1;
+}
+.fancybox-close {
+	background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-closewhite.png') 0px center #5e2d61;
+/*	background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-closewhite.png) 0px center #5e2d61; */
+	right:0;
+	background-size:25px;
+	background-position:90% center;
+	background-repeat:no-repeat;
+	width:15%;
+	left:85%;
+	top:0;
+	height:55px;
+}
+.fancybox-close {
+	background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-closewhite.png') 75% 10px #5e2d61 ;
+/*	background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-closewhite.png) 75% 10px #5e2d61 ; */
+	right:0;
+	background-size:25px;
+	background-repeat:no-repeat;
+	height:50px;
+	top:0;
+}
+[class*="column"]+[class*="column"]:last-child {
+	float:left;
+}
+.fancybox-image,.fancybox-iframe {
+	display:block;
+	width:100%;
+	height:92%;
+	top:8%;
+	position:absolute;
+	background: #FFF;
+}
+
+.fancybox-lock .fancybox-overlay {
+	overflow: auto;
+	overflow-y: auto;
+}
+
+@media screen and (max-width:670px) {
+	#content.list h2 {
+		display:block;
+		padding-bottom:0;
+		width:auto;
+	}	
+	#content .thumbHolder img {
+		margin: 0 auto;
+		padding: 0;
+		opacity: 1;
+		-webkit-transition: opacity linear .3s;
+		max-width: none;
+		height: 100%;
+	}
+	#content.list .date_mod, #content.list .author_update {
+		display:inline-block;
+		padding-bottom:5px;
+		font-weight: 400;
+		line-height: 18px;
+		padding-top: 3px;
+		text-align:left;
+		width:auto;
+		display:block;
+	}
+}
+
+@media screen and (max-width:620px) {
+	#content.list .date_mod, #content.list .author_update {
+		font-weight: 400;
+		line-height: 18px;
+		padding-top: 0;
+		display: block;
+		width: auto;
+	}
+}
+
+@media screen and (max-width:568px) {
+	#header>h1 {
+		min-width: 90px;
+		font-size: 13px;
+		font-weight: bold;
+		letter-spacing: -1px;
+		max-width: 90px;
+		text-align: left;
+		padding-left: 55px;
+		height: 45px;
+	}
+	.fancybox-title-outside-wrap {
+		width: 82%;
+	}
+
+	.fancybox-close {
+		background-position: 60% center;
+		width:15.5%;
+	}
+
+	.fancybox-image, .fancybox-iframe {
+		display: block;
+		width: 100%;
+		height: 90%;
+		top: 9%;
+		position: absolute;
+		background: #FFF;
+	}
+	#content {
+		-webkit-overflow-scrolling:touch;
+	}
+	#content.grid li.columns.driveBox {
+		position: relative;
+		width: 47.5%;
+		padding: 0;
+		margin: 3px .8%;
+	}
+	#content .thumbHolder img {
+		height:100%;
+		width:auto;
+	}
+	#content.list h2 {
+		font-size: 14;
+		line-height: 19px;
+		padding-bottom: 5px;
+		padding-right: 0;
+	}
+	#content.grid .columns.driveBox {
+		height: 120px;
+		overflow: hidden;
+	}
+	#content .driveBox .caption_holder {
+		background: rgba(255,255,255,0.8);
+		top: 90px;
+		height: 100px;
+	}
+	#content .driveBox:hover .caption_holder {
+		top:50px;
+	}
+	#content .thumbHolder img {
+		height: auto;
+		width: 120%;
+		max-width: 120%;
+		margin-top: -5%;
+		margin-left: -10%;
+	}
+	#content.list .date_mod, #content.list .author_update {
+		font-size: 10px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		font-weight: 300;
+		line-height: 11px;
+		display: inline-block;
+		padding-top: 0;
+		width: auto;
+		margin-right: 4px;
+		padding-bottom: 5px;
+		position: relative;
+		color: #999;
+		text-align: left;
+	}
+	#content.list .date_mod {
+		text-align: left;
+		font-weight: 400;
+		letter-spacing: 0;
+		font-size: 10px;
+	}
+	#content.list .author_update {
+			float:none;
+			margin-top:0;
+			padding-right:0px;
+			padding-left:1%;
+	}
+	#content.list .author_update strong {
+			color:#666;
+	}
+	#content li.driveBox {
+			width:47.5%;
+			margin:3px .9%;
+			padding: 0;
+	}
+	.columns.driveBox .caption_holder h2 {
+
+	font-size: 12px;
+	line-height: 20px;
+
+	}
+}
+
+@media only screen and (min-width: 48em) {
+	.fancybox-title-outside-wrap {
+        width: 90%;
+    }
+}

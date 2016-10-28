@@ -1,0 +1,206 @@
+.article_content {
+	margin: 0;
+	display: block;
+	overflow: hidden;
+	border: none;
+	padding-bottom: 0px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ccc;
+	height: 180px;
+}
+
+.article_content h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	margin: 0;
+	font-size: 26px;
+	line-height: 30px;
+	color: #333;
+}
+.img_container {
+	overflow: hidden;
+	padding: 0;
+	margin-bottom: 15px;
+	display: block;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	border: 1px solid #eee;
+	max-height: 240px;
+}
+.img_container img {
+	margin:0;
+	padding:0;
+}
+.article_content p {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #555;
+	font-weight: 300;
+	font-size: 13px;
+	line-height: 20px;
+	margin: 0;
+	padding: 12px 0px;
+}
+
+.article_content a {
+	color: #ffac64;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 18px;
+	display: block;
+	text-align: right;
+	margin: 10px 0px 5px;
+	font-family: 'Fjalla One', sans-serif;
+	text-transform: uppercase;
+	position: absolute;
+	right: 15px;
+	bottom: 30px;
+}
+
+.article_content a.green {
+	color: #0066CC;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 18px;
+	display: block;
+	text-align: right;
+	margin: 10px 0px 5px;
+	font-family: 'Fjalla One', sans-serif;
+	text-transform: uppercase;
+	position: absolute;
+	right: 15px;
+	bottom: 30px;
+	-webkit-transition-duration:.2s;
+}
+
+.article_content a.green:hover { color: #003399; }
+
+.block:hover {
+    background: #F7F8F9;
+    transition: all .2s ease;
+}
+.block{
+    transition: all .2s ease;
+}
+
+button.green {
+	-webkit-appearance: none;
+	-webkit-outline: none;
+	outline: none;
+	border: none;
+	border: none;
+	background: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/Page-Listing-img-googleplus.png') left bottom no-repeat, -webkit-gradient(linear, 0% 0%, 0% 100%, from(#90BD26), to(#7AB330));
+	padding: 0;
+	margin: 0 auto;
+	padding: 12px 25px 12px 45px;
+	display: block;
+	color: #FFF;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	border-radius: 3px;
+	border: 1px solid #7AB330;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+	-webkit-transition-duration: .3s;
+}
+
+button.green:hover {
+	background: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/Page-Listing-img-googleplus.png') left bottom no-repeat,-webkit-gradient(linear, 0% 0%, 0% 100%, from(#86B023), to(#6FA32C));
+	box-shadow:0p 0px 6px rgba(0,0,0,0.3);
+	border:1px solid #6FA32C;
+}
+
+button.green span {
+	font-weight:400;
+	display:inline-block;
+	font-size:16px;
+}
+
+
+.authText {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	color: #666;
+	line-height: 18px;
+	padding-bottom: 20px;
+}
+
+span.date {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 11px;
+	color: #999;
+	margin-bottom: 5px;
+	display: block;
+}
+
+[class*="column"]+[class*="column"]:last-child { float: left; }
+
+@media screen and (max-width:568px) {
+	.article_content h2 {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 20px;
+	}	
+
+	.article_content {
+		margin: 0;
+		display: block;
+		overflow: hidden;
+		border: none;
+		padding-bottom: 0px;
+		margin-bottom: 20px;
+		border-bottom: 1px solid #ccc;
+		height: 220px;
+		font-size: 12px;
+		line-height: 16px;
+	}
+	.article_content p {
+		font-family: 'Source Sans Pro', sans-serif;
+		color: #666;
+		font-weight: 400;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 0;
+		padding: 5px 0px;
+	}
+
+	.img_container { margin-bottom:10px; }	
+
+	.img_container img {
+		min-width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+		margin-top: 0;
+	}
+
+	span.date {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-size: 11px;
+		color: #999;
+		margin-bottom: 5px;
+		display: block;
+	}
+
+	.article_content a.green {
+		right: 15px;
+		bottom: 20px;
+		-webkit-transition-duration: .2s;
+	}
+
+	.row .small-6 {
+		position: relative;
+		width: 50%;
+		padding-left: 0.75%;
+		padding-right: 0.75%;
+	}
+}
+

@@ -1,0 +1,642 @@
+<Module>
+<ModulePrefs 
+	scrolling="true"
+	height="500" 
+	width="100%"
+	title="PageListing"
+	description="A Custom Google Gadget for displaying all sub pages in a list, dropdown, or block view"
+	author="White Stratus"
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+	author_link="http://www.whitestratus.com"
+	category="UAS"> 
+	<Require feature="dynamic-height"/>
+</ModulePrefs>
+
+<UserPref name="parentURL" display_name="Parent Page URL" required="true"></UserPref>
+<UserPref name="title" display_name="Title to Display (if blank then parent page name is displayed)" required="false"></UserPref>
+<UserPref name="display" display_name="Display Type" required="true" default_value="block" datatype="enum">
+	<EnumValue value="list"/>
+	<EnumValue value="dropdown"/>
+	<EnumValue value="block"/>
+</UserPref>
+<UserPref name="sort" display_name="Sort Method" required="true" default_value="Alphabetical" datatype="enum">
+	<EnumValue value="alphabetical"/>
+	<EnumValue value="custom"/>
+</UserPref>
+<UserPref name="sort_order" display_name="Custom sort order desired(Comma separated, no spaces in between)" required="false"></UserPref>
+
+<Content type="html">
+<![CDATA[ 
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Muli:300,400|Ubuntu+Condensed|PT+Sans:400,700|PT+Sans+Narrow:400,700|Telex|Scada:400,700|Roboto+Condensed:400,300,700|Source+Sans+Pro:200,300,400,700,900|Oswald:400,300,700|Merriweather+Sans:400,300|Roboto+Condensed:400,700|Fjalla+One|Roboto:400,300,400italic,700" rel="stylesheet" type="text/css">
+
+	<link href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/PageListing-style-foundationMin.css" rel="stylesheet" type="text/css">
+		
+	<link href='https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/PageListing-style.css' rel='stylesheet' type='text/css' />
+	<style>
+		#authorize-button {
+			-webkit-appearance: none;
+			border: none;
+			background-color: #357ae8;
+			color: #FFF;
+			padding: 10px 20px;
+			margin: 10px auto;
+			text-align: center;
+			float: none;
+			display: block;
+			line-height: 20px;
+		}
+
+		#authorize-button:hover { background-color: #1860d2; }
+
+		#authorize-window {
+			background: #FFF;
+			position: absolute;
+			top: 50px;
+			width: 100%;
+			z-index: 1000;
+			height: 100%;
+		}
+
+		.auth {
+			background: #f2f2f5;
+			width: 63%;
+			position: relative;
+			left: 18.5%;
+			margin-top: 20px;
+		}
+		.auth h2{
+			font-family: 'Open Sans', sans-serif;
+			font-size: 14px;
+			font-weight: 600;
+			padding: 20px 20px 5px 20px;
+			color: #333;
+		}
+		.authText {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 12px;
+			font-weight: 300;
+			padding: 0px 20px 20px 20px;
+		}
+		
+		.img_container img {
+			min-width: 100%;
+			margin: 0;
+			padding: 0;
+			margin-top: 0px;
+		}
+
+		@media screen and (max-width:568px) {
+			.row .small-6 {
+				position: relative;
+				width: 49%;
+				padding-left: .9%;
+				padding-right: .9%;
+			}
+			.img_container {
+				height: 80px;
+				margin-bottom: 5px;
+			}
+			.article_content {
+				margin: 0;
+				display: block;
+				overflow: hidden;
+				border: none;
+				padding-bottom: 0px;
+				margin-bottom: 20px;
+				border-bottom: 1px solid #ccc;
+				height: 125px;
+				font-size: 12px;
+				line-height: 16px;
+				padding-right: 5px;
+			}
+		}
+	</style>
+	<script type="text/javascript">
+		//====================================================================================================
+        // GLOBAL VARIABLES //
+			// CLIENT //
+		        var DOMAIN = 'cemaust.com.au';
+		        var CLIENT_ID = '291265929725-cv3nra9u6dqkuc4i478e17oir9pfkk85.apps.googleusercontent.com';
+		        var API_KEY = 'AIzaSyCUVqz2InE5egrhGIOAUXsd4zgXck823tw';
+			var _SITE_NAME_ = 'gone-google';
+			
+			// SETTINGS //
+			var prefs = new gadgets.Prefs();
+			var _GADGET_TITLE_ = prefs.getString("title");
+			var _PARENT_URL_ = prefs.getString("parentURL");
+			var _DISPLAY_ = prefs.getString("display");
+			var _SORT_ = prefs.getString("sort");
+			var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/';
+			var _SORT_ORDER_ = prefs.getString("sort_order");
+			var _TOKEN_;		
+				
+		//====================================================================================================		
+		
+		//=================================================================================================
+		function handleClientLoad()
+		//=================================================================================================
+		{
+			gapi.client.setApiKey(API_KEY);
+			window.setTimeout(checkAuth,1);
+		};		
+		
+		//=================================================================================================
+		function checkAuth()
+		//=================================================================================================
+		{
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: true,
+                                include_granted_scopes: false
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+		};		
+		
+		//=================================================================================================
+		function handleAuthResult(authResult) //Get Oauth result if authorized then pass data to function to parse else request user to authorize the gadget
+		//=================================================================================================
+		{
+			if (authResult && !authResult.error) 
+			{
+				_TOKEN_ = gapi.auth.getToken().access_token;
+				
+				fetchSitesData(1, 0); //Fetch Google Sites Data with no errors 
+			} 
+			else 
+			{					
+				var authorizeButton = document.getElementById('authorize-button');
+				authorizeButton.onclick = handleAuthClick;
+				
+				//DISPLAY AUTH
+				displaySection('auth');
+			}
+		};		
+		
+		//=================================================================================================
+		function handleAuthClick(event) //trigger OAuth pop-up
+		//=================================================================================================
+		{
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: false,
+                                include_granted_scopes: false
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+			return false;
+		};		
+		
+		//=================================================================================================
+		// Invoke fetchSitesData() to fetch data from the service provider endpoint.    
+		// Depending on the results of fetchSitesData, decide what to do.
+		// If the user hasn't approved access yet, response.oauthApprovalUrl contains a URL that includes 
+		// a Google-supplied request token. This is presented in the gadget as a link that the user 
+		// clicks to begin the approval process.
+		function fetchSitesData(errorCount, pageID)
+		//=================================================================================================
+		{
+			if(errorCount == null) {
+				errorCount = 1;
+			}
+			var index = _PARENT_URL_.search(_SITE_NAME_);
+			if(index != -1)
+			{
+				var url = "https://sites.google.com/feeds/content/" + DOMAIN + "/" + _SITE_NAME_ + "?alt=json";
+				
+				if(pageID == 0)
+				{
+					var pagePath = _PARENT_URL_.substring(index + _SITE_NAME_.length + 1);
+					//console.log("Page Path: " + pagePath);
+					
+					url = url + "&path=/" + pagePath + "&access_token=" + _TOKEN_;
+				}
+				else url = url + "&parent=" + pageID + "&access_token=" + _TOKEN_;
+				console.log("Fetch URL: "+url);
+				
+				var params = {};
+				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+				
+				gadgets.io.makeRequest(url, function (response) { 
+					if (response.oauthApprovalUrl) //NOT AUTHORIZED
+					{
+						var authButton = document.getElementById('id_AuthButton');
+						authButton.onclick = handleAuthClick;
+						
+						//DISPLAY AUTH FOR SITES
+						displaySection('auth');
+					} 
+					
+					else if (response.data) //AUTHORIZED
+					{			
+						if(pageID == 0) { getPageID(response.data); } //get parent ID 
+						else { createSitesResults(response.data); } //get child page data
+					} 
+					
+					else //ERROR
+					{
+						// The response.oauthError and response.oauthErrorText values may help debug
+						// problems with your gadget.
+						// Exponential back off for 504 errors added
+						var error = response.text;
+						var errorCode = response.rc;
+												
+						if(errorCode>499 && errorCount<6)
+						{
+							errorCount++;
+							setTimeout(function(){fetchSitesData(errorCount)}, Math.pow(2,errorCount)*1000);
+						}
+						console.log('OAuth error ('+errorCount+'): ' + error);
+					}
+				}, params);
+			}
+		};		
+		
+		//=================================================================================================
+		function getPageID(result) //Process returned JSON feed to make page child request
+		//=================================================================================================
+		{
+			var list = result.feed.entry;
+			if(list != null) 
+			{
+				//console.log(list);
+				var urlID = list[0].id.$t;
+				//console.log("URLID Index : "+urlID);
+				var index = urlID.search(_SITE_NAME_);
+				if(index != -1)
+				{
+					//Gadget Title
+					if(_GADGET_TITLE_ == '')
+					{
+						_GADGET_TITLE_ = list[0].title.$t;
+						//console.log("Gadget Title: "+_GADGET_TITLE_);
+					}
+					
+					//ID
+					var parentID = urlID.substring(index + _SITE_NAME_.length + 1);
+					//console.log("Parent ID: "+parentID)
+					fetchSitesData(1, parentID);
+				}
+				else
+				{
+					console.log("Error while retrieving the Page ID");
+				}
+			}
+		};
+		//========
+                
+                //========
+		//=================================================================================================
+		function createSitesResults(result) //Process returned JSON feed to display data
+		//=================================================================================================
+		{
+			var unsortedList = result.feed.entry;
+			//console.log(list);
+			
+			if(unsortedList != null) 
+			{				
+				//HEADING
+				if(_DISPLAY_ === 'block') buildBlockHeading();
+				else if(_DISPLAY_ === 'dropdown') buildDropdownHeading();
+				else buildListHeading();
+				
+				//SORT
+				//console.log(_SORT_);
+				if(_SORT_ === "custom"){
+					var list = customSort(unsortedList);
+				}else{
+					var list = unsortedList.sort(sortTitle);
+				}
+				//console.dir(list);
+				//BODY
+				for(var i=0; i<list.length; i++) 
+				{
+					var page = list[i];
+					if(page.category[0].label == "webpage")
+					{	
+						//TITLE
+						var pageTitle = page.title.$t;
+						//console.log("Title: "+pageTitle);
+						//console.dir(page);
+						//URL
+						var link = page.link;					
+						var linkFlag = false; 
+						for(var j=0; j<link.length; j++) 
+						{
+							if(link[j].rel == 'alternate') 
+							{
+								var pageURL = page.link[j].href;
+								linkFlag = true;
+							}
+						}
+						if(linkFlag == false) 
+						{
+							var pageURL = 'No URL';
+						}
+						//console.log("Page URL: "+pageURL);
+						
+						//BUILD HTML
+						if(_DISPLAY_ === 'block') //Block View
+						{
+							//Page HTML
+							var html = page.content.$t;
+							//console.log("Page HTML: "+html);
+							if(html != null)
+							{
+								var index = html.search(/<div class=["']sites-layout-tile sites-tile-name-content-1/); //one column layout
+			  
+								if(index == -1)
+								{
+									index = html.search(/<td class=["']sites-layout-tile sites-tile-name-content-1['"]>/); //all other column layouts skip if sidebar
+								}
+								
+								if(index == -1)
+								{
+									index = html.search(/<td class=["']sites-layout-tile sites-tile-name-content-2['"]>/); //second column content
+								}
+								
+								if(index != -1)
+								{
+									//CONTENT
+									var allContent = html.substring(index);
+									//console.log(allContent);
+									var text = html.replace(/<(?:.|\n)*?>/gm, ''); //remove the HTML tags
+									//console.log(text);
+									//console.log(pageTitle);
+									var titleIndex = text.search(pageTitle);
+									text = text.substring(titleIndex+pageTitle.length); //remove the title
+									//console.log(text);
+									if(text.search('\n') != -1 && text.search('\n') < 20) {
+										text = text.substring(text.search('\n'));
+									}									
+									//console.log(text);
+									var expString = text.split(/\s+/, 20);
+									var pageContent = expString.join(" ");
+									if(expString.length == 20)
+									{
+										pageContent = pageContent + '...';
+										//console.log(pageContent);
+									}
+									
+									//IMAGE
+									var index = html.search(/<div class=["']sites-layout-tile sites-tile-name-content-1/);
+									var temp = document.createElement('div');
+									temp.innerHTML = html;
+									//console.log(html);
+			  
+									if(index == -1)
+									{
+										index = html.search(/<td class=["']sites-layout-tile sites-tile-name-content-1['"]>/); //all other column layouts skip if sidebar
+										temp.innerHTML = temp.getElementsByClassName('sites-tile-name-header')[0].innerHTML + temp.getElementsByClassName('sites-tile-name-content-1')[0].innerHTML;
+									}
+									
+									if(index == -1)
+									{
+										index = html.search(/<td class=["']sites-layout-tile sites-tile-name-content-2['"]>/); //second column content
+										temp.innerHTML = temp.getElementsByClassName('sites-tile-name-header')[0].innerHTML + temp.getElementsByClassName('sites-tile-name-content-1')[0].innerHTML;
+									}
+									if(index != -1)
+									{
+
+										var pageImage = "";
+										//console.log(temp);
+										$(temp).find('img').each(function() {
+											var imageSrc = ""+this.src;
+											//console.log(imageSrc);
+											if(imageSrc.search(/www.google.com\/chart?/) == -1){
+												pageImage = imageSrc;
+												return false;
+											}
+										});										
+									}
+								}
+								else 
+								{ 
+									var pageContent = '';
+									var pageImage = 'https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/cemaust_logo.jpg';
+								}
+							}
+							else 
+							{ 
+								var pageContent = '';
+								var pageImage = 'https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/PageListing/cemaust_logo.jpg';
+							}
+							//console.log("Page Content: "+pageContent);
+							//console.log("Page Image: "+pageImage);
+							
+							buildBlockHTML(pageURL, pageTitle, pageContent, pageImage);							
+						}
+						else if(_DISPLAY_ === 'dropdown') //Dropdown View
+						{
+							buildDropdownHTML(pageURL, pageTitle);
+						}
+						else
+						{
+							buildListHTML(pageURL, pageTitle);
+						}
+					}
+				}
+			}
+			else 
+			{
+				var pageInfo = document.createElement('li');
+				pageInfo.className = "pageResult";
+				pageInfo.innerHTML = 'The page does not have any subpages to display.';
+				document.getElementById("id_SitesResults").appendChild(pageInfo);
+			}
+			
+			//DISPLAY ALL RESULTS
+			displaySection('results');
+		};		
+		
+		//==========================================================================================================
+		function buildBlockHeading() //builds the wrapping HTML
+		//==========================================================================================================
+		{
+			var headingInfo = document.createElement('div');
+			headingInfo.id = "id_BlockWrapper";
+			headingInfo.className = "large-12 small-12 columns";
+			document.getElementById("id_SitesResults").appendChild(headingInfo);
+		};
+		
+		//==========================================================================================================
+		function buildBlockHTML(pageURL, pageTitle, pageContent, pageImage) //builds the entry items
+		//==========================================================================================================
+		{
+			var pageInfo = document.createElement('div');
+			pageInfo.className = "page_block large-4 small-6 columns";
+			pageInfo.innerHTML = '<div class="block">'+
+                                        '<a href="'+pageURL+'" target="_top">'+
+					'<div class="img_container">'+
+						'<img class="rsImg" src="'+pageImage+'"/>'+
+					'</div>'+
+					'<div class="article_content">'+
+						'<h2>'+pageTitle+'</h2>'+
+						'<p>'+pageContent+'</p>'+
+						'</div>'+
+                                                '</a>'+
+                                                '</div>';
+			document.getElementById("id_SitesResults").appendChild(pageInfo);
+		};		
+
+		//==========================================================================================================
+		function buildDropdownHeading() //builds the wrapping HTML
+		//==========================================================================================================
+		{
+			var headingInfo = document.createElement('div');
+			headingInfo.id = "id_DropdownWrapper";
+			headingInfo.innerHTML = '<div class="title_container">'+_GADGET_TITLE_+'</div><div class="dropdownBox" onclick="displaySection(\'dropdown\')">Select a Page</div><ul class="pageDropdown" id="id_pageDropdown" style></ul>';
+			document.getElementById("id_SitesResults").appendChild(headingInfo);
+		};
+		
+		//==========================================================================================================
+		function buildDropdownHTML(pageURL, pageTitle) //builds the entry items
+		//==========================================================================================================
+		{
+			var pageInfo = document.createElement('li');
+			pageInfo.className = "dropdownItem";
+			pageInfo.innerHTML = '<a class="dropdownLink" href="' + pageURL + '" target="_parent">' + pageTitle + '</a>';
+			
+			document.getElementById("id_pageDropdown").appendChild(pageInfo);
+		};		
+		
+		//==========================================================================================================
+		function buildListHeading() //builds the wrapping HTML
+		//==========================================================================================================
+		{
+			var headingInfo = document.createElement('div');
+			headingInfo.id = "id_ListWrapper";
+			headingInfo.innerHTML = '<div class="title_container">'+_GADGET_TITLE_+'</div><ul class="pageList" id="id_pageList"></ul>';
+			document.getElementById("id_SitesResults").appendChild(headingInfo);
+		};
+		
+		//==========================================================================================================
+		function buildListHTML(pageURL, pageTitle) //builds the entry items
+		//==========================================================================================================
+		{
+			var pageInfo = document.createElement('li');
+			pageInfo.className = "listItem";
+			pageInfo.innerHTML = '<a class="listLink" href="' + pageURL + '" target="_parent">' + pageTitle + '</a>';
+			
+			document.getElementById("id_pageList").appendChild(pageInfo);
+		};
+		
+		//==========================================================================================================
+		function customSort(toSort){
+		//==========================================================================================================
+			if(_SORT_ORDER_ == null || _SORT_ORDER_ == ""){
+				var order = ["General", "Mail", "Calendar", "Drive", "Sites", "Google+", "Contacts"];
+			}
+			else{
+				var order = _SORT_ORDER_.split(",");
+			}
+
+			var titlesToSort = [];
+			var sorted = [];
+			var sortedTitles = [];
+			var left = [];
+			//console.log(toSort);
+			
+			for(var x = 0; x<toSort.length; x++){
+				titlesToSort.push(toSort[x].title.$t);
+			}
+			
+			for(var i = 0; i<order.length; i++){
+				//console.log(order[i]);
+				var index = titlesToSort.indexOf(order[i]);
+				//console.log(index);
+				if(index > -1){
+					sorted.push(toSort[index]);
+				}
+			}	
+			for(var x = 0; x<sorted.length; x++){
+				sortedTitles.push(sorted[x].title.$t);
+			}
+			if(sorted.length < titlesToSort.length){
+				//console.log("in the portion to be sorted alphabetically");
+				for(var j = 0; j<titlesToSort.length; j++){
+					if(sortedTitles.indexOf(titlesToSort[j]) == -1){
+						left.push(toSort[j]);
+					}
+				}
+				left.sort(sortTitle);
+				sorted = sorted.concat(left);
+			}
+			//console.log(sorted);
+			return sorted;
+		}
+		
+		//==========================================================================================================
+		function sortTitle(a,b) //sorting the returned pages by title
+		//==========================================================================================================
+		{
+		  if (a.title.$t < b.title.$t) return -1;
+		  if (a.title.$t > b.title.$t) return 1;
+		  return 0;
+		};
+		
+		//=================================================================================================
+		function displaySection(toShow) //Display the passed section of the html to the user
+		//=================================================================================================
+		{			
+			if(toShow === 'auth')
+			{
+				document.getElementById('authorize-window').style.display = "block";
+				document.getElementById('results').style.display = "none";		
+			}
+			else if(toShow === 'results') 
+			{
+				document.getElementById('results').style.display = "block";
+				document.getElementById('authorize-window').style.display = "none";				
+			}
+			else if(toShow === 'dropdown')
+			{
+				if(document.getElementById('id_pageDropdown').style.display == 'block') 
+				{
+					document.getElementById('id_pageDropdown').style.display = 'none';
+				}
+				else
+				{
+					document.getElementById('id_pageDropdown').style.display = 'block';
+				}
+			}
+		};
+		</script>
+	</head>
+	<body>		
+		<div id="authorize-window" class="authorizeWindow" style="display:none">
+			<div class ="auth">
+				<h2 class="authTitle">
+					A Note from your Cement Australia Administrator
+				</h2>
+				<div class="authText">
+					In order for you to experience the enhanced features of the UAS site, you will need to “allow access” the first time you use this gadget. You will only need to do this once for each feature.
+					<br><br>
+					After clicking the button below, you will be presented with a second screen that will also prompt to allow access.  Once you click through both screens, the feature will be enabled for your account.
+				</div>	
+			</div>			
+			<button id="authorize-button" data-role="none">Allow access</button>
+		</div>
+			
+		<div id="results" style="display:none;">
+			<div id="id_SitesResults" class="row large-12 small-12 columns"></div>
+		</div>
+		
+		<script type="text/javascript">		
+			//START OAUTH FLOW
+			gadgets.util.registerOnLoadHandler(function() {
+				$.getScript('//apis.google.com/js/api.js', function() {
+					gapi.load('auth:client', handleClientLoad);
+				});
+			});
+		</script>
+	</body>
+]]> 
+</Content>
+</Module>

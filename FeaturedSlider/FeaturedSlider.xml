@@ -1,0 +1,248 @@
+<Module>
+    <ModulePrefs scrolling="false" height="380" width="100%" title="FeaturedSlider" description="A Custom Google Gadget for Displaying Featured Content Slider with Touch/Swipe Support."
+    author="White Stratus" author_email="support@whitestratus.com" author_aboutme="Google Apps Deployment Specilaist Consulting and Cloud computing Expert" author_link="http://www.whitestratus.com" category="UAS" />
+    <UserPref name="img1Url" display_name="Image 1 URL" required="true" />
+    <UserPref name="img1Label" display_name="Image Label 1" required="true" />
+    <UserPref name="img1Ttl" display_name="Image 1 Title" required="true" />
+    <UserPref name="img1Lnk" display_name="Page URL 1" required="true" />
+    <UserPref name="img2Url" display_name="Image 2 URL" required="false" />
+    <UserPref name="img2Label" display_name="Image Label  2" required="true" />
+    <UserPref name="img2Ttl" display_name="Image 2 Title" required="false" />
+    <UserPref name="img2Lnk" display_name="Page URL 2" required="false" />
+    <UserPref name="img3Url" display_name="Image 3 URL" required="false" />
+    <UserPref name="img3Label" display_name="Image Label 3" required="true" />
+    <UserPref name="img3Ttl" display_name="Image 3 Title" required="false" />
+    <UserPref name="img3Lnk" display_name="Page URL 3" required="false" />
+    <UserPref name="img4Url" display_name="Image 4 URL" required="false" />
+    <UserPref name="img4Label" display_name="Image Label 4" required="true" />
+    <UserPref name="img4Ttl" display_name="Image 4 Title" required="false" />
+    <UserPref name="img4Lnk" display_name="Page URL 4" required="false" />
+    <UserPref name="img5Url" display_name="Image 5 URL" required="false" />
+    <UserPref name="img5Label" display_name="Image Label 5" required="true" />
+    <UserPref name="img5Ttl" display_name="Image 5 Title" required="false" />
+    <UserPref name="img5Lnk" display_name="Page URL 5" required="false" />
+    <Content type="html">
+        <![CDATA[ 
+		<head>
+		
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+        <script class="rs-file" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/FeaturedSlider/jquery.royalslider.min.js"></script>
+
+        <link class="rs-file" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/FeaturedSlider/royalslider.css" rel="stylesheet">
+
+        <link class="rs-file" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/FeaturedSlider/rs-default.css" rel="stylesheet">
+
+        <link class="rs-file" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/FeaturedSlider/tabbed-slider-style.css" rel="stylesheet">
+            
+        <link href='https://fonts.googleapis.com/css?family=Muli:300,400|Ubuntu+Condensed|PT+Sans:400,700|PT+Sans+Narrow:400,700|Telex|Scada:400,700|Roboto+Condensed:400,300,700|Source+Sans+Pro:200,300,400,700,900|Oswald:400,300,700|Merriweather+Sans:400,300|Roboto+Condensed:400,700|Fjalla+One|Roboto:400,300,400italic,700'
+        rel='stylesheet' type='text/css' />
+        </head>
+        
+        <body>
+            <div class="wrapper" id="page_Wrapper">
+			</div>
+            <script type="text/javascript">
+                var prefs = new gadgets.Prefs();
+                var img1Url = prefs.getString("img1Url");
+                var img1Label = prefs.getString("img1Label");
+                var img1Ttl = prefs.getString("img1Ttl");
+                var img1Lnk = prefs.getString("img1Lnk");
+                var img2Url = prefs.getString("img2Url");
+                var img2Label = prefs.getString("img2Label");
+                var img2Ttl = prefs.getString("img2Ttl");
+                var img2Lnk = prefs.getString("img2Lnk");
+                var img3Url = prefs.getString("img3Url");
+                var img3Label = prefs.getString("img3Label");
+                var img3Ttl = prefs.getString("img3Ttl");
+                var img3Lnk = prefs.getString("img3Lnk");
+                var img4Url = prefs.getString("img4Url");
+                var img4Label = prefs.getString("img4Label");
+                var img4Ttl = prefs.getString("img4Ttl");
+                var img4Lnk = prefs.getString("img4Lnk");
+                var img5Url = prefs.getString("img5Url");
+                var img5Label = prefs.getString("img5Label");
+                var img5Ttl = prefs.getString("img5Ttl");
+                var img5Lnk = prefs.getString("img5Lnk");
+                var sliderContent = document.createElement('div');
+                sliderContent.className = "royalSlider contentSlider rsDefault";
+                sliderContent.id = "content-slider-1";
+				
+				if(img5Lnk == "" || img5Lnk == null){
+				sliderContent.innerHTML =
+				'<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img1Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+						'<div class="infoBlock_inner" >' +
+						'<h3>' + img1Label + '</h3>' +
+						'<h4>' + img1Ttl + '</h4>' +
+						'<a target="_top" href="' + img1Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img1Label + '</h2>' +
+                    '<p>' + img1Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img2Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">' +
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img2Label + '</h3>' +
+                    '<h4>' + img2Ttl + '</h4>' +
+                    '<a target="_top" href="' + img2Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img2Label + '</h2>' +
+                    '<p>' + img2Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img3Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img3Label + '</h3>' +
+                    '<h4>' + img3Ttl + '</h4>' +
+                    '<a target="_top" href="' + img3Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img3Label + '</h2>' +
+                    '<p>' + img3Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img4Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img4Label + '</h3>' +
+                    '<h4>' + img4Ttl + '</h4>' +
+                    '<a target="_top" href="' + img4Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img4Label + '</h2>' +
+                    '<p>' + img4Ttl + '</p>' +
+                    '</span>' +
+                    '</div>';
+				
+				}
+				else{
+                sliderContent.innerHTML =
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img1Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+						'<div class="infoBlock_inner" >' +
+						'<h3>' + img1Label + '</h3>' +
+						'<h4>' + img1Ttl + '</h4>' +
+						'<a target="_top" href="' + img1Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img1Label + '</h2>' +
+                    '<p>' + img1Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img2Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">' +
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img2Label + '</h3>' +
+                    '<h4>' + img2Ttl + '</h4>' +
+                    '<a target="_top" href="' + img2Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img2Label + '</h2>' +
+                    '<p>' + img2Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img3Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img3Label + '</h3>' +
+                    '<h4>' + img3Ttl + '</h4>' +
+                    '<a target="_top" href="' + img3Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img3Label + '</h2>' +
+                    '<p>' + img3Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img4Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img4Label + '</h3>' +
+                    '<h4>' + img4Ttl + '</h4>' +
+                    '<a target="_top" href="' + img4Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img4Label + '</h2>' +
+                    '<p>' + img4Ttl + '</p>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="rsContent">' +
+                    '<img class="rsImg" src="' + img5Url + '" data-rsw="707" data-rsh="397"/>' +
+                    '<div class="infoBlock">'+
+                    '<div class="infoBlock_inner">' +
+                    '<h3>' + img5Label + '</h3>' +
+                    '<h4>' + img5Ttl + '</h4>' +
+                    '<a target="_top" href="' + img5Lnk + '">Read More</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="rsTmb">' +
+                    '<h2>' + img5Label + '</h2>' +
+                    '<p>' + img5Ttl + '</p>' +
+                    '</span>' +
+                    '</div>';
+					}
+                document.getElementById('page_Wrapper').appendChild(sliderContent);
+            </script>
+            <script id="addJS">
+                jQuery(document).ready(function ($) {
+                   
+                   $('#content-slider-1').royalSlider({
+       	arrowsNav: true,
+	   	arrowsNavAutoHide: false,
+    	fadeinLoadedSlide: true,
+    	controlNavigationSpacing: 0,
+    	controlNavigation: 'thumbnails',
+		
+		keyboardNavEnabled: true,
+		imageScaleMode: 'fill',
+		imageAlignCenter:true,
+		slidesSpacing: 0,
+		loop: true,
+		loopRewind: false,
+		numImagesToPreload: 1,
+	   thumbs: {
+			  autoCenter: false,
+			  fitInViewport: true,
+			  orientation: 'vertical',
+			  spacing: 0,
+			  paddingBottom: 0,
+			  arrowsAutoHide: false,
+			  autoHideControlNav:false,
+			  autoHideBlocks: true
+			},
+    	autoPlay: {
+    		enabled: true,
+    		pauseOnHover: true,
+			delay:8000
+    	}
+	});
+                });
+            </script>
+        </body>
+        
+        </html>
+		]]>
+</Content>
+</Module>

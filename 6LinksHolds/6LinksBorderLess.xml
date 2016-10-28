@@ -1,0 +1,111 @@
+<Module>  
+<ModulePrefs 
+   	scrolling="false"
+   	height="100%" 
+   	width="300"
+   	title="6LinksHolder"
+    title_url="http://www.whitestratus.com"
+    description="A Custom Google Gadget for Displaying a List pf Links with Icons"
+    author="White Stratus" 
+    author_email="support@whitestratus.com" 
+    author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+    author_link="http://www.whitestratus.com" 
+    category="UAS" >
+	<Require feature="locked-domain"/>
+</ModulePrefs>
+<UserPref name="gadget_title" display_name="Tab Label (Title)" required="false" />
+<UserPref name="item1Label" display_name="Label 1" required="false" />
+<UserPref name="item1Icon" display_name="Icon 1" required="false" />
+<UserPref name="item1Url" display_name="Link 1" required="false" />
+
+<UserPref name="item2Label" display_name="Label 2" required="false" />
+<UserPref name="item2Icon" display_name="Icon 2" required="false" />
+<UserPref name="item2Url" display_name="Link 2" required="false" />
+
+<UserPref name="item3Label" display_name="Label 3" required="false" />
+<UserPref name="item3Icon" display_name="Icon 3" required="false" />
+<UserPref name="item3Url" display_name="Link 3" required="false" />
+
+<UserPref name="item4Label" display_name="Label 4" required="false" />
+<UserPref name="item4Icon" display_name="Icon 4" required="false" />
+<UserPref name="item4Url" display_name="Link 4" required="false" />
+
+<UserPref name="item5Label" display_name="Label 5" required="false" />
+<UserPref name="item5Icon" display_name="Icon 5" required="false" />
+<UserPref name="item5Url" display_name="Link 5" required="false" />
+
+<UserPref name="item6Label" display_name="Label 6" required="false" />
+<UserPref name="item6Icon" display_name="Icon 6" required="false" />
+<UserPref name="item6Url" display_name="Link 6" required="false" />
+  
+<Content type="html">
+<![CDATA[
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>        
+        <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6LinksHolds/6LinksHolder-style-list.css" />	               
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Source+Sans+Pro:200,300,400,700,900|Fjalla+One|Roboto:400,300,400italic,700' rel='stylesheet' type='text/css' />
+	<script type='text/javascript'>
+		//====================================================================================================
+		function createUI()
+		//====================================================================================================
+		{
+			var prefs = new gadgets.Prefs();
+			//var gadgetTitle = prefs.getString("gadget_title"); 
+			var item1Url = prefs.getString("item1Url"); 
+			var item1Icon = prefs.getString("item1Icon"); 
+			var item1Label = prefs.getString("item1Label");
+			
+			var item2Url = prefs.getString("item2Url"); 
+			var item2Icon = prefs.getString("item2Icon"); 
+			var item2Label = prefs.getString("item2Label");
+			
+			var item3Url = prefs.getString("item3Url"); 
+			var item3Icon = prefs.getString("item3Icon"); 
+			var item3Label = prefs.getString("item3Label");
+			
+			var item4Url = prefs.getString("item4Url"); 
+			var item4Icon = prefs.getString("item4Icon"); 
+			var item4Label = prefs.getString("item4Label");
+			
+			var item5Url = prefs.getString("item5Url"); 
+			var item5Icon = prefs.getString("item5Icon"); 
+			var item5Label = prefs.getString("item5Label");
+			
+			var item6Url = prefs.getString("item6Url"); 
+			var item6Icon = prefs.getString("item6Icon"); 
+			var item6Label = prefs.getString("item6Label");
+			
+			
+			var listItems = document.createElement('ul');
+			listItems.innerHTML = 
+				'<li><a href="'+item1Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item1Icon+'"/></span><span class="label">'+item1Label+'</span></a></li>'+
+				'<li><a href="'+item2Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item2Icon+'"/></span><span class="label">'+item2Label+'</span></a></li>'+
+				'<li><a href="'+item3Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item3Icon+'"/></span><span class="label">'+item3Label+'</span></a></li>'+
+				'<li><a href="'+item4Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item4Icon+'"/></span><span class="label">'+item4Label+'</span></a></li>'+
+				'<li><a href="'+item5Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item5Icon+'"/></span><span class="label">'+item5Label+'</span></a></li>'+
+				'<li><a href="'+item6Url+'" class="large-1" target="_top"><span class="icon_holder"><img src="'+item6Icon+'"/></span><span class="label">'+item6Label+'</span></a></li>';
+				
+			document.getElementById('listContainer').appendChild(listItems);
+			
+			var header = document.createElement('div');
+			header.id = 'header';                        
+			header.innerHTML = '<h2>'+gadgetTitle+'</h2>';		
+			document.getElementById('headerContainer').appendChild(header);                        
+		};
+	</script>
+</head>
+
+<body>
+	<div id="headerContainer">
+	</div>	
+	<div id="listContainer">	
+	</div>
+	<script type='text/javascript'> 
+		createUI();
+	</script>
+</body>
+</html>
+]]>
+</Content>
+</Module>

@@ -1,0 +1,346 @@
+body,
+html {
+	height: 100%;
+overflow: hidden;
+}
+.container{
+background: #F2F2F2;
+border: 1px solid #F2F2F2;
+height: 100%;;
+}
+#header_container h2 {
+	position: relative;
+	z-index: 100;
+}
+
+#contentMain {
+background-size: 100%;
+max-width: none;
+background: #707173;
+overflow: hidden;
+margin-bottom: 15px;
+margin-top: 15px;
+}
+
+iframe#ifrm {
+box-shadow: 0px 0px 300px rgba(0,0,0,0.7);
+height: 340px !important;
+width: 100%;
+}
+
+.rsDefault, .rsDefault .rsOverflow, .rsDefault .rsSlide, .rsDefault .rsVideoFrameHolder, .rsDefault .rsThumbs {
+background: #f2f2f2;
+color: #333;
+}
+
+.rsDefault .rsArrowIcn {
+
+background-color: transparent;
+border-radius: 0px;
+}
+
+
+.rsDefault .rsArrowIcn:hover {
+	background-color: transparent;
+border-radius: 0px;
+}
+.rsDefault .rsArrow:hover {
+	background:rgba(0,0,0,0.85);
+}
+.row {
+	background: transparent;
+	padding: 0;
+	border: 0;
+	max-width:none;
+}
+.four, .row .four {
+	width: 31.1%;
+	margin-top: 0;
+	margin-left: 1.5%;
+	padding: 0;
+	border-left: 0;
+	border-right: 0;
+	margin-bottom: 15px;
+}
+.royalSlider {
+	height: 330px;
+	position: relative;
+	background: #f2f2f2;
+}
+.wrapper {
+	padding: 0;
+}
+
+a.caption_holder {
+	display: block;
+	background:#FFF;
+	overflow: hidden;
+	padding: 0;
+	margin: 10px 0px -10px;
+	border: 1px solid #eee;
+	border-right: 0px;
+	height: 150px;
+	transition: all .2s ease;
+}
+
+a.caption_holder .thumbHolder {
+	float: left;
+	width: 100px;
+	margin: 10px 10px 5px 10px;
+	overflow: hidden;
+	position:relative;
+	z-index:1000;
+	height: 80px;
+	display:block;
+}
+a.caption_holder .thumbnail_overlay {
+position: absolute !important;
+z-index: 2000 !important;
+content: '';
+background-image: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/sprite_play-button.png');
+background-repeat: no-repeat;
+background-position: 0px 0px;
+top: 45px;
+left: 34px;
+width: 54px;
+height: 32px;
+background-color: transparent;
+border-radius: inherit;
+box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+display: block !important;
+}
+a.caption_holder .thumbnail_overlay .active{
+	background-position: -200px 0px;
+}
+.thumbHolder img {
+border: none;
+max-width: none;
+position: absolute;
+top: 0;
+left: -10px;
+height: inherit;
+}
+.author_update {
+	font-size: 10px;
+	text-transform: uppercase;
+	width: 50%;
+	display: block;
+	float: left;
+}
+.date_mod {
+/*---------------------------- CSS Change -----------------------------------------*/
+color: #5E2D61;
+/*---------------------------- CSS Change -----------------------------------------*/
+font-size: 11px;
+line-height: 14px;
+font-weight: 600;
+text-transform: uppercase;
+font-family: sans-serif;
+padding-top: 10px;
+display: inline-block;
+}
+a.caption_holder h2 {
+font-size: 16px;
+font-family: 'Arimo',sans-serif;
+font-weight: 400;
+padding-right: 15px;
+padding-bottom: 0;
+line-height: 19px;
+display: block;
+vertical-align: top;
+margin: 0;
+padding-top: 4px;
+color: #333;
+transition: all .2s ease;
+}
+
+a.caption_holder p {
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 400;
+	margin: 0;
+	padding: 5px 15px;
+	font-family: 'Arimo', sans-serif;
+	color: #888;
+	transition: all .2s ease;
+}
+a.caption_holder:hover{
+    /*---------------------------- CSS Change -----------------------------------------*/
+	background: #5E2D61;
+	transition: all .2s ease;
+	/*---------------------------- CSS Change -----------------------------------------*/
+}
+a.caption_holder.selected {
+    /*---------------------------- CSS Change -----------------------------------------*/
+	background: #e5791f;
+	transition: all .2s ease;
+	/*---------------------------- CSS Change -----------------------------------------*/
+}
+a.caption_holder.selected:hover {
+    /*---------------------------- CSS Change -----------------------------------------*/
+	background: #5E2D61;
+	transition: all .2s ease;
+	/*---------------------------- CSS Change -----------------------------------------*/
+}
+
+a.caption_holder.selected .date_mod strong,
+a.caption_holder:hover .date_mod strong {
+	color:#222;
+}
+
+a.caption_holder.selected .date_mod, 
+a.caption_holder.selected h2, 
+a.caption_holder.selected .author_update,
+a.caption_holder:hover .date_mod, 
+a.caption_holder:hover h2, 
+a.caption_holder:hover .author_update,
+a.caption_holder.selected p,
+a.caption_holder:hover p {
+color: #FFF !important;
+}
+
+
+
+ul#content li a.selected .date_mod strong {
+color:#222;
+}
+
+ul#content li .thumbHolder img {
+	background: #000;
+	
+}
+
+
+
+.twelve, .row .twelve {
+width: 100%;
+}
+
+.four, .row .four {
+width: 32.0%;
+margin-top: 0;
+margin-left: 10px;
+padding: 0;
+border-left: 0;
+border-right: 0;
+margin-bottom: 10px;
+}
+
+.column, .columns {
+float: left;
+min-height: 1px;
+padding: 0;
+position: relative;
+}
+
+/*-----ROYAL SLIDER----*/
+.rsDefault .rsArrow {
+
+width: 35px;
+background-color: rgba(51, 51, 51, 0.75);
+}
+[class*="column"]+[class*="column"]:last-child {
+float: left;
+}
+@media screen and (max-width:568px) {
+	
+	body, html {
+		height:100%;
+		overflow:hidden;
+	}
+	
+	#contentMain {
+		margin-bottom:0px;
+	}
+	
+	a.caption_holder {
+		border: 0;
+		border-right: 0px;
+	}
+
+	[class*="column"]+[class*="column"]:last-child {
+		float: none;
+	}
+
+	.twelve, .row .twelve {
+		width: 100%;
+		padding: 0;
+	}
+
+	iframe#ifrm {
+		height: 200px !important;
+	}
+	.slider {
+		border: 0;
+	}
+	
+	a.caption_holder p {
+		font-size: 11px;
+		line-height: 14px;
+	
+	}
+
+}
+@media screen and (max-width:768px) {
+	.rsSlide {
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.rsDefault .rsArrow {
+		display: none !important;
+	}
+
+	.row .playlistSidebar {
+		margin-left: 0;
+	}
+	#contentMain {
+		margin-bottom:0px;
+		margin-top:0px;
+	}
+	iframe#ifrm {
+		height: 300px;
+		width:100%;
+	}
+	.twelve, .row .twelve {
+		width: 100%;
+		padding-top: 0px;
+	}
+
+	[class*="column"]+[class*="column"]:last-child {
+		float: none;
+	}
+
+	.four, .row .four {
+		width: 100% !important;
+		margin-top: 0;
+		margin-left: 0;
+		padding: 0;
+		border-left: 0;
+		border-right: 0;
+		margin-bottom: 0;
+		display: block;
+		clear: both;
+		position: relative;
+		z-index: 200;
+	}
+	a.caption_holder {
+		border: 0px;
+		margin: 0;
+		border-bottom: 1px solid #eee;
+		height:auto;
+		min-height: 130px;
+	}
+
+	.thumbHolder {
+		margin: 10px 10px 25px 10px;
+		height: 80px;
+		box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.48);
+	}
+	.thumbHolder img {
+		margin-left: -20px;
+		margin-top: -20px;
+		height: inherit;
+	}
+}

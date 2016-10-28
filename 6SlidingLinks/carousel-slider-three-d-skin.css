@@ -1,0 +1,117 @@
+/******************************************************\
+*
+*  3D skin
+*
+*    1. Arrows(direction) navigation
+*    2. Paging navigation
+*
+\******************************************************/
+
+
+
+/******************************************************\
+*
+*  1. Arrows (direction) navigation
+*
+\******************************************************/
+.touchcarousel.three-d .arrow-icon {
+	top: 0;
+	background-image: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-sprite.png');
+	background-repeat: no-repeat;
+	width: 19px;
+	height: 20px;	
+	margin-top: 0;
+}
+.touchcarousel.three-d .arrow-holder {
+	top: -23px;
+	width: 19px;
+	height: 20px;	
+	
+	-moz-opacity: 0.8;	
+	-webkit-opacity: 0.8;	
+	opacity: 0.8;	
+}
+.touchcarousel.three-d .arrow-holder.left {
+	
+}
+.touchcarousel.three-d .arrow-holder.right {
+right: 0;
+float:none !important;
+width: 22px;
+height: 100px;
+top: 0px;
+z-index: 1000;
+background: rgba(255,255,255,1);
+position: absolute;
+box-shadow: -3px 0px 4px -2px rgba(0,0,0,0.1);
+opacity: 1;
+border-radius: 2px;
+}
+
+
+.touchcarousel.three-d .arrow-icon.right {
+background: URL("https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-arrow-carousel-right.png") center -32px;
+top: 30px;
+right: 5px;
+float:none !important;
+}
+
+.touchcarousel.three-d .arrow-holder:hover {
+	-moz-opacity: 1;	
+	-webkit-opacity: 1;	
+	opacity: 1;	
+}
+.touchcarousel.three-d .arrow-holder:active {
+	-moz-opacity: 0.7;	
+	-webkit-opacity: 0.7;	
+	opacity: 0.7;	
+}
+.touchcarousel.three-d .arrow-holder.disabled {
+	-moz-opacity: 1;	
+	-webkit-opacity: 1;	
+	opacity: 1;	
+}
+
+/******************************************************\
+*
+*  2. Paging navigation
+*
+\******************************************************/
+
+
+.touchcarousel.three-d .tc-paging-centerer {
+display: block;
+overflow: hidden;
+background: #FFF;
+height: 25px;
+text-align: center;
+}
+.touchcarousel.three-d .tc-paging-centerer-inside {
+position: relative;
+margin: 0 auto;
+display: block;
+text-align: center;
+padding-top: 5px;
+}
+.touchcarousel.three-d .tc-paging-item {
+background: #ccc;
+width: 6px;
+height: 6px;
+-moz-opacity: 0.8;
+-webkit-opacity: 0.8;
+opacity: 0.8;
+margin-right: 8px;
+}
+.touchcarousel.three-d .tc-paging-item.current {	
+	background: #444;
+}
+.touchcarousel.three-d .tc-paging-item:hover {		
+	-moz-opacity: 1;	
+	-webkit-opacity: 1;	
+	opacity: 1;		
+}
+
+
+
+
+

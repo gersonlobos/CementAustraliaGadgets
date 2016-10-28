@@ -1,0 +1,158 @@
+<Module>
+    <ModulePrefs scrolling="false" height="130" width="100%" title="Six Sliding Links" description="Sliding Carousel with images and links" author="White Stratus" author_email="support@whitestratus.com"
+    author_aboutme="Google Apps Deployment Specilaist Consulting and Cloud computing development" author_link="http://www.whitestratus.com" category="UAS" />
+    <UserPref name="item1Label" display_name="Label 1" required="false" />
+    <UserPref name="item1Phrase" display_name="Phrase 1" required="false" />
+    <UserPref name="item1Icon" display_name="Icon 1" required="false" />
+    <UserPref name="item1Url" display_name="Link 1" required="false" />
+    <UserPref name="item2Label" display_name="Label 2" required="false" />
+    <UserPref name="item2Phrase" display_name="Phrase 2" required="false" />
+    <UserPref name="item2Icon" display_name="Icon 2" required="false" />
+    <UserPref name="item2Url" display_name="Link 2" required="false" />
+    <UserPref name="item3Label" display_name="Label 3" required="false" />
+    <UserPref name="item3Phrase" display_name="Phrase 3" required="false" />
+    <UserPref name="item3Icon" display_name="Icon 3" required="false" />
+    <UserPref name="item3Url" display_name="Link 3" required="false" />
+    <UserPref name="item4Label" display_name="Label 4" required="false" />
+    <UserPref name="item4Phrase" display_name="Phrase 4" required="false" />
+    <UserPref name="item4Icon" display_name="Icon 4" required="false" />
+    <UserPref name="item4Url" display_name="Link 4" required="false" />
+    <UserPref name="item5Label" display_name="Label 5" required="false" />
+    <UserPref name="item5Phrase" display_name="Phrase 5" required="false" />
+    <UserPref name="item5Icon" display_name="Icon 5" required="false" />
+    <UserPref name="item5Url" display_name="Link 5" required="false" />
+    <UserPref name="item6Label" display_name="Label 6" required="false" />
+	<UserPref name="item6Phrase" display_name="Phrase 6" required="false" />
+    <UserPref name="item6Icon" display_name="Icon 6" required="false" />
+    <UserPref name="item6Url" display_name="Link 6" required="false" />
+    
+    <Content type="html">
+		<![CDATA[
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+       
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script> 
+<script src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/custom.modernizr.js"></script>
+    <script src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/jquery.touchcarousel-1.2.min.js"></script> 
+
+	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/foundation.min.css">
+
+    <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-touchcarousel.css" />
+
+
+        <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-style.carousel.css" />
+
+        <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-three-d-skin.css" />
+
+
+	<script src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/foundation.min.js"></script>
+
+
+
+	 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Source+Sans+Pro:200,300,400,700,900|Fjalla+One|Roboto:400,300,400italic,700' rel='stylesheet' type='text/css' />
+     
+	
+	<div id="main-body" class="row">
+    	<div class="large-12 small-12 columns">		
+			<div class="carousel_top"></div>
+			<div id="carousel-image-text-horizontal" class="touchcarousel  three-d">       
+				
+			</div>
+			<div class="carousel_bottom"></div>
+		
+		</div>
+   </div>
+	
+<script type='text/javascript'>
+            $(window).load(function () {
+                var prefs = new gadgets.Prefs();
+
+                var item1Url = prefs.getString("item1Url");
+                var item1Phrase = prefs.getString("item1Phrase");
+                var item1Icon = prefs.getString("item1Icon");
+                var item1Label = prefs.getString("item1Label");
+
+                var item2Url = prefs.getString("item2Url");
+                var item2Phrase = prefs.getString("item2Phrase");
+                var item2Icon = prefs.getString("item2Icon");
+                var item2Label = prefs.getString("item2Label");
+
+                var item3Url = prefs.getString("item3Url");
+                var item3Phrase = prefs.getString("item3Phrase");
+                var item3Icon = prefs.getString("item3Icon");
+                var item3Label = prefs.getString("item3Label");
+
+                var item4Url = prefs.getString("item4Url");
+                var item4Phrase = prefs.getString("item4Phrase");
+                var item4Icon = prefs.getString("item4Icon");
+                var item4Label = prefs.getString("item4Label");
+
+                var item5Url = prefs.getString("item5Url");
+                var item5Phrase = prefs.getString("item5Phrase");
+                var item5Icon = prefs.getString("item5Icon");
+                var item5Label = prefs.getString("item5Label");
+				
+				var item6Url = prefs.getString("item6Url");
+                var item6Phrase = prefs.getString("item6Phrase");
+                var item6Icon = prefs.getString("item6Icon");
+                var item6Label = prefs.getString("item6Label");
+
+
+                var listItems = document.createElement('ul');
+                listItems.className = 'touchcarousel-container';
+                listItems.innerHTML =
+                    '<li class="touchcarousel-item">'+
+						'<a href="'+item1Url+'" target="_top">'+
+							'<img src="' + item1Icon + '" width="85">'+
+								'<div class="rblock">'+
+									'<h4>'+item1Label + '</h4>'+
+									'<p>' + item1Phrase + '</p>'+
+								'</div></a></li>' +
+                    '<li class="touchcarousel-item"><a href="' + item2Url + '" target="_top">' +
+                    '<img src="' + item2Icon + '"/>' +
+                    '<div class="rblock">' +
+                    '<h4>' + item2Label + '</h4>' +
+                    '<p>' + item2Phrase + '</p>' +
+                   '</div></a></li>' +
+                    '<li class="touchcarousel-item"><a href="' + item3Url + '" target="_top">' +
+                    '<img src="' + item3Icon + '"/>' +
+                    '<div class="rblock">' +
+                    '<h4>' + item3Label + '</h4>' +
+                    '<p>' + item3Phrase + '</p>' +
+                 '</div></a></li>' +
+                    '<li class="touchcarousel-item"><a href="' + item4Url + '" target="_top">' +
+                    '<img src="' + item4Icon + '"/>' +
+                    '<div class="rblock">' +
+                    '<h4>' + item4Label + '</h4>' +
+                    '<p>' + item4Phrase + '</p>' +
+                  '</div></a></li>' +
+                    '<li class="touchcarousel-item"><a href="' + item5Url + '" target="_top">' +
+                    '<img src="' + item5Icon + '"/>' +
+                    '<div class="rblock">' +
+                    '<h4>' + item5Label + '</h4>' +
+                    '<p>' + item5Phrase + '</p>' +
+                   '</div></a></li>'+
+				   '<li class="touchcarousel-item"><a href="' + item6Url + '" target="_top">' +
+                    '<img src="' + item6Icon + '"/>' +
+                    '<div class="rblock">' +
+                    '<h4>' + item6Label + '</h4>' +
+                    '<p>' + item6Phrase + '</p>' +
+                   '</div></a></li>';
+                document.getElementById('carousel-image-text-horizontal').appendChild(listItems);
+				$("#carousel-image-text-horizontal").touchCarousel({			
+				itemsPerMove: 1,
+				pagingNav: true,
+				scrollbar: false,				
+				scrollToLast: true,
+				loopItems: true,
+				autoplayDelay: 2000,
+				useWebkit3d: true,
+				transitionSpeed: 400	
+						
+			});
+            });
+        </script>	
+       
+     ]]>
+	</Content>
+</Module>

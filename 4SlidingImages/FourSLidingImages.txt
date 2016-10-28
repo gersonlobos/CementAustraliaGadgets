@@ -1,0 +1,146 @@
+<Module>  
+<ModulePrefs 
+     scrolling="false"
+     height="250" 
+     width="100%"
+     title="4SlidingImages"
+    title_url="http://whitestratus.com"
+    description="A Custom Google Gadget for Displaying Browser-Friendly Hover Captions."
+    author="White Stratus" 
+    author_email="support@whitestratus.com" 
+    author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+    author_link="http://www.whitestratus.com" 
+    category="UAS"
+/> 
+<UserPref name="img1Url" display_name="Image1 URL." required="false" />
+<UserPref name="img1Lbl" display_name="Label" required="false" />
+<UserPref name="img1Cptn" display_name="Caption" required="false" />
+<UserPref name="img1Lnk" display_name="Page URL." required="false" />
+<UserPref name="img2Url" display_name="Image2 URL." required="false" />
+<UserPref name="img2Lbl" display_name="Label" required="false" />
+<UserPref name="img2Cptn" display_name="Caption" required="false" />
+<UserPref name="img2Lnk" display_name="Page URL." required="false" />
+<UserPref name="img3Url" display_name="Image3 URL." required="false" />
+<UserPref name="img3Lbl" display_name="Label" required="false" />
+<UserPref name="img3Cptn" display_name="Caption" required="false" />
+<UserPref name="img3Lnk" display_name="Page URL." required="false" />
+<UserPref name="img4Url" display_name="Image4 URL." required="false" />
+<UserPref name="img4Lbl" display_name="Label" required="false" />
+<UserPref name="img4Cptn" display_name="Caption" required="false" />
+<UserPref name="img4Lnk" display_name="Page URL." required="false" />
+<Content type="html">
+	<![CDATA[
+     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+		<link rel="stylesheet" href="https://googledrive.com/host/0BybYotsuLktyVTBhSG42S09GYms/4SlidingImages-style-matehover.css" type="text/css" />
+		<link rel="stylesheet" href="https://googledrive.com/host/0BybYotsuLktyVTBhSG42S09GYms/4SlidingImages-style-foundation.css" />
+		<link rel="stylesheet" href="https://googledrive.com/host/0BybYotsuLktyVTBhSG42S09GYms/4SlidingImages-style-hovereffects.css" />
+		<link href='https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Droid+Sans:400,700|Gudea|Oswald:300,400,800|Open+Sans+Condensed:300,700|Open+Sans:300,400,600,700italic,400,300,700,800' rel='stylesheet' type='text/css'/>
+		<!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>  
+		<script src="https://googledrive.com/host/0BybYotsuLktyVTBhSG42S09GYms/JqueryEasing13.js" type="text/javascript"></script>
+		<script src="https://googledrive.com/host/0BybYotsuLktyVTBhSG42S09GYms/JqueryMateHover10Min.js" type="text/javascript"></script>
+
+		<div class="page" id="boxes_container">
+		</div><!-- column close -->
+
+		<script type="text/javascript">
+	   		var prefs = new gadgets.Prefs();
+	 		var img1Url = prefs.getString("img1Url"); 
+			var img1Lbl = prefs.getString("img1Lbl"); 
+			var img1Cptn = prefs.getString("img1Cptn"); 
+			var img1Lnk = prefs.getString("img1Lnk");
+			
+			var img2Url = prefs.getString("img2Url"); 
+			var img2Lbl = prefs.getString("img2Lbl"); 
+			var img2Cptn = prefs.getString("img2Cptn"); 
+			var img2Lnk = prefs.getString("img2Lnk");  
+			
+			var img3Url = prefs.getString("img3Url"); 
+			var img3Lbl = prefs.getString("img3Lbl"); 
+			var img3Cptn = prefs.getString("img3Cptn"); 
+			var img3Lnk = prefs.getString("img3Lnk"); 
+			
+			var img4Url = prefs.getString("img4Url"); 
+			var img4Lbl = prefs.getString("img4Lbl"); 
+			var img4Cptn = prefs.getString("img4Cptn"); 
+			var img4Lnk = prefs.getString("img4Lnk"); 
+			
+			var slidingCaptionsContent = document.createElement('div');
+			slidingCaptionsContent.className = "row large-12 columns";
+			slidingCaptionsContent.innerHTML = 
+				'<div class="large-3 small-6 columns">'+
+					'<div class="panel blue1" data-zlname="test">'+
+						'<img src="'+img1Url+'"/>'+
+						'<h3>'+img1Lbl+'</h3>'+
+						'<div data-zl-popup="link">'+
+							'<h2>'+img1Lbl+'</h2>'+
+							'<p>'+img1Cptn+'</p>'+
+							'<a target="_top" href="'+img1Lnk+'">Read More</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>'+
+				'<div class="large-3 small-6 columns">'+
+				'<div class="panel blue2" data-zlname="test2">'+
+					'<img src="'+img2Url+'"/>'+
+					'<h3>'+img2Lbl+'</h3>'+
+					'<div data-zl-popup="link">'+
+						'<h2>'+img2Lbl+'</h2>'+
+                    	'<p>'+img2Cptn+'</p>'+
+                    	'<a target="_top" href="'+img2Lnk+'">Read More</a>'+
+					'</div>'+
+				'</div>'+
+				'</div>'+
+				'<div class="large-3 small-6 columns">'+
+				'<div class="panel blue3" data-zlname="test">'+
+					'<img src="'+img3Url+'"/>'+
+					'<h3>'+img3Lbl+'</h3>'+
+					'<div data-zl-popup="link">'+
+						'<h2>'+img3Lbl+'</h2>'+
+                    	'<p>'+img3Cptn+'</p>'+
+                    	'<a target="_top" href="'+img3Lnk+'">Read More</a>'+
+					'</div>'+
+				'</div>'+
+				'</div>'+
+				'<div class="large-3 small-6 columns">'+
+				'<div class="panel blue4" data-zlname="test2">'+
+					'<img src="'+img4Url+'"/>'+
+					'<h3>'+img4Lbl+'</h3>'+
+					'<div data-zl-popup="link">'+
+						'<h2>'+img4Lbl+'</h2>'+
+                    	'<p>'+img4Cptn+'</p>'+
+                    	'<a target="_top" href="'+img4Lnk+'">Read More</a>'+
+					'</div>'+
+				'</div>'+
+				'</div>';
+			document.getElementById('boxes_container').appendChild(slidingCaptionsContent);
+		
+			$(window).load(function(){
+				$('[data-zlname = test]').mateHover({
+					position: 'x',
+					overlayStyle: 'rolling',
+					overlayBg: '#fff',
+					overlayOpacity: 0.9,
+					popupEasing: 'easeOutCirc',
+					rollingPosition: 'left',
+					overlaySpeedOut: 300,
+					overlaySpeedOut: 300
+				});
+				$('[data-zlname = test2]').mateHover({
+					position: 'y',
+					overlayStyle: 'rolling',
+					overlayBg: '#fff',
+					overlayOpacity: 0.9,
+					rollingPosition: 'top',
+					popupEasing: 'easeOutCirc',
+					overlaySpeedOut: 300,
+					overlaySpeedOut: 200
+				});
+			});
+		</script>
+	]]>
+</Content>
+</Module>

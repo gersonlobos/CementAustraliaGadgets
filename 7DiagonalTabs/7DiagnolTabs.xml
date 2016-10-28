@@ -1,0 +1,132 @@
+<Module>  
+<ModulePrefs 
+	scrolling="false"
+	height="50" 
+	width="100%"
+	title="7DiagonalTabs"
+	title_url="http://www.whitestratus.com"
+	description="A Custom Google Gadget for Displaying a List of Tabs as a Responsive Layout"
+	author="White Stratus" 
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+	author_link="http://www.whitestratus.com" 
+	category="UAS"
+/> 
+<UserPref name="menuItem1Label" display_name="Label 1" required="true" />
+<UserPref name="menuItem1" display_name="Link 1" required="true" />
+
+<UserPref name="menuItem2Label" display_name="Label 2" required="false" />
+<UserPref name="menuItem2" display_name="Link 2" required="false" />
+
+<UserPref name="menuItem3Label" display_name="Label 3" required="false" />
+<UserPref name="menuItem3" display_name="Link 3" required="false" />
+
+<UserPref name="menuItem4Label" display_name="Label 4" required="false" />
+<UserPref name="menuItem4" display_name="Link 4" required="false" />
+
+<UserPref name="menuItem5Label" display_name="Label 5" required="false" />
+<UserPref name="menuItem5" display_name="Link 5" required="false" />
+
+<UserPref name="menuItem6Label" display_name="Label 6" required="false" />
+<UserPref name="menuItem6" display_name="Link 6" required="false" />
+
+<UserPref name="menuItem7Label" display_name="Label 7" required="false" />
+<UserPref name="menuItem7" display_name="Link 7" required="false" />
+
+<UserPref name="menuItem8Label" display_name="Label 8" required="false" />
+<UserPref name="menuItem8" display_name="Link 8" required="false" />
+    
+<Content type="html">
+<![CDATA[
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+   	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/7DiagonalTabs/6DiagonalTabs-style-foundationtabs.css">
+  	<link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/7DiagonalTabs/6DiagonalTabs-style.css"/>
+  	
+  	<link href='https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Droid+Sans:400,700|Gudea|Cantarell:400,700|Oswald:300,400,800|Open+Sans+Condensed:300,700|Open+Sans:300,400,600,700italic,400,300,700,800' rel='stylesheet' type='text/css'/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>  
+	<script type='text/javascript'> 
+		$(window).load(function(){
+			var prefs = new gadgets.Prefs();
+			
+			var menuItem1 = prefs.getString("menuItem1"); 
+			var menuItem1Label = prefs.getString("menuItem1Label"); 
+			
+			var menuItem2 = prefs.getString("menuItem2");
+			var menuItem2Label = prefs.getString("menuItem2Label"); 
+			
+			var menuItem3 = prefs.getString("menuItem3");
+			var menuItem3Label = prefs.getString("menuItem3Label");
+			
+			var menuItem4 = prefs.getString("menuItem4");
+			var menuItem4Label = prefs.getString("menuItem4Label");
+			
+			var menuItem5 = prefs.getString("menuItem5");
+			var menuItem5Label = prefs.getString("menuItem5Label");
+			
+			var menuItem6 = prefs.getString("menuItem6");
+			var menuItem6Label = prefs.getString("menuItem6Label");
+
+			var menuItem7 = prefs.getString("menuItem7");
+			var menuItem7Label = prefs.getString("menuItem7Label");
+
+			var menuItem8 = prefs.getString("menuItem8");
+			var menuItem8Label = prefs.getString("menuItem8Label");
+			
+			var tabsArrURL = []; //array to hold the URLs
+			menuItem1 == '' || menuItem1 == null ? 0 : tabsArrURL.push(menuItem1);
+			menuItem2 == '' || menuItem2 == null ? 0 : tabsArrURL.push(menuItem2);
+			menuItem3 == '' || menuItem3 == null ? 0 : tabsArrURL.push(menuItem3);
+			menuItem4 == '' || menuItem4 == null ? 0 : tabsArrURL.push(menuItem4);
+			menuItem5 == '' || menuItem5 == null ? 0 : tabsArrURL.push(menuItem5);
+			menuItem6 == '' || menuItem6 == null ? 0 : tabsArrURL.push(menuItem6);
+			menuItem7 == '' || menuItem7 == null ? 0 : tabsArrURL.push(menuItem7);
+			menuItem8 == '' || menuItem8 == null ? 0 : tabsArrURL.push(menuItem8);
+			
+			var tabsArrLABEL = []; //array to hold the LABELs
+			menuItem1Label == '' || menuItem1Label == null ? 0 : tabsArrLABEL.push(menuItem1Label);
+			menuItem2Label == '' || menuItem2Label == null ? 0 : tabsArrLABEL.push(menuItem2Label);
+			menuItem3Label == '' || menuItem3Label == null ? 0 : tabsArrLABEL.push(menuItem3Label);
+			menuItem4Label == '' || menuItem4Label == null ? 0 : tabsArrLABEL.push(menuItem4Label);
+			menuItem5Label == '' || menuItem5Label == null ? 0 : tabsArrLABEL.push(menuItem5Label);
+			menuItem6Label == '' || menuItem6Label == null ? 0 : tabsArrLABEL.push(menuItem6Label);
+			menuItem7Label == '' || menuItem7Label == null ? 0 : tabsArrLABEL.push(menuItem7Label);
+			menuItem8Label == '' || menuItem8Label == null ? 0 : tabsArrLABEL.push(menuItem8Label);
+
+			var menuItems = document.createElement('ul');
+			menuItems.className = "row menu";
+			menuItems.id = "tabsMenu";
+			menuItems.innerHTML = '';
+			for(var i=0; i<tabsArrURL.length; i++)
+			{
+				menuItems.innerHTML = menuItems.innerHTML + '<li class="large-2 small-2"><a href="'+tabsArrURL[i]+'" target="_top">'+tabsArrLABEL[i]+'</a></li>';
+			}
+			document.getElementById('menuContainer').appendChild(menuItems);
+		}); 
+	</script>
+
+	<div class="menu" id="menuContainer">
+	</div>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			$(function(){
+				var url = (window.location != window.parent.location) ? document.referrer: document.location;
+                                //console.log(url);
+				url = url.replace(/\/$/,''); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
+                                //console.log(url);
+				// now grab every link from the navigation
+				$('.menu li a').each(function(){
+					// and test its href against the url pathname regexp
+                                        //console.log(this.href);
+					if(url == this.href){
+						$(this).addClass('active');
+					}
+				});
+			});
+		});
+	</script>
+]]>
+</Content>
+</Module>

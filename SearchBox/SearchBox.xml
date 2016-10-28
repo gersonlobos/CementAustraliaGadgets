@@ -1,0 +1,52 @@
+<Module> 
+<ModulePrefs 
+	scrolling="false"
+	height="120" 
+	width="100%"
+	title="SearchBox"
+	description="A Custom Google Gadget for Displaying a Google Site Logo and Search Bar"
+	author="White Stratus" 
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+	author_link="http://www.whitestratus.com" 
+	category="UAS"> 
+	<Require feature="dynamic-height"/>
+</ModulePrefs>
+
+<Content type="html">
+<![CDATA[
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/SearchBox-style-foundation.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/SearchBox-style.css"/>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:700italic,400,300,700,800' rel='stylesheet' type='text/css'/>
+	<style>
+		html,body, .row { background:transparent; }
+		#logo{
+			height: 81px;
+			padding-left: 22px;
+		}
+	</style>
+	
+	<div class="row">
+		<div class="twelve columns">
+			<div class="five columns" id="logo">
+				<div class="panel">
+				<a href="https://sites.google.com/a/cemaust.com.au/gone-google/uas" target="_top"><img id="logo" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/cemaust_logo.jpg" /></a>
+				</div>
+			</div>
+			<div class="seven columns" id="search">
+				<div class="panel">
+					<form id="sites-searchbox-form" action="https://sites.google.com/a/cemaust.com.au/gone-google/search-results" target="_top">
+						 <input dir="" name="q" type="text" />
+						 <input type="hidden" id="sites-searchbox-scope" name="scope" value="search-site">
+					  <input name="sa" type="submit" value="" /> 
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+]]>
+</Content>
+</Module>

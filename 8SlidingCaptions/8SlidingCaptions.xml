@@ -1,0 +1,215 @@
+<Module>  
+<ModulePrefs 
+   scrolling="false"
+   height="350" 
+   width="100%"
+   title="8SlidingCaptions"
+title_url="http://www.whitestratus.com"
+description="A Custom Google Gadget for a Photo Grid with Sliding Captions."
+author="White Stratus" 
+author_email="support@whitestratus.com" 
+author_aboutme="Google Apps Deployment Specilaist Consulting and Cloud computing Expert" 
+author_link="http://www.whitestratus.com" 
+category="UAS" >
+<Require feature="dynamic-height"/>
+</ModulePrefs>
+<UserPref name="img1Url" display_name="Image URL." required="false" />
+<UserPref name="img1Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img1Lnk" display_name="Page URL." required="false" />
+<UserPref name="img2Url" display_name="Image URL." required="false" />
+<UserPref name="img2Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img2Lnk" display_name="Page URL." required="false" />
+<UserPref name="img3Url" display_name="Image URL." required="false" />
+<UserPref name="img3Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img3Lnk" display_name="Page URL." required="false" />
+<UserPref name="img4Url" display_name="Image URL." required="false" />
+<UserPref name="img4Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img4Lnk" display_name="Page URL." required="false" />
+<UserPref name="img5Url" display_name="Image URL." required="false" />
+<UserPref name="img5Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img5Lnk" display_name="Page URL." required="false" />
+<UserPref name="img6Url" display_name="Image URL." required="false" />
+<UserPref name="img6Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img6Lnk" display_name="Page URL." required="false" />
+<UserPref name="img7Url" display_name="Image URL." required="false" />
+<UserPref name="img7Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img7Lnk" display_name="Page URL." required="false" />
+<UserPref name="img8Url" display_name="Image URL." required="false" />
+<UserPref name="img8Lbl" display_name="Label,Caption" required="false" />
+<UserPref name="img8Lnk" display_name="Page URL." required="false" />
+  <Content type="html">
+		<![CDATA[
+     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>  
+	
+	<script class="rs-file" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/8SlidingCaption/8SlidingCaptions-js-mosaic.js"></script>
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500|Ubuntu+Condensed|Open+Sans:400,300,700|Open+Sans+Condensed:300,700|Oswald:400,700" type="text/css">
+  	<link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/8SlidingCaption/8SlidingCaptions-style-foundationmin.css"/>
+
+ 	<link href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/8SlidingCaption/8SlidingCaptions-style.css" rel="stylesheet">
+	<style type="text/css">
+	
+	@media screen and (max-width:568px){
+	[class*="column"]+[class*="column"]:last-child {
+		float: none;
+		width: 100%;
+		clear: both;
+	}
+	
+	[class*="column"]+[class*="column"]:last-child .mosaic-backdrop img {
+		min-height: 100%;
+		max-width: none;
+		max-height: none !important;
+		height: auto !important;
+		width: 100% !important;
+	}
+	}
+	
+	.mosaic-backdrop {
+	display: none;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: #FFF;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	}
+	</style>
+    	<div id="content">
+           
+    	</div><!--end .row-->
+		
+   		<script type="text/javascript">
+		
+		
+		function getSliders(){
+			var sliders = [];
+	   		var prefs = new gadgets.Prefs();
+	 		var img1Url = prefs.getString("img1Url"); 
+			var img1Lbl = prefs.getString("img1Lbl").split(",")[0]; 
+			var img1Cptn = prefs.getString("img1Lbl").split(",")[1]; 
+			var img1Lnk = prefs.getString("img1Lnk");
+			
+			
+			var img2Url = prefs.getString("img2Url"); 
+			var img2Lbl = prefs.getString("img2Lbl").split(",")[0];
+			var img2Cptn = prefs.getString("img2Lbl").split(",")[1]; 
+			var img2Lnk = prefs.getString("img2Lnk");  
+			
+			var img3Url = prefs.getString("img3Url"); 
+			var img3Lbl = prefs.getString("img3Lbl").split(",")[0];
+			var img3Cptn = prefs.getString("img3Lbl").split(",")[1]; 
+			var img3Lnk = prefs.getString("img3Lnk"); 
+			
+			var img4Url = prefs.getString("img4Url"); 
+			var img4Lbl = prefs.getString("img4Lbl").split(",")[0];
+			var img4Cptn = prefs.getString("img4Lbl").split(",")[1]; 
+			var img4Lnk = prefs.getString("img4Lnk");
+			
+			var img5Url = prefs.getString("img5Url"); 
+			var img5Lbl = prefs.getString("img5Lbl").split(",")[0];
+			var img5Cptn = prefs.getString("img5Lbl").split(",")[1]; 
+			var img5Lnk = prefs.getString("img5Lnk");
+			
+			var img6Url = prefs.getString("img6Url"); 
+			var img6Lbl = prefs.getString("img6Lbl").split(",")[0];
+			var img6Cptn = prefs.getString("img6Lbl").split(",")[1]; 
+			var img6Lnk = prefs.getString("img6Lnk");
+			
+			var img7Url = prefs.getString("img7Url"); 
+			var img7Lbl = prefs.getString("img7Lbl").split(",")[0];
+			var img7Cptn = prefs.getString("img7Lbl").split(",")[1]; 
+			var img7Lnk = prefs.getString("img7Lnk");
+			
+			var img8Url = prefs.getString("img8Url"); 
+			var img8Lbl = prefs.getString("img8Lbl").split(",")[0];
+			var img8Cptn = prefs.getString("img8Lbl").split(",")[1]; 
+			var img8Lnk = prefs.getString("img8Lnk");
+			
+			img1Lnk == '' || img1Lnk == null ? 0 : sliders.push({"imgUrl":img1Url, "imgLbl":img1Lbl, "imgCptn":img1Cptn, "imgLnk":img1Lnk});
+			img2Lnk == '' || img2Lnk == null ? 0 : sliders.push({"imgUrl":img2Url, "imgLbl":img2Lbl, "imgCptn":img2Cptn, "imgLnk":img2Lnk});
+			img3Lnk == '' || img3Lnk == null ? 0 : sliders.push({"imgUrl":img3Url, "imgLbl":img3Lbl, "imgCptn":img3Cptn, "imgLnk":img3Lnk});
+			img4Lnk == '' || img4Lnk == null ? 0 : sliders.push({"imgUrl":img4Url, "imgLbl":img4Lbl, "imgCptn":img4Cptn, "imgLnk":img4Lnk});
+			img5Lnk == '' || img5Lnk == null ? 0 : sliders.push({"imgUrl":img5Url, "imgLbl":img5Lbl, "imgCptn":img5Cptn, "imgLnk":img5Lnk});
+			img6Lnk == '' || img6Lnk == null ? 0 : sliders.push({"imgUrl":img6Url, "imgLbl":img6Lbl, "imgCptn":img6Cptn, "imgLnk":img6Lnk});
+			img7Lnk == '' || img7Lnk == null ? 0 : sliders.push({"imgUrl":img7Url, "imgLbl":img7Lbl, "imgCptn":img7Cptn, "imgLnk":img7Lnk});
+			img8Lnk == '' || img8Lnk == null ? 0 : sliders.push({"imgUrl":img8Url, "imgLbl":img8Lbl, "imgCptn":img8Cptn, "imgLnk":img8Lnk});
+			
+			console.log(sliders);		
+			return sliders;
+		}
+		var SLIDERS = getSliders();
+		
+		function createSlide(width, imgLnk, imgLbl, imgCptn, imgUrl){
+			var slider = '<div class="large-'+width+' small-'+width+' columns">'+
+						'<div class="panel">'+
+							'<div class="mosaic-block bar2">'+
+								'<a href="'+imgLnk+'" target="_top" class="mosaic-overlay">'+
+									'<div class="details">'+
+										'<h4>'+imgLbl+'</h4>'+
+										'<p>'+imgCptn+'</p>'+
+									'</div>'+
+								'</a>'+
+								'<div class="mosaic-backdrop" style="background-image:url('+imgUrl+');">'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+					
+			return slider;
+		}
+	
+		var rowsLeft = Math.floor(SLIDERS.length / 3);
+		var lastRowCount = SLIDERS.length % 3;
+		var count = 0;
+		if(lastRowCount > 0) rowsLeft++;
+		console.log(rowsLeft);
+		console.log(lastRowCount);
+		var innerHtml = '';
+		console.dir(innerHtml);
+		for(var i = 0; i<SLIDERS.length; i++){
+			count++;
+			var sliderHtml = '';
+			if(count == 1){
+				sliderHtml = '<div class="mosaic_outer">'+	
+								'<div id="mosaic_container">'+
+									'<div class="row">';
+			}
+			if (rowsLeft == 1){
+				sliderHtml = sliderHtml + createSlide(4, SLIDERS[i]["imgLnk"], SLIDERS[i]["imgLbl"], SLIDERS[i]["imgCptn"], SLIDERS[i]["imgUrl"]);
+				if(count == lastRowCount || count == 3) {
+					if(count != 3){
+						var spaces = 3 - lastRowCount;
+						for(var j = 0; j<spaces; j++){
+							sliderHtml = sliderHtml + '<div class="large-4 small-4 columns"></div>';
+						}
+					}
+					sliderHtml = sliderHtml + '</div></div></div>';
+				}
+			}else {
+				sliderHtml = sliderHtml +createSlide(4, SLIDERS[i]["imgLnk"], SLIDERS[i]["imgLbl"], SLIDERS[i]["imgCptn"], SLIDERS[i]["imgUrl"]);
+				if(count == 3){
+					sliderHtml = sliderHtml + '</div></div></div>';
+					count = 0;
+					rowsLeft--;
+				}
+			}
+			console.dir(innerHtml);
+			innerHtml = innerHtml + sliderHtml;
+		}
+		console.log(innerHtml);		
+		document.getElementById('content').innerHTML = innerHtml;
+		$('.bar2').mosaic({
+			animation:'slide' //fade or slide
+		});
+		gadgets.window.adjustHeight();
+		
+</script>
+
+]]>
+</Content>
+</Module>

@@ -1,0 +1,197 @@
+/*----HTML AND BODY DEFAULTS----*/
+body,html {
+	font: 400 12px 'Open Sans', sans-serif;
+}
+/*----END HTML AND BODY DEFAULTS----*/
+
+
+/*----SCROLLBAR----*/
+::-webkit-scrollbar {
+	width:10px;
+}
+::-webkit-scrollbar-track {
+	background:#c3c3cb;
+}
+::-webkit-scrollbar-thumb {
+	background:#83838e;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #a1a1aa;
+}
+/*----END SCROLLBAR----*/
+
+
+/*----AUTHORIZATION-----*/
+.authorizeButton {
+	-webkit-appearance: none;
+	-moz-appearance:none;
+	border: none;
+	background-color: #357ae8;
+	color: #FFF;
+	padding: 10px 20px;
+	margin: 10px auto;
+	text-align: center;
+	float: none;
+	display: block;
+	border-radius: 4px;
+	line-height: 20px;
+}
+.authorizeButton:hover { background-color: #1860d2; }
+.authorizeWindow {
+	background: #FFF;
+	position: absolute;
+	top: 50px;
+	z-index: 1000;
+	height: 100%;
+	width: 100%;
+}
+.auth {
+	background: #f2f2f5;
+	width: 63%;
+	position: relative;
+	left: 18.5%;
+	margin-top: 20px;
+}
+.auth h2{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 20px 20px 5px 20px;
+	color: #333;
+}
+.authText {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	padding: 0px 20px 20px 20px;
+}
+/*----END AUTHORIZATION-----*/
+
+
+/*----HEADER----*/
+.generalHeader {
+	overflow: hidden;
+	display:block;
+
+	box-shadow:0px 1px 1px rgba(0,0,0,0.05);
+	border-bottom:3px solid #163d8a;
+	background: URL(https://googledrive.com/host/0Bz9aUgVgF_RZVDhZVmdOTlhpRlE/generalHeader-img-bgtab.png) no-repeat right top;
+	
+    padding: 0;
+    margin: 0;
+    
+	height:46px;
+	min-width: 45%;
+}
+.generalHeader h1 {
+    color: #FFF;
+    font: 400 18px 'Fjalla One',sans-serif;
+    letter-spacing: 0;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    text-shadow: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+    margin: 0;
+    padding: 0 0 0 40px;
+    
+    display: inline-block;
+    
+    height: 45px;
+    width: 100%;
+}
+.generalHeader.reverse {
+    background: URL(https://googledrive.com/host/0Bz9aUgVgF_RZVDhZVmdOTlhpRlE/generalHeaderReverse-img-bgtab.png) no-repeat left top;
+    border-bottom: 3px solid #57595f;
+}
+.generalHeader.reverse h1 {
+    text-align: right;
+    padding: 0;
+    width: 90%;
+}
+/*----END HEADER----*/
+
+
+/*----BUTTONS----*/
+.generalButton {
+    background:#0066CC;
+    border:1px solid #0066CC;
+    padding:10px 15px;
+    color:#FFF;
+    cursor: pointer;
+}
+.generalButton:hover {
+    background:#003399;
+    border:1px solid #003399;
+} /*----END BUTTONS----*/
+
+
+/*----LINKS----*/
+.generalLink {
+    text-decoration: none;
+    color:#0066CC;
+}
+.generalLink:hover {
+    color:#003399;
+}
+/*----END LINKS----*/
+
+/*----GADGET BRANDING CLASSES----*/
+/*----3arrowtabs----*/
+.rightarrowdiv {
+    background-color: #99cc00;
+}
+.rightarrowdiv:before {
+    border-color: transparent transparent transparent #99cc00;
+}
+.rightarrowdiv.active,
+.rightarrowdiv:hover {
+	background-color:#003399;
+}
+.rightarrowdiv.active:before,
+.rightarrowdiv:hover:before {
+	border-color: transparent transparent transparent #003399;
+}
+.rightarrowdiv.red {
+    background-color:#FF0099;
+}
+.rightarrowdiv.red:before {
+    border-color: transparent transparent transparent #FF0099;
+}
+.rightarrowdiv.red:hover,
+.rightarrowdiv.red.active {
+	background-color:#003399;
+}
+.rightarrowdiv.red.active:before,
+.rightarrowdiv.red:hover:before {
+	border-color: transparent transparent transparent #003399;
+}
+.rightarrowdiv.yellow {
+    background-color:#ff9900;
+}
+.rightarrowdiv.yellow:before {
+	border-color: transparent transparent transparent #ff9900;
+}
+.rightarrowdiv.yellow.active,
+.rightarrowdiv.yellow:hover {
+	background-color:#003399;
+}
+.rightarrowdiv.yellow.active:before,
+.rightarrowdiv.yellow:hover:before {
+	border-color: transparent transparent transparent #003399;
+}
+/*----END 3arrowtabs----*/
+
+
+
+
+
+
+
+
+
+
+

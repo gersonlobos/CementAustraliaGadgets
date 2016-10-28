@@ -1,0 +1,307 @@
+<Module>  
+<ModulePrefs 
+	scrolling="false"
+	height="550" 
+	width="100%"
+	title="Google Drive Listing Tree View"
+	title_url="http://www.gfs.com"
+	description="A Custom Google Gadget for a tree like view of a folder structure."
+	author="White Stratus" 
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specilaist Consulting and Cloud computing Expert" 
+	author_link="http://www.whitestratus.com" 
+	category="HomePlate"
+/> 
+<UserPref name="driveParentId" display_name="Drive Uppermost Folder ID" required="false" />
+<UserPref name="gadgetTitle" display_name="Gadget Title" required="false" />
+<Content type="html">
+<![CDATA[
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+	<script type="text/javascript" src="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-jquery-fancybox-script.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-jquery-fancybox-style.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-treeview-style.css"/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:700italic,400,300,700,800' rel='stylesheet' type='text/css'/>
+	
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+	</style>
+	
+    <script type='text/javascript'>
+		var CLIENT_ID = '161893176405.apps.googleusercontent.com';
+		var API_KEY = 'AIzaSyBCTegXmVN6DvdDzURiOuSxshAECoW0jkg';
+		var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/';
+		var DOMAIN = 'gfs.com';
+		var prefs = new gadgets.Prefs();
+		var _PARENT_FOLDER_ID_ = prefs.getString("driveParentId"); 
+		var _FOLDER_ID_ = ''; //store current subfolder ID
+		var _PREVIOUS_FOLDER_ID_ = _PARENT_FOLDER_ID_; //store the previous folder ID
+		var _GADGET_TITLE_ = prefs.getString("gadgetTitle"); 
+
+		function sortItems(a, b) {
+			if (a.title < b.title) return -1;
+			if (a.title > b.title) return 1;
+			return 0;
+		}
+
+		function handleClientLoad() {
+			gapi.client.setApiKey(API_KEY);
+			window.setTimeout(checkAuth, 1);
+		}
+
+		function checkAuth() {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: true
+			};
+			
+			if (_FOLDER_ID_ == '') {
+				if($('.gadget_title').html() == '')
+				{
+					$('.gadget_title').append(_GADGET_TITLE_);
+				}
+			}
+			
+			gapi.auth.authorize(options, handleAuthResult);
+		}
+
+		function handleAuthResult(authResult) {
+			var authorizeWindow = document.getElementById('authorize-window');
+			var authorizeButton = document.getElementById('authorize-button');
+			
+			if (authResult && !authResult.error) {
+				
+				authorizeWindow.style.display = 'none';
+				if (_FOLDER_ID_ == '') {
+					var folderID = _PARENT_FOLDER_ID_;
+				} 
+				else {
+					var folderID = _FOLDER_ID_;
+				}
+				makeApiCall(folderID);
+			} 
+			else {
+				authorizeWindow.style.display = "block";
+				authorizeButton.onclick = handleAuthClick;
+			}
+		}
+
+		function handleAuthClick(event) {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: false
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+			return false;
+		}
+
+		function makeApiCall(folderID) {
+			gapi.client.load('drive', 'v2', makeRequest(folderID));
+		}
+
+		function makeRequest(folderID) 
+		{
+			var requestParams = createRequest(folderID);
+			var request = gapi.client.request(requestParams);
+			request.execute(function (resp) 
+			{
+				var items = resp.items;
+				items.sort(sortItems);
+				
+				if (_FOLDER_ID_ != '') {
+					var backButton = document.getElementById('id_back');					
+					backButton.style.display = "block";
+				}
+				
+				for (var i = 0; i < resp.items.length; i++) 
+				{				
+					var trashed = resp.items[i].labels.trashed; //weed out items in the trash
+			
+					if(trashed == false) 
+					{	
+						var type = resp.items[i].mimeType; //separate folders out
+						if (type == "application/vnd.google-apps.folder") {
+							var itemInfo = createFolderObject(resp.items[i], _PREVIOUS_FOLDER_ID_);
+						} 
+						else {
+							var itemInfo = createFileObject(resp.items[i], type);
+						}
+						if (_FOLDER_ID_ != '')
+						{
+							document.getElementById('id_list' + folderID).appendChild(itemInfo);
+						}
+						else { document.getElementById('id_list').appendChild(itemInfo); }
+					}
+				}
+			});
+		}
+
+		function createRequest(folderID) 
+		{
+			var requestParams = new Object();
+			requestParams.path = '/drive/v2/files';
+			requestParams.method = 'GET';
+			
+			requestParams.params = {
+				'q': '"' + folderID + '" in parents',
+				'maxResults': '100'
+			};
+			
+			return requestParams;
+		}
+
+		function createFolderObject(item) {
+			var folderID = item.id;
+			var folderTitle = item.title; //Folder title
+			var userDocIcon = item.iconLink; //link to Google Icons
+			/* var userThumb = item.thumbnailLink; //Google provided thumbnail 
+			if (userThumb == null) {
+				userThumb = "https://sites.google.com/a/" + DOMAIN + "/customer-image-repository/default.jpg"
+			} */
+			var folderInfo = document.createElement('li');
+			folderInfo.className = "three columns driveBox mobile-two";
+			folderInfo.innerHTML = '<img class="docIcon" width="20" src="' + userDocIcon + '"/> <a class="caption_holder" id="id_button' + folderID + '" onclick="getFolderContents(\'' + folderID + '\')"><h2>' + folderTitle + '</h2></div></a><ul class="subfolder" id="id_list' + folderID + '" style="display:none"></ul>';
+			
+			return folderInfo;
+		}
+
+		function createFileObject(item, type) {
+			var userDocIcon = item.iconLink; //link to Google Icons
+			var fileTitle = item.title; //File title
+			var fileAltLink = item.alternateLink; //Google Drive view or edit link
+			var fileID = item.id; //file id
+			var fileExtension = item.fileExtension; //file extention for uploaded files
+			/*var userThumb = item.thumbnailLink; //Google provided thumbnail 
+			if (userThumb == null) {
+				userThumb = "https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-thumbnail-default.jpg";
+			}
+			*/
+			var userContentLink = item.webContentLink; //download link
+			var userEmbed = item.embedLink; //Link to embed file
+			var dateModified = item.modifiedDate; //file updated
+			var date = new Date(dateModified);
+			var months = Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
+			var dateString = months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+			var downloadURL = ''; //url for non-Google files
+			
+			if (type == "application/vnd.google-apps.form") {
+				var URL = 'https://docs.google.com/a/'+DOMAIN+'/forms/d/'+fileID+'/viewform';
+				fileAltLink = URL;
+				userEmbed = URL;
+			} 
+			else if (type == "application/vnd.google-apps.script") {
+				userEmbed = 'https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-preview-default.jpg';
+			} 
+			else if (fileExtension != null) {
+				downloadURL = '<a class=\'download_doc\' target=\'_blank\' href=\'' + userContentLink + '\'>&nbsp;</a>';
+				userEmbed = 'https://docs.google.com/a/' + DOMAIN + '/file/d/' + fileID + '/preview';
+			}
+			else if (userEmbed != null) {
+				//userEmbed = userEmbed;
+			} 
+			else {
+				userEmbed = 'https://docs.google.com/a/' + DOMAIN + '/file/d/' + fileID + '/preview';
+			}
+			
+			var fileInfo = document.createElement('li');
+			fileInfo.className = "three columns driveBox mobile-two";
+			var innerHTML = '<img class="docIcon" width="20" src="' + userDocIcon + 
+			'"/>' + 
+			/* <div class="thumbHolder"><img src="' + userThumb + '"/></div> */ 
+			'<a class="caption_holder fancybox fancybox.iframe" title="<h3>' + fileTitle +
+			'</h3><a class=\'open_doc\' target=\'_blank\' href=\''+fileAltLink+'\'>&nbsp;</a>'+downloadURL+'"href="'+userEmbed+'"' +
+			'target="ifrm"><h2>' + fileTitle + '</h2><span class="author_update">LAST UPDATED ON <strong>' + dateString + 
+			'</strong></span></a>';
+			
+			fileInfo.innerHTML = innerHTML;
+			return fileInfo;
+		}
+
+		function getFolderContents(folderID) {
+			_FOLDER_ID_ = folderID; //setting global variable for conditional buttons
+			
+			//display the folder list which will also update the button to call hideFolder instead of retrieving the information again.
+			displayFolder(folderID);
+			
+			//retrieve folder contents
+			handleClientLoad();
+		}
+
+		function displayFolder(folderID) 
+		{
+			$('#id_list' + folderID).show().animate({ opacity: "1.0"},300);
+			
+			//update button to call displayFolder instead of retrieving the information again.
+			var folderButton = document.getElementById('id_button' + folderID);
+			folderButton.onclick = function() { hideFolder(folderID); };
+		}
+		
+		function hideFolder(folderID) 
+		{
+			$('#id_list' + folderID).hide().animate({ opacity: "0.0"},300);
+			
+			//update button to call displayFolder instead of retrieving the information again.
+			var folderButton = document.getElementById('id_button' + folderID);
+			folderButton.onclick = function() { displayFolder(folderID); };
+		}
+		
+		function resetUI()
+		{
+			document.getElementById('id_list').innerHTML= '';
+			
+			_FOLDER_ID_ = '';
+			
+			handleClientLoad();
+		}
+	</script>
+</head>
+<body>
+	<div id="header">
+		<h1 class="gadget_title"></h1>
+		<span class="button_back" id="id_back" onclick="resetUI()" style="display:none"> Reset </span>
+	</div>
+	<div id="authorize-window" class="authorizeWindow" style="display:none">
+		<div class ="auth">
+			<h2 class="authTitle">
+				A Note from your GFS HomePlate Administrator
+			</h2>
+			<div class="authText">
+				In order for you to experience the enhanced features of HomePlate, you will need to “allow access” the first time you use this gadget. You will only need to do this once for each feature.
+				<br><br>
+				After clicking the button below, you will be presented with a second screen that will also prompt to allow access.  Once you click through both screens, the feature will be enabled for your account.
+			</div>	
+		</div>			
+		<button id="authorize-button">Allow access</button>
+	</div>
+	<div class="container" id="contentWrapper">
+		<ul class="list" id="content">
+			<ul class="row list" id="id_list">
+			</ul>
+		</ul>
+	</div>
+			
+	<script type='text/javascript'>
+		$(document).ready(function() {
+			$('#authorize-button').on('click', handleAuthClick);
+			$.getScript('//apis.google.com/js/api.js', function() {
+			gapi.load('auth:client', handleClientLoad);
+			});
+			
+			$('.fancybox').fancybox({
+				helpers : {title : {type : 'outside'}},
+				iframe :{scrolling : 'auto',	preload : true}
+			});
+		});
+	</script>
+</body>	
+]]> 
+</Content>
+</Module>

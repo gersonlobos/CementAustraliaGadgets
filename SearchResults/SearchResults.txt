@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs 
+		scrolling="false"
+		height="1000"
+		title="Unified Search Results"
+		description="Browse search results from both Google Drive and Sites."
+		width="100%"
+		author="White Stratus" 
+		author_email="support@whitestratus.com" 
+		author_aboutme="Google Apps Deployment Specilaist Consulting and Cloud computing development" 
+		author_link="http://www.whitestratus.com" 
+		category="UAS"> 
+		<Require feature="locked-domain"/>
+	</ModulePrefs>
+	<UserPref name="domain" display_name="Google Apps Domain (e.g. mydomain.com)" required="true" />
+	<UserPref name="siteName" display_name="Site Name (Separated by hyphens)" required="true" />
+	<UserPref name="siteUrl" display_name="Google Site Full URL" required="true" />
+	<UserPref name="gadgetTitle" display_name="Gadget Name (to display in the header)" required="false" />
+	<UserPref name="tab" display_name="Default Search Tab" required="true" default_value="drive" datatype="enum">
+		<EnumValue value="drive"/>
+		<EnumValue value="sites"/>
+	</UserPref>
+	<UserPref name="collectionName1" display_name="Collection 1 Name" required="false" />
+	<UserPref name="collection1" display_name="Collection 1 ID" required="false" />
+	<UserPref name="collectionName2" display_name="Collection 2 Name" required="false" />
+	<UserPref name="collection2" display_name="Collection 2 ID" required="false" />
+	<UserPref name="collectionName3" display_name="Collection 3 Name" required="false" />	
+	<UserPref name="collection3" display_name="Collection 3 ID" required="false" />
+	<UserPref name="collectionName4" display_name="Collection 4 Name" required="false" />	
+	<UserPref name="collection4" display_name="Collection 4 ID" required="false" />
+	<UserPref name="collectionName5" display_name="Collection 5 Name" required="false" />	
+	<UserPref name="collection5" display_name="Collection 5 ID" required="false" />
+	<UserPref name="collectionName6" display_name="Collection 6 Name" required="false" />	
+	<UserPref name="collection6" display_name="Collection 6 ID" required="false" />
+	<UserPref name="collectionName7" display_name="Collection 7 Name" required="false" />	
+	<UserPref name="collection7" display_name="Collection 7 ID" required="false" />
+	<UserPref name="collectionName8" display_name="Collection 8 Name" required="false" />	
+	<UserPref name="collection8" display_name="Collection 8 ID" required="false" />
+<Content type="html">
+<![CDATA[ 
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+		<link href='https://fonts.googleapis.com/css?family=Arimo:400,700|Noto+Sans:400,700,400italic|Pontano+Sans' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/foundation.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/style.common.randstad.intranet.css"/>
+		<link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/unified.search.css"/>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/foundation.min.js"></script>
+	</head>
+    <body>
+		<div class="loading" id="loading">Searching... </div>
+ 		<div class="auth" id="auth" style="display: none">
+			<div class="authwrapper">
+				<h2 class="authTitle">
+						A Note from your Cement Australia Administrator
+			        </h2>
+				<div class="authText">
+						In order for you to experience the enhanced features of the UAS site, you will need to “allow access” the first time you use this gadget. You will only need to do this once for each feature.
+						<br><br>
+						After clicking the button below, you will be presented with a second screen that will also prompt to allow access.  Once you click through both screens, the feature will be enabled for your account.
+			        </div>	
+			</div>	
+                        <button class="authButton red" id="id_AuthButton">Allow access</button>			
+		</div>
+		<div class="results row" id="results">
+            <div id="header_container">
+                <h2 class="gadget_title">Search Results</h2>
+            </div>
+			<div class="tab-container columns large-12" id="tabs">
+                <ul class="tabSet">
+                    <li class="tab" id="drive"><a href="#tabs-1" id="driveLink" onclick="fetchData(this)">Drive</a></li>
+                    <li class="tab" id="sites"><a href="#tabs-2" id="sitesLink" onclick="fetchData(this)">Sites</a></li>
+            	</ul>
+					<!--BEGIN TABS PANELS CONTAINER-->
+				<div class="panels_container row" id="tabs-container">
+					<div class="columns large-12 panelTab" id="tabs-1" style="display: none;">
+						<div class="driveResults" id="driveResults">
+                        	<div class="columns large-12" id="drive_sorter">
+                            	<div class="large-4 small-12 columns select_holder">
+									<form class="custom">
+										<label for="customDropdown">Filter by Document Type</label>
+										<select class="medium" id="customDropdown" onChange="updateUI(this.value, 'docType')">
+										  <option value="all">All Files</option>
+										  <option value="doc">Google Doc</option>
+										  <option value="sheet">Google Sheet</option>
+										  <option value="slide">Google Presentation</option>
+										  <option value="form">Google Forms</option>
+										  <option value="pdf">PDF file</option>
+										  <option value="mDocx">Microsoft Document</option>
+										  <option value="mPptx">Microsoft PowerPoint</option>
+										  <option value="mXlsx">Microsoft Excel</option>
+										</select>
+									</form>
+								</div>
+                                  <div class="large-4 small-12 columns select_holder">
+                                        <form class="custom">
+                                            <label for="customDropdown">Sort Results</label>
+                                            <select class="medium" id="customDropdownSort" onChange="updateUI(this.value, 'sort')">
+                                              <option value="lastModified">Last Modified Date</option>
+                                              <option value="dateCreated">Creation Date</option>
+											  <option value="lastViewed">Last Viewed by Me</option>
+											  <option value="byTitle">By Title</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                     <div class="large-4 small-12 columns select_holder">
+                                        <form class="custom">
+                                            <label for="customDropdownCollection">Filter by Collection</label>
+                                            <select class="medium" id="customDropdownCollection" onChange="updateUI(this.value, 'collection')">
+                                              <option value="allCollections">All Collections</option>
+											  <option value="sharedWithMe">Shared with Me</option>
+                                              <option value="ownedByMe">Owned by Me</option>
+                                              <option value="starred">Starred Files</option>
+                                            </select>
+                                        </form>
+									</div><!--end third column-->
+                                </div><!--end #drive_sorter--> 
+								<div id="driveResults" class="columns large-12 small-12">
+									<h2 class="resultsTitle">Google Drive Results</h2>
+									<ul id="driveContent">
+									</ul>
+								</div><!-- end #driveCOntent -->
+							</div><!-- end #driveResults -->
+						</div><!-- end #tab-1 -->
+                        <!--Begin #tab-2 -->
+						<div class="columns large-12 panelTab" id="tabs-2" style="display: block;">
+							<div class="sitesResults columns large-12 small-12" id="sitesResults">
+								<h2 class="resultsTitle">Google Sites Page Results</h2>
+								<ul id="sitesContent">
+								</ul>
+							</div><!-- end #sitesResults -->
+						</div><!-- end #tab-2 -->
+					</div><!--end #tabs_container -->
+		</div><!--end #tabs -->
+		</div><!-- end #results -->
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			if(TAB === 'drive'){
+				$('#tabs-2').hide();
+				$('#tabs-1').show();
+				$('#driveLink').parent().addClass('active');
+				//console.dir($('#driveLink').parent());
+			}else{
+				$('#tabs-1').hide();
+				$('#tabs-2').show();
+				$('#sitesLink').parent().addClass('active');
+				//console.dir($('#driveLink').parent());		
+			}
+			//$('#tabs .panelTab').hide();
+			//$('#tabs .panelTab:first').show();
+			//$('#tabs ul li:first').addClass('active');
+			$('#tabs ul li a').click(function(){
+				$('#tabs ul li').removeClass('active');
+				$(this).parent().addClass('active');
+				var currentTab = $(this).attr('href');
+				$('#tabs .panelTab').hide();
+				$(currentTab).show();
+				return false;
+			});
+		});
+		
+		function getUrlVars(url)
+		{
+			var vars = [], hash;
+			var hashes = url.slice(url.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			//console.log(vars);
+			return vars;
+		}
+		
+		//GLOBAL VARIABLES ================================================================================
+			//Variables from XML settings
+			var prefs = new gadgets.Prefs();
+			var _GADGET_TITLE_ = prefs.getString("gadgetTitle");
+			var _SITE_URL_ = prefs.getString("siteUrl");
+			var _SITE_NAME_ = prefs.getString("siteName");
+			var DOMAIN = prefs.getString("domain");
+			var TAB = prefs.getString("tab");
+			var sitesFetch = false;
+			var driveFetch = false;
+			
+			//var searchResultsPage = _SITE_URL_+'/search-results?';
+			//var QUERY = document.referrer.substring(searchResultsPage.length);
+			
+			//************************************
+			//Allows additional Q string options to be used in the future to allow deep-linking to specific collections, filters and sorting.
+			var currentPageUrl = (window.location != window.parent.location) ? document.referrer: document.location;
+			var urlVars = getUrlVars(currentPageUrl); 
+			//console.log(urlVars);
+
+			
+			var QUERY = urlVars['q'];
+			//console.log("The current query is: " + QUERY);
+			
+			if (typeof urlVars['view'] != "undefined") {
+				TAB = urlVars['view'];
+				console.log("View parameter passed: " + urlVars['view']);
+			}
+			else {
+				console.log("View parameter NOT passed.");
+			}
+
+			//Before using the additional filters in the query code, check for (typeof URL_[varname] != "undefined") to determine if that value has been passed in in the query string.
+			//var URL_DFILTER = urlVars['drivefilter'];
+			//var URL_DSORT = urlVars['drivesort'];
+			//var URL_DFOLDERID = urlVars['drivefolderid'];
+			//console.log('Additional options passed in: Filter = ' + URL_DFILTER + ', Sort = '  + URL_DSORT + ', Folder ID = ' + URL_DFOLDERID);
+			//************************************
+			
+			
+			var _TOKEN_;
+			
+			//Office format mimetypes from : http://filext.com/faq/office_mime_types.php 
+			var docType = {
+				"all":"",
+				"doc":" and mimeType = 'application/vnd.google-apps.document'",
+				"sheet":" and mimeType = 'application/vnd.google-apps.spreadsheet'",
+				"form":" and mimeType = 'application/vnd.google-apps.form'",
+				"pdf":" and mimeType = 'application/pdf'",
+				"slide":" and mimeType = 'application/vnd.google-apps.presentation'",
+				"mDoc":" and mimeType = 'application/msword'",					
+				"mDocx":" and mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'",						
+				"mPpt":" and mimeType = 'application/vnd.ms-powerpoint'",
+				"mPptx":" and mimeType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'",
+				"mXls":" and mimeType = 'application/vnd.ms-excel'",
+				"mXlsx":" and mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"				
+			};
+			var docTypeSelected = "all";
+			
+			var collections = getCollections();
+			var collectionSelected = "allCollections";
+			
+			var d = new Date();
+			var sort = {
+				"lastModified":	function(a, b) {if (Date.parse(a.modifiedDate) < Date.parse(b.modifiedDate)) return 1;if (Date.parse(a.modifiedDate) > Date.parse(b.modifiedDate)) return -1; return 0;},
+				"dateCreated": function(a, b) {if (Date.parse(a.createdDate) < Date.parse(b.createdDate)) return 1;if (Date.parse(a.createdDate) > Date.parse(b.createdDate)) return -1; return 0;},
+				"lastViewed": function(a,b) {
+					if (!a.lastViewedByMeDate) return 1;
+					if (!b.lastViewedByMeDate) return -1;
+					if (Date.parse(a.lastViewedByMeDate) < Date.parse(b.lastViewedByMeDate)) return 1;
+					if (Date.parse(a.lastViewedByMeDate) > Date.parse(b.lastViewedByMeDate)) return -1; 
+					return 0;
+				},
+				"byTitle": function(a,b) {if (a.title < b.title) return -1;if (a.title > b.title) return 1;return 0;}
+			}
+			var sortSelected = "lastModified";
+			
+			var pageNumber = 0;
+		//OAuth variables
+			//credentials
+			var API_KEY = 'AIzaSyBotRV7eyWrUg4QWeLfAcC_oFvN92Xf3RE';
+			var CLIENT_ID = '1058593784161.apps.googleusercontent.com';
+
+			var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/ https://www.googleapis.com/auth/userinfo.email';
+			
+		//=================================================================================================
+			
+		function getCollections(){
+			var collections = new Object();
+			collections.allCollections = "";
+			collections.sharedWithMe = "and sharedWithMe";
+			collections.ownedByMe = "";
+			collections.starred = "and starred = true";
+			
+			var collect1 = prefs.getString("collection1");
+			var collect2 = prefs.getString("collection2");
+			var collect3 = prefs.getString("collection3");
+			var collect4 = prefs.getString("collection4");
+			var collect5 = prefs.getString("collection5");
+			var collect6 = prefs.getString("collection6");
+			var collect7 = prefs.getString("collection7");
+			var collect8 = prefs.getString("collection8");	
+
+			var collectName1 = prefs.getString("collectionName1");
+			var collectName2 = prefs.getString("collectionName2");
+			var collectName3 = prefs.getString("collectionName3");
+			var collectName4 = prefs.getString("collectionName4");
+			var collectName5 = prefs.getString("collectionName5");
+			var collectName6 = prefs.getString("collectionName6");
+			var collectName7 = prefs.getString("collectionName7");
+			var collectName8 = prefs.getString("collectionName8");
+			
+			var collectionSelect = document.getElementById("customDropdownCollection");
+			//console.log("Collection select = "+collectionSelect);
+
+			if(collect1 == "" || collect1 == null){}else{
+				collections.collection1 = " and '"+ collect1 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection1";
+				option.innerHTML = collectName1;
+				collectionSelect.appendChild(option);
+			}
+			if(collect2 == "" || collect2 == null){}else{
+				collections.collection2 = " and '"+ collect2 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection2";
+				option.innerHTML = collectName2;
+				collectionSelect.appendChild(option);
+			}
+			if(collect3 == "" || collect3 == null){}else{
+				collections.collection3 = " and '"+ collect3 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection3";
+				option.innerHTML = collectName3;
+				collectionSelect.appendChild(option);
+			}
+			if(collect4 == "" || collect4 == null){}else{
+				collections.collection4 = " and '"+ collect4 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection4";
+				option.innerHTML = collectName4;
+				collectionSelect.appendChild(option);
+			}
+			if(collect5 == "" || collect5 == null){}else{
+				collections.collection5 = " and '"+ collect5 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection5";
+				option.innerHTML = collectName5;
+				collectionSelect.appendChild(option);
+			}
+			if(collect6 == "" || collect6 == null){}else{
+				collections.collection6 = " and '"+ collect6 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection6";
+				option.innerHTML = collectName6;
+				collectionSelect.appendChild(option);
+			}
+			if(collect7 == "" || collect7 == null){}else{
+				collections.collection7 = " and '"+ collect7 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection7";
+				option.innerHTML = collectName7;
+				collectionSelect.appendChild(option);
+			}
+			if(collect8 == "" || collect8 == null){}else{
+				collections.collection8 = " and '"+ collect8 +"' in parents"; 
+				var option = document.createElement("option");
+				option.value = "collection8";
+				option.innerHTML = collectName8;
+				collectionSelect.appendChild(option);
+			}
+			
+			return collections;
+		}
+		
+		//START DRIVE SEARCH =====================================================================================	
+			function handleClientLoad() {
+				gapi.client.setApiKey(API_KEY);
+				window.setTimeout(checkAuth,1);
+			}
+			function checkAuth() {
+				var options = {
+					client_id: CLIENT_ID,
+					scope: SCOPES,
+					immediate: true,
+                                        include_granted_scopes:false
+
+				};
+				gapi.auth.authorize(options, handleAuthResult);
+			}
+			function handleAuthResult(authResult) {
+				if (authResult && !authResult.error) {
+					_TOKEN_ = gapi.auth.getToken().access_token;
+					document.getElementById('results').style.display = '';
+					if(TAB === "sites"){myFunction(fetchSitesData(1));} //Search Sites
+					else {makeApiCall();} //Search Drive
+					fetchUserEmail();
+				} 
+				else {					
+					var authorizeButton = document.getElementById('id_AuthButton');
+					authorizeButton.onclick = handleAuthClick;
+					
+					//DISPLAY AUTH
+					displaySection('auth');
+				}
+			}
+			
+			function myFunction() { }
+			
+			function handleAuthClick(event) {
+				var options = {
+					client_id: CLIENT_ID,
+					scope: SCOPES,
+					immediate: false,
+                                        include_granted_scopes:false
+				};
+				gapi.auth.authorize(options, handleAuthResult);
+				return false;
+			}
+			function makeApiCall() {		
+				gapi.client.load('drive', 'v2', fetchDriveData());   
+			}	
+			function fetchDriveData() {
+				pageNumber = 0;
+				var requestParams = createRequest();
+				
+				var request = gapi.client.request(requestParams);    
+				request.execute(function(resp) {
+					//console.dir(resp);
+					var length = resp.items.length;
+					var items = resp.items;
+					var nextPage = resp.nextPageToken;
+					
+					items.sort(sort[sortSelected]);
+					var x = parseInt(length/10);
+					//var y = length%10;
+					var count = 0;
+					//console.log("x:"+x+" y:"+y);
+					//console.dir(items);
+					if(length != 0) 
+					{
+						
+						for (var j = 0; j < x; j++){
+							
+							//Create List to hold list of 10 items
+							var driveList = document.createElement("ul");
+							driveList.className = "driveList";
+							driveList.id = 'id_driveList'+pageNumber; 
+							if(pageNumber != 0){
+								driveList.style.display = "none";
+							}
+							document.getElementById('driveContent').appendChild(driveList);
+							
+							for (var i=0; i<10; i++) 
+							{	
+								var trashed = items[i].labels.trashed; //weed out items in the trash
+						
+								if(trashed == false) {				
+									var itemInfo = createItemObject(items[count]);
+									//console.dir(items[count]);
+									document.getElementById('id_driveList'+pageNumber).appendChild(itemInfo);
+									count++;
+									//console.log(count);
+								}
+							}
+							
+							//Add Next Page Link
+							var controlsContainer = document.createElement("div");
+							
+							controlsContainer.className = "controls";
+							controlsContainer.id = "controlsContainer_"+pageNumber;
+							document.getElementById('id_driveList'+pageNumber).appendChild(controlsContainer);
+							
+							var nextlink = document.createElement("a");
+							nextlink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber+1) +"','id_driveList"+ pageNumber +"')");
+							nextlink.className = "nextLink";
+							nextlink.id = "id_link"+pageNumber;
+							nextlink.innerHTML = "Next";
+							document.getElementById('controlsContainer_'+pageNumber).appendChild(nextlink);
+							
+							if(pageNumber != 0){
+								var previouslink = document.createElement("a");
+								previouslink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber-1) +"', 'id_driveList"+ pageNumber +"')");
+								previouslink.className = "previousLink";
+								previouslink.innerHTML = "Previous";
+								document.getElementById('controlsContainer_'+pageNumber).appendChild(previouslink);
+							}
+							pageNumber++;
+							//console.log(pageNumber);
+							//console.log(x);
+							
+						}
+						if(count < length)
+						{
+							//pageNumber++;
+							//console.log(pageNumber);
+							var driveList = document.createElement("ul");
+							driveList.className = "driveList";
+							driveList.id = 'id_driveList'+pageNumber;
+							if(j != 0){
+								driveList.style.display = "none";
+							}
+							document.getElementById('driveContent').appendChild(driveList);
+							
+							while(count < length){
+								var trashed = items[count].labels.trashed; //weed out items in the trash
+							
+								if(trashed == false) {				
+									var itemInfo = createItemObject(items[count]);
+									//console.dir(items[count]);
+									document.getElementById('id_driveList'+pageNumber).appendChild(itemInfo);
+									count++;
+									//console.log(count);
+								}
+							}
+							var controlsContainer = document.createElement("div");
+								
+							controlsContainer.className = "controls";
+							controlsContainer.id = "controlsContainer_"+pageNumber;
+							document.getElementById('id_driveList'+pageNumber).appendChild(controlsContainer);
+							
+							if(nextPage  == 'undefined' || nextPage == null){}else{
+								var lastnextlink = document.createElement("a");
+								lastnextlink.setAttribute("href", "javascript:fetchMoreDriveData('"+ nextPage +"')");
+								lastnextlink.className = "nextLink";
+								lastnextlink.id = "id_link"+pageNumber;
+								lastnextlink.innerHTML = "Next";
+								document.getElementById('controlsContainer_'+pageNumber).appendChild(lastnextlink);
+							}
+							if(pageNumber > 0){
+							var previouslink = document.createElement("a");							
+							previouslink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber-1) +"', 'id_driveList"+ pageNumber +"')");
+							
+							previouslink.className = "previousLink";
+							previouslink.innerHTML = "Previous";
+							document.getElementById('controlsContainer_'+pageNumber).appendChild(previouslink);
+							}
+						}
+						else{
+							pageNumber--;
+							//console.log("nextPage : "+nextPage);
+							if(nextPage != 'undefined' || nextPage != null){
+							var previousNextlink = document.getElementById("id_link"+(pageNumber));
+							previousNextlink.setAttribute("href", "javascript:fetchMoreDriveData('"+ nextPage +"')");
+							}else{
+								var previousNextlink = document.getElementById("id_link"+(pageNumber));
+								previousNextlink.parentNode.removeChild(previousNextlink);
+							}
+						}
+					}
+					else {
+						var itemInfo = document.createElement('li');
+						itemInfo.className = "noResults";
+						itemInfo.innerHTML = "Your search for <b>"+QUERY.replace(/%20/g, ' ')+"</b> did not match any documents.";
+						document.getElementById("driveContent").appendChild(itemInfo);
+					}
+					
+					//DISPLAY DRIVE RESULTS
+					displaySection('driveResults', 'loading');
+					displaySection('driveContent', 'loading');
+					driveFetch = true;
+					TAB = "drive";
+				}); 		
+			}	
+			function createRequest() {
+				var requestParams = new Object();
+				requestParams.path = '/drive/v2/files';
+				requestParams.method = 'GET';
+				requestParams.params = {"q": "fullText contains '"+QUERY.replace(/%20/g, ' ')+"' and trashed = false" + docType[docTypeSelected] + collections[collectionSelected], 
+										"maxResults": "100",
+										"fields": "nextLink,nextPageToken,items(alternateLink,createdDate,iconLink,id,labels/trashed,lastViewedByMeDate,mimeType,modifiedDate,title,sharedWithMeDate)"};
+				//console.log(requestParams.params);
+				
+				return requestParams;
+			}	
+			function createItemObject(item) {
+				
+				var userDocIcon = item.iconLink; //link to Google Icons
+				var fileTitle = item.title; //File title
+				var fileAltLink = item.alternateLink; //Google Drive view or edit link
+				var type = item.mimeType; //separate folders out
+				var fileID = item.id; //file id
+				switch(sortSelected){
+					case  "dateCreated": 
+						var dateToShow =  item.createdDate;
+						var textToShow = "PUBLISHED DATE";
+						break;
+					case "lastViewed":
+						if(!item.lastViewedByMeDate){ var dateString = "Unopened File";}
+						else{ var dateToShow = item.lastViewedByMeDate;}
+						var textToShow = "LAST VIEWED";
+						break;
+					default:
+						var dateToShow = item.modifiedDate;
+						var textToShow = "LAST UPDATE ";
+				}
+				//var dateToShow = item.modifiedDate; //file updated
+				var date = new Date(dateToShow);
+				var months = Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
+				if(!dateString){ var dateString =  months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(); }
+				
+				if(type == "application/vnd.google-apps.form") {
+					fileAltLink = 'https://docs.google.com/a/'+DOMAIN+'/forms/d/'+fileID+'/viewform';
+				}
+				
+				var fileInfo = document.createElement('li');
+				fileInfo.className = "driveResult";
+				var innerHTML = '<img class="docIcon" align="top" width="20" src="' + userDocIcon + 
+					'"/><a class="driveLink" href="'+fileAltLink+'" target="_blank">'+fileTitle+'<div class="driveDate"> '+ textToShow +' <strong>' + 
+					dateString + '</strong></div></a>';
+				
+				fileInfo.innerHTML = innerHTML;
+				
+				return fileInfo;		
+			}
+			function fetchMoreDriveData(nextPageToken) {
+    			var requestParams = new Object();
+    			requestParams.path = '/drive/v2/files';
+				requestParams.method = 'GET';
+				
+				requestParams.params = { "pageToken" : nextPageToken,
+										 "q": "fullText contains '"+QUERY.replace(/%20/g, ' ')+"' and trashed = false" + docType[docTypeSelected] + collections[collectionSelected],
+										 "maxResults": "100",
+										 "fields": "nextLink,nextPageToken,items(alternateLink,createdDate,iconLink,id,labels/trashed,lastViewedByMeDate,mimeType,modifiedDate,title,sharedWithMeDate)"};
+				//console.log(requestParams.params);
+				var request = gapi.client.request(requestParams); 
+				request.execute(function(resp) {
+					var length = resp.items.length;
+					var items = resp.items;
+					var x = parseInt(length/10);
+					items.sort(sort[sortSelected]);
+					//console.dir(items);
+                    var count = 0;                   
+					if(length != 0) 
+					{
+						var nextPage = resp.nextPageToken;
+						//console.log(pageNumber);
+						//hide current displayed items
+						document.getElementById('id_driveList'+pageNumber).style.display = 'none';
+						
+						//update the nextpage link to display the list, not fetch the list again
+						var previousNextlink = document.getElementById("id_link"+pageNumber);
+						previousNextlink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber+1) +"','id_driveList"+ pageNumber +"')");
+						pageNumber++;
+						for (var j = 0; j < x; j++){
+							
+							//Create List to hold list of 10 items
+							var driveList = document.createElement("ul");
+							driveList.className = "driveList";
+							driveList.id = 'id_driveList'+pageNumber; 
+							if(j != 0){
+								driveList.style.display = "none";
+							}
+							document.getElementById('driveContent').appendChild(driveList);
+							
+							for (var i=0; i<10; i++) 
+							{	
+								var trashed = items[i].labels.trashed; //weed out items in the trash
+						
+								if(trashed == false) {				
+									var itemInfo = createItemObject(items[count]);
+									//console.dir(items[count]);
+									document.getElementById('id_driveList'+pageNumber).appendChild(itemInfo);
+									count++;
+									//console.log(count);
+								}
+							}
+							
+							//Add Next Page Link
+							var controlsContainer = document.createElement("div");
+							
+							controlsContainer.className = "controls";
+							controlsContainer.id = "controlsContainer_"+pageNumber;
+							document.getElementById('id_driveList'+pageNumber).appendChild(controlsContainer);
+							
+							var nextlink = document.createElement("a");
+							nextlink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber+1) +"','id_driveList"+ pageNumber +"')");
+							nextlink.className = "nextLink";
+							nextlink.id = "id_link"+pageNumber;
+							nextlink.innerHTML = "Next";
+							document.getElementById('controlsContainer_'+pageNumber).appendChild(nextlink);
+							
+							if(pageNumber != 0){
+								var previouslink = document.createElement("a");
+								previouslink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber-1) +"', 'id_driveList"+ pageNumber +"')");
+								previouslink.className = "previousLink";
+								previouslink.innerHTML = "Previous";
+								document.getElementById('controlsContainer_'+pageNumber).appendChild(previouslink);
+							}
+							pageNumber++;
+							//console.log(pageNumber);
+							//console.log(x);
+							
+						}
+						if(count < length)
+						{
+							//pageNumber++;
+							//console.log(pageNumber);
+							var driveList = document.createElement("ul");
+							driveList.className = "driveList";
+							driveList.id = 'id_driveList'+pageNumber;
+							if(j != 0){
+								driveList.style.display = "none";
+							}
+							document.getElementById('driveContent').appendChild(driveList);
+							
+							while(count < length){
+								var trashed = items[i].labels.trashed; //weed out items in the trash
+							
+								if(trashed == false) {				
+									var itemInfo = createItemObject(items[count]);
+									//console.dir(items[count]);
+									document.getElementById('id_driveList'+pageNumber).appendChild(itemInfo);
+									count++;
+									//console.log(count);
+								}
+							}
+							var controlsContainer = document.createElement("div");
+								
+							controlsContainer.className = "controls";
+							controlsContainer.id = "controlsContainer_"+pageNumber;
+							document.getElementById('id_driveList'+pageNumber).appendChild(controlsContainer);
+							
+							if(nextPage  == 'undefined' || nextPage == null){}else{
+								var lastnextlink = document.createElement("a");
+								lastnextlink.setAttribute("href", "javascript:fetchMoreDriveData('"+ nextPage +"')");
+								lastnextlink.className = "nextLink";
+								lastnextlink.id = "id_link"+pageNumber;
+								lastnextlink.innerHTML = "Next";
+								document.getElementById('controlsContainer_'+pageNumber).appendChild(lastnextlink);
+							}
+							var previouslink = document.createElement("a");
+							previouslink.setAttribute("href", "javascript:displaySection('id_driveList"+ (pageNumber-1) +"', 'id_driveList"+ pageNumber +"')");
+							previouslink.className = "previousLink";
+							previouslink.innerHTML = "Previous";
+							document.getElementById('controlsContainer_'+pageNumber).appendChild(previouslink);
+						}
+						else{
+							pageNumber--;
+							//console.log("nextPage : "+nextPage);
+							if(nextPage != 'undefined' || nextPage != null){
+							var previousNextlink = document.getElementById("id_link"+(pageNumber));
+							previousNextlink.setAttribute("href", "javascript:fetchMoreDriveData('"+ nextPage +"')");
+							}else{
+								var previousNextlink = document.getElementById("id_link"+(pageNumber));
+								previousNextlink.parentNode.removeChild(previousNextlink);
+							}
+						}
+					}
+					
+					else {
+						var itemInfo = document.createElement('li');
+						itemInfo.className = "noResults";
+						itemInfo.innerHTML = 'Your search - <b>'+QUERY.replace(/%20/g, ' ')+'</b> - did not match any documents.';
+						document.getElementById("driveContent").appendChild(itemInfo);
+					}
+					
+					//Add Next Page Link
+					
+				});
+				 		
+			}
+		//END DRIVE SEARCH =======================================================================================
+		
+		//START SITES SEARCH ==============================================================================
+			  
+			//Process returned JSON feed to display data
+			function createSitesResults(result) {
+				var list = result.feed.entry;
+				//console.dir(list);
+				if(list != null) {
+					for(var i=0; i<list.length; i++) {
+						var page = list[i];
+						
+						//console.log(JSON.stringify(page.category));
+						
+						var category = page.category[0].label;
+						//console.log("Category: "+category);
+						if(category != 'attachment')
+						{						
+							var pageTitle = page.title.$t;
+							//console.log("Title: "+pageTitle);
+							
+							var link = page.link;					
+							var linkFlag = false; 
+							for(var j=0; j<link.length; j++) {
+								if(link[j].rel == 'alternate') {
+									var pageURL = page.link[j].href;
+									linkFlag = true;
+								}
+							}
+							if(linkFlag == false) {
+								var pageURL = 'No URL';
+							}
+							//console.log("Page URL: "+pageURL);
+													
+							var updatedDate = page.updated.$t;
+							var date = new Date(updatedDate);
+							var months = Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
+							var dateString = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+							
+							var html = page.content.$t;
+							//console.log("Page HTML: "+html);
+							if(html != null)
+							{
+								var text = html.replace(/<(?:.|\n)*?>/gm, '');
+								var expString = text.split(/\s+/, 20);
+								var content = expString.join(" ");
+								content = content + '...';
+							}
+							else { var content = '';}
+							
+							var crumb = pageURL.substring(pageURL.search(_SITE_NAME_));
+							crumb = crumb.replace(/\//g, ' > ');
+							
+							var pageInfo = document.createElement('li');
+							pageInfo.className = "sitesResult";
+							pageInfo.innerHTML = '<a href="' + pageURL + '" target="_blank"><div class="sitesTitle">'+pageTitle+'</div><div class="sitesContent">' + content + '</div><div class="sitesDateandCrumb">LAST UPDATED ' + dateString + '<span>' + crumb + '</span></div></a>';
+							
+							document.getElementById("sitesContent").appendChild(pageInfo);
+						}							
+					}
+				}
+				else {
+					var pageInfo = document.createElement('li');
+					pageInfo.className = "pageResult";
+					pageInfo.innerHTML = 'Your search - <b>'+QUERY.replace(/%20/g, ' ')+'</b> - did not match any pages.';
+					document.getElementById("sitesContent").appendChild(pageInfo);
+				}
+				
+				//DISPLAY SITES RESULTS
+				displaySection('sitesResults', 'loading');
+				displaySection('sitesContent', 'loading');
+				sitesFetch = true;
+				TAB = sites;
+			}
+			
+			function fetchUserEmail(){
+				var params = {};
+				var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+_TOKEN_;
+				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+				gadgets.io.makeRequest(url, function (response) { 
+					var data = jQuery.parseJSON(response.data);
+					//console.dir(response);
+					//console.dir(data);
+					collections.ownedByMe = "and '"+ data.email +"' in owners";
+					//console.log(sort.ownedByMe);
+				});
+			}
+			
+			// Invoke makeRequest() to fetch data from the service provider endpoint.
+			// Depending on the results of makeRequest, decide which version of the UI
+			// to ask showSection() to display. If user has approved access to his
+			// or her data, display data.
+			// If the user hasn't approved access yet, response.oauthApprovalUrl contains a
+			// URL that includes a Google-supplied request token. This is presented in the 
+			// gadget as a link that the user clicks to begin the approval process.
+			function fetchSitesData(errorCount) {
+				if(errorCount == null) {
+					errorCount = 1;
+				}
+				//console.log("in fetch sites data function!");
+				var params = {};
+				var url = "https://sites.google.com/feeds/content/"+DOMAIN+"/"+_SITE_NAME_+"?alt=json&q="+QUERY+"&access_token="+_TOKEN_;
+				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+
+				gadgets.io.makeRequest(url, function (response) { 
+					if (response.oauthApprovalUrl) {
+						var authButton = document.getElementById('id_AuthButton');
+						authButton.onclick = handleAuthClick;
+						
+						//DISPLAY AUTH FOR SITES
+						displaySection('auth');
+					} 
+					else if (response.data) {		
+						createSitesResults(response.data);
+						//console.log(response.data);
+					} 
+					else {
+						// The response.oauthError and response.oauthErrorText values may help debug
+						// problems with your gadget.
+						//Added an exponential back off for 504 errors
+						var error = response.text;
+						var errorCode = response.rc;
+												
+						if(errorCode>499 && errorCount<6)
+						{
+							errorCount++;
+							
+							//console.log('Sites error ('+errorCount+'): ' + errorCode + ' ' + error);
+							
+							setTimeout(fetchSitesData(errorCount, 0), (2^errorCount)*1000); 
+						}						
+					}
+				}, params);
+			}
+		//END SITE SEARCH ========================================================================================
+		
+		// Display UI depending on OAuth access state of the gadget (see <divs> above).
+		// If user hasn't approved access to data, provide a "Authorize" button
+		// that contains the oauthApprovalUrl returned from makeRequest.
+		//
+		// When the user confirms access, the fetchSitesData() function is invoked again to
+		// obtain and display the user's data.
+		function displaySection(toShow, toHide) {	
+			if(toShow === 'auth'){
+				document.getElementById('auth').style.display = "block";
+				document.getElementById('loading').style.display = "block";
+				document.getElementById('results').style.display = "none";		
+			}else if(toShow === 'loading'){
+				document.getElementById(toShow).style.display = "block";
+				document.getElementById(toHide).style.display = "none";	
+				document.getElementById('auth').style.display = "none";
+			}
+			else {
+				document.getElementById(toShow).style.display = "block";
+				document.getElementById(toHide).style.display = "none";	
+				document.getElementById('loading').style.display = "none";
+				document.getElementById('auth').style.display = "none";
+			}
+		}
+		
+		function updateUI(value, selection)
+		{
+				if(selection == "docType"){
+					docTypeSelected = value;
+				}else if(selection == "collection"){
+					collectionSelected = value;
+				}else{
+					sortSelected = value;
+				}
+				//var mimeType = docType[type];
+				//docTypeSelected = type;
+				document.getElementById('driveContent').innerHTML = "";
+				makeApiCall();
+		};
+		function fetchData(tab){
+			//console.log("fetching data");
+			//console.log(tab.id);
+			if(tab.id == "driveLink" && driveFetch == false){
+				//console.log("drive data");
+				displaySection('loading','driveContent');
+				makeApiCall();
+			}else if(tab.id == "sitesLink" && sitesFetch == false){
+				//console.log("sites data");
+				displaySection('loading','sitesContent');
+				myFunction(fetchSitesData(1));
+			}
+		}
+		</script>
+	<script type="text/javascript">
+			
+			//START DRIVE AUTH
+			document.getElementById('id_AuthButton').onclick = handleAuthClick;
+			
+			//Start AUTH
+			gadgets.util.registerOnLoadHandler(function() {
+				$.getScript('//apis.google.com/js/api.js', function() {
+					gapi.load('auth:client', handleClientLoad);
+				});
+			});
+		</script>
+	</body>
+]]> 
+</Content>
+</Module>

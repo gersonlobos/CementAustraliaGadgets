@@ -1,0 +1,294 @@
+body, html {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+overflow-x: hidden;
+background: #FFF;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+}
+#main-body {
+display: block;
+width: 100%;
+margin: 0 auto;
+padding: 0;
+overflow: hidden;
+background: #FFF;
+}
+h1 , h2 {
+	width: 100%;
+	text-align: center;
+}
+p.myinfo {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+h2 {
+	margin-top: 70px;
+}
+/**
+		* Carousel with image and text (horizontal)
+		**/
+#carousel-image-text-horizontal {
+width: 100% !important;
+padding: 0;
+height: 115px;
+margin: 0 auto;
+max-width: 100% !important;
+display: block;
+background: #f5f5f5;
+margin-top: 0;
+position: relative;
+z-index: 1;
+}
+#carousel-image-text-horizontal .touchcarousel-item {
+width: 230px;
+margin: 0;
+padding: 0;
+position: relative;
+margin: 10px 0px;
+margin-left: 5px;
+float: left;
+}
+#carousel-image-text-horizontal .touchcarousel-item {
+width: 230px;
+margin: 0;
+padding: 0;
+position: relative;
+padding: 10px 5px;
+float: left;
+border-right: 1px solid #eee;
+border-left: 1px solid #FFF;
+background: #Fafafa;
+}
+#carousel-image-text-horizontal img {
+width: 70px;
+height: 70px;
+box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+#carousel-image-text-horizontal .rblock {
+width: 135px;
+margin-left: 7px;
+display: inline-block;
+vertical-align: top;
+}
+#carousel-image-text-horizontal h4 {
+color: #000;
+width: 140px;
+font-family: 'Fjalla One', sans-serif;
+font-weight: normal;
+text-transform: uppercase;
+font-size: 14px;
+margin: 0;
+}
+#carousel-image-text-horizontal p {
+color: #555;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 12px;
+line-height: 15px;
+padding-top: 0;
+text-transform: capitalize;
+margin: 0;
+}
+.touchcarousel.three-d .tc-paging-container {
+width: auto;
+float: none;
+margin: 0 auto;
+width: 100%;
+position: relative;
+z-index: 1000;
+top: -25px;
+padding-top: 5px;
+}
+.touchcarousel.three-d .arrow-holder.right {
+right: 0;
+float: none !important;
+width: 24px;
+height: 100%;
+top: 0;
+z-index: 1000;
+background: rgba(0,0,0,0.5);
+position: absolute;
+box-shadow: -3px 0px 4px -2px rgba(0,0,0,0.1);
+opacity: 1;
+border-radius: 0;
+-webkit-transition: ease-in-out .2s;
+}
+.touchcarousel.three-d .arrow-holder.left {
+left: 0;
+float: none !important;
+width: 24px;
+height: 100%;
+top: 0px;
+z-index: 1000;
+background: rgba(0,0,0,0.5);
+position: absolute;
+box-shadow: -3px 0px 4px -2px rgba(0,0,0,0.1);
+opacity: 1;
+border-radius: 0;
+-webkit-transition:ease-in-out .2s;
+}
+.touchcarousel.three-d .arrow-icon.left {
+/*	background: URL(https://googledrive.com/host/0BybYotsuLktydzNDa00tTTBhX3M/carousel-slider-arrow-carousel-left.png);*/
+	background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-arrow-carousel-left.png');
+	background-position: center -2px;
+	left: 4px;
+	top: 30px;
+}
+.touchcarousel.three-d .arrow-icon.right {
+/*background: URL(hhttps://googledrive.com/host/0BybYotsuLktydzNDa00tTTBhX3M/carousel-slider-arrow-carousel-right.png);*/
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-arrow-carousel-right.png');
+background-position: center -2px;
+top: 30px;
+right: 5px;
+float: none !important;
+}
+.touchcarousel.three-d .arrow-holder.right:hover,
+.touchcarousel.three-d .arrow-holder.left:hover {
+	background:rgba(0,0,0,0.8);
+}
+.carousel_top {
+background: #FFF;
+width: 100%;
+height: 15px;
+display: block;
+overflow: hidden;
+position: relative;
+z-index: 100;
+box-shadow: 0px 2px 0px rgba(0,0,0,0.03);
+}
+.carousel_bottom {
+width: 100%;
+position: absolute;
+margin: 0;
+padding: 0;
+height: 5px;
+background: #FFF;
+margin-top: -25px;
+z-index: 2;
+box-shadow: 0px -2px 0.5px rgba(0,0,0,0.03);
+}
+.row .small-12 {
+	position: relative;
+	width: 100%;
+	padding: 0;
+	border: none;
+}
+@media screen and (max-width:568px) {
+	
+	#carousel-image-text-horizontal .rblock {
+width: 140px;
+margin-left: 7px;
+display: inline-block;
+vertical-align: top;
+}
+	#main-body {
+display: block;
+width: 100%;
+margin: 0 auto;
+padding: 0;
+overflow: hidden;
+background: #FFF;
+padding: 0px 8px;
+border: 1px solid #eee;
+}
+
+.touchcarousel.three-d .tc-paging-container {
+width: auto;
+float: none;
+margin: 0 auto;
+width: 102%;
+position: relative;
+z-index: 1000;
+top: -25px;
+padding-top: 5px;
+margin-left: -2px;
+}
+	.touchcarousel.three-d .arrow-holder.left {
+width: 22px;
+height: 100px;
+left: 0;
+}
+
+#carousel-image-text-horizontal {
+width: 100% !important;
+padding: 0;
+height: 113px;
+margin: 0 auto;
+max-width: 100% !important;
+display: block;
+background: #fafafa;
+margin-top: 0px;
+position: relative;
+border-left: 1px solid #eee;
+border-right: 1px solid #eee;
+}
+
+.touchcarousel.three-d .arrow-holder.left {
+left: -1px;
+width: 24px;
+height: 40px;
+top: 20px;
+z-index: 1000;
+background: rgba(255,255,255,1);
+position: absolute;
+box-shadow: none;
+opacity: 1;
+border-radius: 0;
+-webkit-transition: ease-in-out .2s;
+border: 1px solid #eee;
+border-left: 1px solid #FFF;
+display:none;
+}
+.touchcarousel.three-d .arrow-holder.right {
+right: -1px;
+float: none !important;
+width: 24px;
+height: 40px;
+top: 20px;
+z-index: 1000;
+background: rgba(255,255,255,1);
+position: absolute;
+box-shadow: none;
+opacity: 1;
+border-radius: 0;
+-webkit-transition: ease-in-out .2s;
+border: 1px solid #eee;
+border-right: 0px;
+display:none;
+}
+.touchcarousel.three-d .arrow-icon.left {
+/*	background: URL(https://googledrive.com/host/0BybYotsuLktydzNDa00tTTBhX3M/carousel-slider-arrow-carousel-left.png);*/
+	background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-arrow-carousel-left.png');
+	background-position: center -2px;
+	left: 4px;
+	top: 10px;
+}
+.touchcarousel.three-d .arrow-icon.right {
+/*background: URL(https://googledrive.com/host/0BybYotsuLktydzNDa00tTTBhX3M/carousel-slider-arrow-carousel-right.png) center -2px;*/
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6SlidingLinks/carousel-slider-arrow-carousel-right.png') center -2px;
+top: 10px;
+right: 5px;
+float: none !important;
+}
+.touchcarousel.three-d .arrow-holder.right:hover,
+.touchcarousel.three-d .arrow-holder.left:hover {
+	background:rgba(255,255,255,1);
+}
+
+.carousel_top {
+background: #FFF;
+width: 100%;
+height: 10px;
+display: block;
+overflow: hidden;
+position: relative;
+z-index: 100;
+box-shadow: 0px 2px 0px rgba(0,0,0,0.03);
+}
+}

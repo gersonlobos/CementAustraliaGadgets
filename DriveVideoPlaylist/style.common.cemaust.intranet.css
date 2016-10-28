@@ -1,0 +1,253 @@
+/*-------------------SCROLL BAR ----------------------------------------*/
+
+::-webkit-scrollbar {
+	width:8px;
+}
+
+::-webkit-scrollbar-track {
+	background:rgba(0,0,0,0.10);
+}
+
+::-webkit-scrollbar-thumb {
+background:rgba(0,0,0,0.35);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+background:rgba(0,0,0,.2);
+}
+
+/*-----------------END CUSTOM SCROLL BAR STYLES------------------*/
+
+
+
+
+
+/*-------------------COMMON STYLES--------------------*/
+*, * * {
+	-webkit-user-select:none;
+	-webkit-callout-color:rgba(0,0,0,0.0);
+}
+*, * *,
+html,body {
+-webkit-text-size-adjust:none;
+-webkit-font-smoothing:antialiased;	
+-webkit-backface-visibility:hidden;
+-webkit-transform:translateZ(0,0,0);
+}
+
+*, * *, 
+p, span, div, strong, em, 
+h1, h2, h3, h4, h5, article, 
+header {
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+-webkit-font-smoothing:antialiased;	
+-webkit-font-smoothing:antialiased;
+-webkit-backface-visibility:hidden;
+-webkit-text-size-adjust:none;
+/*-moz-hyphens:auto;
+-ms-hyphens:auto;
+-webkit-hyphens:auto;
+hyphens:auto;*/
+/*word-wrap:break-word;*/
+}
+
+html,
+body, ul, li {
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	font-size: 13px;
+	line-height: 18px;
+	border: none;
+	font-family: 'Arimo', sans-serif;
+	font-weight: 400;
+}
+
+body, html {
+	background:transparent;
+	background-color:transparent !important;
+}
+
+a, p a {
+	text-decoration:none;
+	color:#fabb00;
+}
+a:focus, a:hover,
+p a:focus, p a:hover {
+	color:#cc9639;
+}
+
+
+body, html, 
+h1, h2, h3, h4, h5, h6, 
+p, span, div, header, article {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+ul, li {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+/*----------------------------GADGET HEADER-----------------------------------------*/
+
+#header_container {
+	/*---------------------------- CSS Change -----------------------------------------*/
+	border-bottom: 3px solid #5E2D61;
+	/*---------------------------- CSS Change -----------------------------------------*/
+
+	height: 45px;
+	
+}
+#header_container h2 {
+font-weight: 400;
+line-height: 45px;
+font-size: 18px;
+letter-spacing: 0;
+margin: 0;
+color: #FFF;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+padding-right: 30px;
+text-shadow: none;
+font-family: 'Fjalla One',sans-serif;
+text-transform: uppercase;
+text-align: left;
+padding-left: 20px;
+}
+.gadget_title{
+/*---------------------------- CSS Change -----------------------------------------*/
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/DriveListingGridview-img-bgtab.png') no-repeat right top;
+/*---------------------------- CSS Change -----------------------------------------*/
+width: 60%;
+height: 45px;
+}
+/*AUTH CONTAINER*/
+
+#auth {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background:#FFF;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	z-index:500000;
+	border:none;
+}
+
+.authwrapper {
+	background:#f2f2f5; 
+	padding:15px;
+	margin:0px 0px 20px;
+	width: 63%;
+	left: 18.5%;
+    position: relative;
+	}
+	
+.authTitle {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 20px 20px 5px 20px;
+}
+.authText {
+	font-family:'Open Sans', sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	padding: 5px 20px 20px 20px;
+}
+
+
+/*-------END AUTH CONTAINER----*/
+
+/*---AUTH BUTTON---*/
+
+button.red {
+	-webkit-appearance: none;
+	-webkit-outline: none;
+    border: none;
+    background-color: #357ae8;
+    color: #FFF;
+    padding: 10px 20px;
+    margin: 10px auto;
+    text-align: center;
+    float: none;
+    display: block;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+button.red:hover {
+    background-color: #1860d2;
+}
+
+button.red span {
+	font-family: 'Noto Sans', sans-serif;
+	font-weight:600;
+	display:inline-block;
+	font-size:16px;
+}
+/*--------------------end GADGET HEADER STYLES------------------------------*/
+
+
+/*-----CONTENT HEADER STYLES----*/
+
+h1 {
+	
+}
+
+
+h2 {
+	
+}
+
+h3 {
+	
+}
+
+/*------FORM STYLES------*/
+button, input, select {
+-webkit-appearance: none;
+-webkit-outline: none;
+outline: none;
+border: none;
+border: none;
+background:none;
+}
+
+.loading,
+.yj-spinner-loading-container .yj-component {
+display: none;
+display: block;
+padding: 20px 20px;
+text-align: center;
+margin: 20px auto;
+background-color: rgba(0,0,0,0.6);
+max-width: 200px;
+border: none;
+border-radius: 2px;
+color: #FFF;
+box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+font-size: 14px;
+font-weight: 300;
+font-family: 'arimo', sans-serif;
+}
+
+@media screen and (max-width:568px) {
+	#header_container h2 {
+		font-family:sans-serif;
+		font-size: 20px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+}
+
+

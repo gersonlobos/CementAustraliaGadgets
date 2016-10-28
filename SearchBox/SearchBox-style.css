@@ -1,0 +1,146 @@
+
+body {
+	margin:0 auto;
+	padding:0;
+	width:100%;
+	overflow:hidden;
+}
+
+form {
+background: transparent;
+border: none;
+}
+
+input.button, input[type="submit"] {
+border-color: #e5791f;
+background-color: #e5791f;
+/*background-image: URL(https://googledrive.com/host/0BybYotsuLktyM2s0bDVYbUZJRzQ/SearchBox-img-search.png);
+*/
+background-image: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/SearchBox-img-search.png');
+background-repeat: no-repeat;
+background-position: center center;
+padding: 13px 8%;
+font-size: 10px;
+line-height: 10px;
+-webkit-appearance: none;
+border: 1px solid #e5791f;
+outline: none;
+-webkit-outline: none;
+color: #FFF !important;
+float: right;
+display: inline-block;
+-webkit-border-radius: 0px;
+border-radius: 3px;
+width: 24%;
+max-width: 25%;
+margin-top: 2px;
+border-radius: 0;
+transition: all .2s ease;
+}
+
+input.button:hover, input[type="submit"]:hover  { 
+    background-color:#5E2D61; 
+    color:#FFF; 
+    border-color: #5E2D61;
+    border: 1px solid #5E2D61;
+    transition: all .2s ease;
+} 
+
+input[type="search"], input[type="textarea"], input[type="text"] {
+border: none;
+box-shadow: inset 1px 1px 1px #eee;
+padding: 12px 2%;
+float: left;
+display: inline-block;
+width: 74%;
+border: 1px solid #ddd;
+vertical-align: top;
+border-radius: 0px;
+}
+
+.panel {
+padding: 10px 15px;
+overflow: hidden;
+}
+
+#logo img {
+margin: 10px 40px 0px;
+text-align: center;
+max-width: 310px;
+}
+
+.row {
+	background:transparent !important;
+}
+.twelve, .row .twelve {
+width: 100%;
+padding: 0;
+}
+
+.six, .row .six {
+width: 48%;
+}
+
+.panel {
+padding: 0px 4px;
+
+}
+#search {
+background:#f2f2f2;
+padding: 18px 2%;
+border: 1px solid rgba(0,0,0,0.02);
+width: 52%;
+margin-top: 8px;
+}
+
+.twelve, .row .twelve {
+/*background: URL(https://googledrive.com/host/0BybYotsuLktyM2s0bDVYbUZJRzQ/bg-header-orange-stripe.png) center bottom no-repeat;*/
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/bg-header-orange-stripe.png') center bottom no-repeat;
+height: 120px;
+background-size: 1075px;
+background-position: 1 -37;
+}
+
+@media screen and (max-width:568px) {
+	#logo {
+		padding:0 !important;
+	}
+#logo img {
+text-align: center;
+max-width: 160px;
+margin: 0 auto 2px;
+}
+
+
+#search {
+margin-top: 5px;
+padding: 4px 2%;
+}
+
+.panel {
+padding: 0px 5px;
+}
+
+input[type="search"], input[type="textarea"], input[type="text"] {
+padding: 10px 2%;
+width: 68%;
+}
+
+input.button, input[type="submit"] {
+border-radius: 0px;
+width: 28%;
+max-width: 28%;
+margin-top: 2px;
+border-radius: 0;
+padding: 11px 8%;
+}
+
+.twelve, .row .twelve {
+/*background: URL(https://googledrive.com/host/0BybYotsuLktyM2s0bDVYbUZJRzQ/bg-header-orange-stripe.png) center bottom no-repeat;
+*/
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/SearchBox/bg-header-orange-stripe.png') center bottom no-repeat;
+height: 114px;
+background-size: 130%;
+}
+
+}

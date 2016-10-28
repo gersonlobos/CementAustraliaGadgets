@@ -1,0 +1,395 @@
+<Module>  
+<ModulePrefs 
+	scrolling="false"
+	height="750" 
+	width="100%"
+	title="DriveListingGridview"
+	description="A Custom Google Gadget for Displaying all the Files in a Google Drive Folder Tree"
+	author="White Stratus" 
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud computing Experts" 
+	author_link="http://www.whitestratus.com" 
+	category="UAS"
+/> 
+<UserPref name="gadgetTitle" display_name="Gadget Display Name"  default_value="Drive Files" required="true" />
+
+<UserPref name="language1" display_name="Language 1 Name,Folder ID"  default_value="English" required="true" />
+<UserPref name="language2" display_name="Language 2 Name,Folder ID"   required="false" />
+<UserPref name="language3" display_name="Language 3 Name,Folder ID"   required="false" />
+<UserPref name="language4" display_name="Language 4 Name,Folder ID"   required="false" />
+<UserPref name="language5" display_name="Language 5 Name,Folder ID"   required="false" />
+<UserPref name="language6" display_name="Language 6 Name,Folder ID"   required="false" />
+<UserPref name="language7" display_name="Language 7 Name,Folder ID"   required="false" />
+<UserPref name="language8" display_name="Language 8 Name,Folder ID"   required="false" />
+<UserPref name="language9" display_name="Language 9 Name,Folder ID"   required="false" />
+<UserPref name="language10" display_name="Language 10 Name,Folder ID"   required="false" />
+<UserPref name="language11" display_name="Language 11 Name,Folder ID"   required="false" />
+<UserPref name="language12" display_name="Language 12 Name,Folder ID"   required="false" />
+<UserPref name="language13" display_name="Language 13 Name,Folder ID"   required="false" />
+<UserPref name="language14" display_name="Language 14 Name,Folder ID"   required="false" />
+<UserPref name="language15" display_name="Language 15 Name,Folder ID"   required="false" />
+<UserPref name="language16" display_name="Language 16 Name,Folder ID"   required="false" />
+<UserPref name="language17" display_name="Language 17 Name,Folder ID"   required="false" />
+<UserPref name="language18" display_name="Language 18 Name,Folder ID"   re0BybYotsuLktyb2c2UUl2ZkpMNTA/6LinksHolder-style-list.cssname="language19" display_name="Language 19 Name,Folder ID"   required="false" />
+<UserPref name="language20" display_name="Language 20 Name,Folder ID"   required="false" />
+<UserPref name="language21" display_name="Language 21 Name,Folder ID"   required="false" />
+<UserPref name="language22" display_name="Language 22 Name,Folder ID"   required="false" />
+<UserPref name="language23" display_name="Language 23 Name,Folder ID"   required="false" />
+<UserPref name="language24" display_name="Language 24 Name,Folder ID"   required="false" />
+
+<Content type="html">
+<![CDATA[
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Open+Sans+Condensed:300,700|Open+Sans:700italic,400,300,700,800|Source+Sans+Pro:200,300,400,700,900|Oswald:400,300,700|Fjalla+One|Roboto:400,300,400italic,700' rel='stylesheet' type='text/css' />	
+
+	<link REL="stylesheet" HREF="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/JqueryMobile-1.3.2.css" />
+	<link REL="stylesheet" TYPE="text/css" HREF="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/JqueryFancybox.css" MEDIA="screen"/>
+	<link REL="stylesheet" TYPE="text/css" HREF="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/Foundation.css">
+	<link REL="stylesheet" TYPE="text/css" HREF="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-style.css">
+	<link REL="stylesheet" TYPE="text/css" HREF="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-style-mobile.css">
+	
+	<script SRC="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script TYPE="text/javascript" SRC="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/JqueryFancybox.js"></script>
+	<script TYPE="text/javascript" SRC="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-js-toggle.js"></script>
+	<script TYPE="text/javascript" SRC="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/JqueryMobile-1.3.1-min.js"></script>
+    
+	<script TYPE="text/javascript">		
+		// CLIENT //
+		var DOMAIN = 'cemaust.com.au';
+		var CLIENT_ID = '152662369140-aq5p456pil81obbuiuttifb156d190ut.apps.googleusercontent.com';
+		var API_KEY = 'AIzaSyC2X_IO7GbxxVKlqoOAZKKXQXi_D3Sxe8g';
+		//////////		
+		
+		var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/';
+		var prefs = new gadgets.Prefs();
+		var _GADGET_TITLE_ = prefs.getString("gadgetTitle");
+		var _LANGUAGES_ = getLanguages(prefs);
+		function getLanguages()
+		{
+			var languages = [];
+			var lang1 = prefs.getString("language1").split(",")[0];
+			var lang2 = prefs.getString("language2").split(",")[0];
+			var lang3 = prefs.getString("language3").split(",")[0];
+			var lang4 = prefs.getString("language4").split(",")[0];
+			var lang5 = prefs.getString("language5").split(",")[0];
+			var lang6 = prefs.getString("language6").split(",")[0];
+			var lang7 = prefs.getString("language7").split(",")[0];
+			var lang8 = prefs.getString("language8").split(",")[0];
+			var lang9 = prefs.getString("language9").split(",")[0];
+			var lang10 = prefs.getString("language10").split(",")[0];
+			var lang11 = prefs.getString("language11").split(",")[0];
+			var lang12 = prefs.getString("language12").split(",")[0];
+			var lang13 = prefs.getString("language13").split(",")[0];
+			var lang14 = prefs.getString("language14").split(",")[0];
+			var lang15 = prefs.getString("language15").split(",")[0];
+			var lang16 = prefs.getString("language16").split(",")[0];
+			var lang17 = prefs.getString("language17").split(",")[0];
+			var lang18 = prefs.getString("language18").split(",")[0];
+			var lang19 = prefs.getString("language19").split(",")[0];
+			var lang20 = prefs.getString("language20").split(",")[0];
+			var lang21 = prefs.getString("language21").split(",")[0];
+			var lang22 = prefs.getString("language22").split(",")[0];
+			var lang23 = prefs.getString("language23").split(",")[0];
+			var lang24 = prefs.getString("language24").split(",")[0];
+			
+			var lang1folder = prefs.getString("language1").split(",")[1];
+			var lang2folder = prefs.getString("language2").split(",")[1];
+			var lang3folder = prefs.getString("language3").split(",")[1];
+			var lang4folder = prefs.getString("language4").split(",")[1];
+			var lang5folder = prefs.getString("language5").split(",")[1];
+			var lang6folder = prefs.getString("language6").split(",")[1];
+			var lang7folder = prefs.getString("language7").split(",")[1];
+			var lang8folder = prefs.getString("language8").split(",")[1];
+			var lang9folder = prefs.getString("language9").split(",")[1];
+			var lang10folder = prefs.getString("language10").split(",")[1];
+			var lang11folder = prefs.getString("language11").split(",")[1];
+			var lang12folder = prefs.getString("language12").split(",")[1];
+			var lang13folder = prefs.getString("language13").split(",")[1];
+			var lang14folder = prefs.getString("language14").split(",")[1];
+			var lang15folder = prefs.getString("language15").split(",")[1];
+			var lang16folder = prefs.getString("language16").split(",")[1];
+			var lang17folder = prefs.getString("language17").split(",")[1];
+			var lang18folder = prefs.getString("language18").split(",")[1];
+			var lang19folder = prefs.getString("language19").split(",")[1];
+			var lang20folder = prefs.getString("language20").split(",")[1];
+			var lang21folder = prefs.getString("language21").split(",")[1];
+			var lang22folder = prefs.getString("language22").split(",")[1];
+			var lang23folder = prefs.getString("language23").split(",")[1];
+			var lang24folder = prefs.getString("language24").split(",")[1];			
+			
+			lang1 == '' || lang1 == null ? 0 : languages.push([lang1, lang1folder]);
+			lang2 == '' || lang2 == null ? 0 : languages.push([lang2, lang2folder]);
+			lang3 == '' || lang3 == null ? 0 : languages.push([lang3, lang3folder]);
+			lang4 == '' || lang4 == null ? 0 : languages.push([lang4, lang4folder]);
+			lang5 == '' || lang5 == null ? 0 : languages.push([lang5, lang5folder]);
+			lang6 == '' || lang6 == null ? 0 : languages.push([lang6, lang6folder]);
+			lang7 == '' || lang7 == null ? 0 : languages.push([lang7, lang7folder]);
+			lang8 == '' || lang8 == null ? 0 : languages.push([lang8, lang8folder]);
+			lang9 == '' || lang9 == null ? 0 : languages.push([lang9, lang9folder]);
+			lang10 == '' || lang10 == null ? 0 : languages.push([lang10, lang10folder]);
+			lang11 == '' || lang11 == null ? 0 : languages.push([lang11, lang11folder]);
+			lang12 == '' || lang12 == null ? 0 : languages.push([lang12, lang12folder]);
+			lang13 == '' || lang13 == null ? 0 : languages.push([lang13, lang13folder]);
+			lang14 == '' || lang14 == null ? 0 : languages.push([lang14, lang14folder]);
+			lang15 == '' || lang15 == null ? 0 : languages.push([lang15, lang15folder]);
+			lang16 == '' || lang16 == null ? 0 : languages.push([lang16, lang16folder]);
+			lang17 == '' || lang17 == null ? 0 : languages.push([lang17, lang17folder]);
+			lang18 == '' || lang18 == null ? 0 : languages.push([lang18, lang18folder]);
+			lang19 == '' || lang19 == null ? 0 : languages.push([lang19, lang19folder]);
+			lang20 == '' || lang20 == null ? 0 : languages.push([lang20, lang20folder]);
+			lang21 == '' || lang21 == null ? 0 : languages.push([lang21, lang21folder]);
+			lang22 == '' || lang22 == null ? 0 : languages.push([lang22, lang22folder]);
+			lang23 == '' || lang23 == null ? 0 : languages.push([lang23, lang23folder]);
+			lang24 == '' || lang24 == null ? 0 : languages.push([lang24, lang24folder]);
+
+			//console.log(languages);		
+			return languages;
+		};
+		
+		function handleClientLoad() {
+			gapi.client.setApiKey(API_KEY);
+			window.setTimeout(checkAuth,1);
+			
+		};
+		function checkAuth() {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: true,
+                                include_granted_scopes:false    
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+		};
+		function handleAuthResult(authResult) {
+			var authorizeButton = document.getElementById('authorize-window');
+			if (authResult && !authResult.error) {
+				authorizeButton.style.visibility = 'hidden';
+				authorizeButton.style.display = 'none';
+							
+				createLanguageDropdown(); //creates the language dropdown
+				var folderID = _LANGUAGES_[getDefaultLanguage()][1]; //gets the default language from local storage
+				
+				makeApiCall(folderID);
+			} 
+			else {
+				authorizeButton.style.visibility = '';
+				authorizeButton.style.display = 'block';
+				document.getElementById('authorize-button').onclick = handleAuthClick;
+			}
+		};
+		function createLanguageDropdown()
+		{
+			for(var i=0; i<_LANGUAGES_.length; i++)
+			{
+				var optionID = "option"+i;
+				var option = document.createElement('option');
+				option.id = optionID;
+				option.value = i;
+				option.innerHTML = _LANGUAGES_[i][0]; 				
+				//console.log(_LANGUAGES_[i][0]+": "+_LANGUAGES_[i][1]);
+				//console.log(_LANGUAGES_);
+				document.getElementById('id_languageDropdown').appendChild(option);
+			}
+			var optionSelected = 'option'+getDefaultLanguage();
+			//console.log(optionSelected);
+			//console.log(document.getElementById(optionSelected));
+			document.getElementById(optionSelected).selected=true;
+			$('#id_languageDropdown').selectmenu('refresh', true);
+			$('.gadget_title').append(_GADGET_TITLE_);			
+		};
+		function getDefaultLanguage()
+		{
+			var lan;
+			var storedLan = localStorage.getItem("storedLan");
+			//console.log(storedLan);
+			if(storedLan){
+				lan = JSON.parse(storedLan);
+			}else {
+				lan = [{lan:"0"}];
+				localStorage.setItem("storedLan", JSON.stringify(lan));
+			}
+			//console.log(lan[0].lan);
+			return lan[0].lan;
+		};
+		
+		function handleAuthClick(event) {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: false
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+			return false;
+		};
+		function makeApiCall(folderID) {  			
+			gapi.client.load('drive', 'v2', makeRequest(folderID));   
+		};	
+		function makeRequest(folderID) {
+			var requestParams = createRequest(folderID);
+			
+			var request = gapi.client.request(requestParams);    
+			request.execute(function(resp) {          
+				var items = resp.items;
+				items.sort(sortItems);
+				for (var i=0; i<resp.items.length; i++) {
+					var trashed = resp.items[i].labels.trashed; //weed out items in the trash
+			
+					if(trashed == false) {				
+						var type = resp.items[i].mimeType; //separate folders out
+						
+						if(type == "application/vnd.google-apps.folder") {
+							createFolderObject(resp.items[i]); 
+						}
+						else { 
+							var itemInfo = createFileObject(resp.items[i], type);
+							document.getElementById('content').appendChild(itemInfo);
+						}
+					}
+				}
+			}); 	
+			
+		};
+		function createRequest(folderID) {
+			var requestParams = new Object();
+			requestParams.path = '/drive/v2/files';
+			requestParams.method = 'GET';
+			requestParams.params = {
+				'q': '"' + folderID + '" in parents', 
+				'maxResults': '30'
+			};
+			return requestParams;
+		};	
+		function createFolderObject(item) {
+			makeRequest(item.id);
+		};	
+		function createFileObject(item, type) {
+			var userDocIcon = item.iconLink; //link to Google Icons
+			var fileTitle = item.title; //File title
+			var fileAltLink = item.alternateLink; //Google Drive view or edit link
+			var fileID = item.id; //file id
+			var fileExtension = item.fileExtension; //file extention for uploaded files
+			var userContentLink = item.webContentLink; //download link
+			var userEmbed = item.embedLink; //Link to embed file
+			var dateModified = item.modifiedDate; //file updated
+			var date = new Date(dateModified);
+			var months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+			var dateString =  months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+			var userUpd = item.lastModifyingUserName;
+			var downloadURL = ''; 
+			var userThumb = item.thumbnailLink;
+			if(userThumb == null) userThumb = 'https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-default.jpg';
+			
+			if(type == "application/vnd.google-apps.form") {
+				var URL = 'https://docs.google.com/a/'+DOMAIN+'/forms/d/'+fileID+'/viewform';
+				fileAltLink = URL;
+				userEmbed = URL;
+			}
+			else if(type == "application/pdf") {
+				var URL = 'https://docs.google.com/a/'+DOMAIN+'/file/d/'+fileID+'/preview';
+				userEmbed = URL;
+			}
+			else if(fileExtension != null) {
+				downloadURL = '<a class=\'download_doc\' target=\'_blank\' href=\''+userContentLink+'\'>&nbsp;</a>';
+				userEmbed = 'https://docs.google.com/a/'+DOMAIN+'/file/d/'+fileID+'/preview';
+			}
+			else if(userEmbed != null) { } //userEmbed = userEmbed;
+			else userEmbed = 'https://docs.google.com/a/'+DOMAIN+'/file/d/'+fileID+'/preview';
+			
+			var fileInfo = document.createElement('li');
+			fileInfo.className = "large-3 columns driveBox small-6";
+			fileInfo.setAttribute('data-filtertext', fileTitle);
+			var innerHTML = '<img class="docIcon" width="20" src="'+userDocIcon+'"/>'+
+				'<div class="thumbHolder">'+
+					'<img src="' + userThumb + '"/>'+
+				'</div><a title ="'+fileTitle+'" class="caption_holder fancybox fancybox.iframe" alt="<h3>' + fileTitle +
+			'</h3><a class=\'open_doc\' target=\'_blank\' href=\''+fileAltLink+'\'>&nbsp;</a>'+downloadURL+'"href="'+userEmbed+'"' +
+			'target="ifrm">'+
+				'<h2>' + fileTitle + '</h2>'+
+				'<span class="author_update">Updated<strong> ' + dateString + '</strong></span>'+
+			'</a>';
+			fileInfo.innerHTML = innerHTML;
+			
+			return fileInfo;		
+		}
+		function sortItems(a,b) {
+			if (a.title < b.title) return -1;
+			if (a.title > b.title) return 1;
+			return 0;
+		}
+		function showSearchForm() {
+			if($('form.ui-listview-filter').hasClass('open')) {
+				$('form.ui-listview-filter').removeClass('open');
+				$('#contentWrapper').removeClass('open');
+				$('#btn_search').removeClass('current');
+			} 
+			else {
+				$('#btn_search').addClass('current');
+				$('form.ui-listview-filter').addClass('open');
+				$('#contentWrapper').addClass('open');
+			}
+		};
+		function updateUI(e)
+		{
+				var lan = [{lan: e}];
+				localStorage.setItem("storedLan", JSON.stringify(lan));			
+				//console.log(lan);
+				document.getElementById('content').innerHTML = "";
+				makeApiCall(_LANGUAGES_[e][1]);
+		};
+	</script>
+</head>
+<body>
+	<div data-role="page" id="home">
+		<div data-role="header" id="header">
+			<span CLASS="list-style-buttons">
+				<a HREF="#" id="gridview" data-ajax="false" CLASS="switcher pressed">
+					<img SRC="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-gridview.png"></a>
+				<a HREF="#" id="listview" data-ajax="false" CLASS="switcher active">
+					<img SRC="https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-listview.png"></a>
+			</span>
+			
+			<h1 CLASS="gadget_title"></h1>
+			<a data-role="button" data-iconpos="notext" CLASS="ui-btn-right" data-theme="a" id="btn_search" onClick="showSearchForm();"></a>
+			<div CLASS="language-style-dropdown">
+				<select id="id_languageDropdown" onchange="updateUI(this.value)">
+				</select>
+			</div>
+		</div>
+		
+		<div id="contentWrapper" CLASS="container row" data-role="content">
+			<div id="authorize-window" class="authorizeWindow" style="display:none">
+				<div class ="auth">
+					<h2 class="authTitle">
+						A Note from your Cement Australia Administrator
+					</h2>
+					<div class="authText">
+						In order for you to experience the enhanced features of the UAS site, you will need to “allow access” the first time you use this gadget. You will only need to do this once for each feature.
+						<br><br>
+						After clicking the button below, you will be presented with a second screen that will also prompt to allow access.  Once you click through both screens, the feature will be enabled for your account.
+					</div>	
+				</div>			
+				<button id="authorize-button" data-role="none">Allow access</button>
+			</div>
+			<ul id="content" data-inset="true" CLASS="list" data-role="listview"  data-filter="true" data-filter-placeholder="Filter list...">
+			</ul>
+		</div>
+	</div><!--End page-->
+	<script TYPE="text/javascript">
+		$(document).ready(function() {
+			$('#authorize-button').on('click', handleAuthClick);
+			$.getScript('//apis.google.com/js/api.js', function() {
+				gapi.load('auth:client', handleClientLoad);
+			});
+		  
+			$('.fancybox').fancybox({
+				beforeLoad : function() { this.title = $(this.element).attr('alt');},
+				helpers : { title : { type : 'outside' }, overlay: {locked: false} },
+				iframe :{ scrolling : 'auto', preload : true }
+			});	
+		});
+	</script>
+</body>
+]]>
+</Content>
+</Module>

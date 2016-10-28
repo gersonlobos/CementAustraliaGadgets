@@ -1,0 +1,169 @@
+html{
+    border:0px;
+    margin:0;
+    padding:0;
+    display:block;
+    overflow:hidden;
+    background:transparent;
+    height:auto;
+    width:auto;
+    border:1px solid #eee;
+}
+
+a {
+    color:#333;
+    text-decoration:none;
+}
+a:visited { color:#333; }
+
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+	overflow:hidden;
+	background:transparent;
+}
+
+ul, li {
+	list-style-type:none;
+	list-style:none;
+	display:block;
+	overflow:hidden;
+	margin:0;
+	padding:0;
+}
+ul {
+    padding: 5px 2% 20px;
+    background: #f2f2f2;
+    position: absolute;
+    top: 51px;
+    width: 96%%;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling:touch;
+}
+ul li a {
+    overflow: hidden;
+    vertical-align: middle;
+    color: #636466;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    display: block;
+    padding: 4px 10px 4px 0px;
+    margin-bottom: 0;
+    background: #FFF;
+    -webkit-transition-duration: .3s;
+    border: 1px solid #eee;
+    border-bottom: 0;
+}
+ul li a:hover {
+    background-color: #f7f8f9;
+    color: #000;
+    box-shadow: inset 0px -1px 0px rgba(0,0,0,0.06), inset 0px 1px 0px rgba(0,0,0,0.06);
+    border-bottom: 0;
+}
+
+.icon_holder {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-right: 10px;
+    background-color: none;
+    overflow: hidden;
+    float: left;
+    margin-top:8px;
+    margin-bottom:8px;
+    margin-left:10px;
+}
+
+.icon_holder img{ max-width:45px; }
+
+.label {
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+    float: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0;
+}
+
+#headerContainer {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+    text-align: right;
+    padding-top: 0px;
+    padding-bottom: 0;
+    background-size: 90%;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    z-index: 2000;
+    box-shadow: 0px 3px 1px rgba(0,0,0,0.15);
+    background-color: #FFF;
+}
+#header {
+    display: block;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  /*  background: URL(https://googledrive.com/host/0BybYotsuLktyb2c2UUl2ZkpMNTA/6LinksHolder-img-tabright.png) 100px center no-repeat; */
+    background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/6LinksHolds/6LinksHolder-img-tabright.png') 100px center no-repeat;
+    padding-left: 40px;
+    min-width: 45%;
+    border-bottom: 3px solid #5e2d61;
+}
+
+#header > h2 {
+    color: #FFF;
+    font-family: 'Fjalla One', sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 14px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+    padding: 16px 35px 15px 25px;
+    text-align: right;
+    font-weight: normal;
+}
+::-webkit-scrollbar {
+    width:10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.15);
+}
+
+::-webkit-scrollbar-thumb {
+    background:#aaa;
+    border-radius:0px;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background:#a1a1aa;
+}
+
+@media screen and (max-width:568px) {
+	.label {
+        font-size: 18px;
+        line-height: 15px;
+        color:#000 !important
+    }
+}

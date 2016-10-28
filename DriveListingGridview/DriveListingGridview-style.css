@@ -1,0 +1,458 @@
+* {
+	-webkit-backface-visibility:hidden;
+	-webkit-transform:translate3d(0,0,0);
+	font-family:'Open Sans',sans-serif;
+	border-radius:0 !important;
+	-webkit-border-radius:0 !important;
+	text-shadow:none !important;
+}
+a {
+	color:#333;
+	text-decoration:none;
+}
+/*-----SCROLLBAR-----*/
+::-webkit-scrollbar {
+	width:10px;
+}
+::-webkit-scrollbar-track {
+	background:#c3c3cb;
+}
+::-webkit-scrollbar-thumb {
+	background:#83838e;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #a1a1aa;
+}
+/*-----END SCROLLBAR-----*/
+
+html,body {
+	min-height:505px;
+	height:100%;
+	overflow:hidden;
+	width:100%;
+}
+body,ul,li {
+	margin:0;
+	padding:0;
+	display:block;
+	font-family:'Open Sans',sans-serif;
+	background:#f2f2f5;
+}
+html {
+	width: auto;
+	border: 1px solid #eee;
+	height: auto;
+}
+body {
+	height:100%;
+	width:100%;
+	overflow:hidden !important;
+}
+
+/*----AUTHORIZATION-----*/
+#authorize-button {
+	-webkit-appearance: none;
+	border: none;
+	background-color: #357ae8;
+	color: #FFF;
+	padding: 10px 20px;
+	margin: 10px auto;
+	text-align: center;
+	float: none;
+	display: block;
+	border-radius: 4px;
+	line-height: 20px;
+}
+#authorize-button:hover { background-color: #1860d2; }
+
+#authorize-window {
+	background: #FFF;
+	position: absolute;
+	top: 50px;
+	width: 100%;
+	z-index: 1000;
+	height: 100%;
+}
+.auth {
+	background: #f2f2f5;
+	width: 63%;
+	position: relative;
+	left: 18.5%;
+	margin-top: 20px;
+}
+.auth h2{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 20px 20px 5px 20px;
+	color: #333;
+}
+.authText {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	padding: 0px 20px 20px 20px;
+}
+/*----END AUTHORIZATION-----*/
+
+#header {
+	position:absolute !important;
+	left:0;
+	top:0;
+	right:0;
+	height:43px;
+	background:#FFF;
+	box-shadow:0px 2px 1px 0px rgba(0,0,0,0.1) !important;
+	z-index:4000;
+	border:none;
+	border-bottom:3px solid #5e2d61;
+}
+#header>h1 {
+	font-weight:400;
+	line-height:45px;
+	font-size:18px;
+	text-align:center;
+	letter-spacing:0;
+	margin:0;
+	color:#FFF;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	padding-right:30px;
+	text-shadow:none;
+	font-family:'Fjalla One',sans-serif;
+	text-transform:uppercase;
+	display:inline-block;
+	margin-left:0;
+	position:absolute;
+	max-width:none;
+	z-index:100;
+	min-width:60%;
+	text-align:left;
+	/*background:URL(http://www.cementaustralia.com.au/intranetimages/0BybYotsuLktybC1uQzRGNkh1RFU.png) no-repeat right top;*/
+	background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-bgtab.png') no-repeat right top;
+	margin-top:0;
+	padding-left:65px;
+	height:45px;
+}
+#contentWrapper {
+	width:100%;
+	position:absolute;
+	top:42px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin-bottom:0;
+/*
+background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-bgsatinweave.png) #f2f2f5;*/
+background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-bgsatinweave.png') #f2f2f5;
+	z-index:100;
+	max-width:none;
+}
+#content {
+	width:auto;
+	margin:0 auto;
+	padding-top:0;
+	padding-right:5px;
+	padding-left:5px;
+	box-shadow:none;
+	position:absolute;
+	overflow:hidden;
+	overflow-y:auto;
+	right:0;
+	bottom:0;
+	left:0;
+	top:45px;
+	padding-top:5px;
+}
+ul,li {
+	overflow:hidden;
+}
+li {
+	padding:0;
+	margin:0;
+}
+h2 {
+	color:#333;
+}
+#content .three.columns.driveBox:last-child {
+	float:left;
+}
+#content .thumbHolder img {
+	margin:0 auto;
+	padding:0;
+	opacity:1;
+	-webkit-transition:opacity linear .3s;
+	max-width:100%;
+}
+#content .driveBox .caption_holder {
+	position:absolute;
+	background:rgba(255,255,255,0.6);
+	color:#FFF;
+	top:165px;
+	height:110px;
+	padding:8px 10px;
+	left:0;
+	right:0;
+	-webkit-transition-duration:.3s;
+	-webkit-backface-visibility:hidden;
+	-webkit-transform:translate3d(0,0,0);
+	overflow:hidden;
+	margin:0;
+	box-shadow:0px -2px 4px rgba(0,0,0,0.08);
+}
+#content .driveBox:hover .caption_holder {
+	top:100px;
+	background:rgba(255,255,255,0.99);
+}
+#content .docIcon {
+	width:16px;
+	height:16px;
+	opacity:.8;
+	display:inline-block;
+	float:left;
+	margin:10px 10px 0px 10px;
+}
+#content.list .thumbHolder {
+	width:200px;
+	height:130px;
+	overflow:hidden;
+	border:0px solid #FFF;
+	background:#Fafafa;
+	display:inline-block;
+	margin:0px 10px 0px 0px;
+	float:left;
+	border-right:1px solid #eee;
+}
+#content.list .thumbHolder img {
+	margin-top:0px;
+}
+#content.list .date_mod,#content.list .author_update {
+	font-size:11px;
+	text-transform:uppercase;
+	letter-spacing:0;
+	color:#999;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	padding-top:5px;
+	font-weight:300;
+	line-height:14px;
+	display:inline-block;
+	padding-bottom:5px;
+	padding-top:15px;
+	padding-right:1%;
+	width:28%;
+	text-align:right;
+}
+#content.list .author_update {
+	padding-top:1px;
+	text-transform:uppercase;
+	width:14%;
+	float:right;
+	margin-top:15px;
+}
+#content .author_update strong {
+	color:#5E2D61;
+}
+#content.list h2 {
+	vertical-align: top;
+	margin: 0;
+	color: #333;
+	font-size: 18px;
+	padding-top: 10px;
+	font-weight: 300;
+	line-height: 22px;
+	display: inline-block;
+	padding-bottom: 15px;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-right: 10px;
+	font-weight: 400;
+	text-transform: capitalize;
+	padding-left: 35px;
+}
+.list-style-buttons {
+	padding-right:0;
+	padding-top:0;
+	position:absolute;
+	right:0;
+	padding-left:0;
+	z-index:20000;
+	height:42px;
+}
+a.switcher.active {
+background-color: #5e2d61;
+transition: all .2s ease;
+}
+a.switcher.pressed:hover {
+background-color: #4d2550;
+transition: all .2s ease;
+}
+.list-style-buttons a {
+	padding: 7px 8px 7px 6px;
+	display: inline-block;
+	margin: 0;
+	white-space: nowrap;
+	vertical-align: middle;
+	color: #666;
+	cursor: pointer;
+	right: 0px;
+	background: #eee;
+	overflow: hidden;
+	margin-left: -6px;
+	border-left: 1px solid #ddd;
+	max-height: 28px;
+	overflow: hidden;
+	border-right: 1px solid #fff;
+	opacity: 1;
+	background-color: #FFF;
+	margin-right: -3px;
+	transition: all .2s ease;
+}
+.list-style-buttons a:first-child {
+	border-left:1px solid #ededed;
+}
+.list-style-buttons a.pressed {
+	opacity:1;
+	/*box-shadow:inset 1px 0px 2px -1px rgba(0,0,0,0.12),inset -2px 0px 2px -1px rgba(0,0,0,0.08);*/
+}
+.list-style-buttons img {
+	max-width:20px;
+	text-align:center;
+	margin:5px;
+}
+.list-style-buttons a img {
+	opacity:.7;
+}
+.list-style-buttons a.pressed img {
+	opacity:.7;
+}
+/*.fancybox-image,.fancybox-iframe{display:block;width:100%;height:92.2%;top:7.8%;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;position: absolute;}*/
+.fancybox-skin {
+	position:relative;
+	color:#444;
+	text-shadow:none;
+}
+.fancybox-close {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:56px;
+	cursor:pointer;
+	z-index:8040;
+/*	background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-closewhite.png) 99% center no-repeat #5e2d61;*/
+	background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-closewhite.png') 99% center no-repeat #5e2d61;
+	right:8px;
+	box-shadow:0px 2px 1px rgba(0,0,0,0.1);
+	background-size:30px;
+}
+.fancybox-title-outside-wrap {
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	padding:0px 2%;
+	font-size:16px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	font-family:'Open Sans',sans-serif;
+	background:none;
+	height:50px;
+	z-index:2000000;
+	width:86%;
+	background:#5E2D61;
+	margin:0;
+	box-shadow:0px 2px 1px rgba(0,0,0,0.1);
+}
+.fancybox-title-outside-wrap h3 {
+	font-size:14px;
+	font-weight:600;
+	max-width:60%;
+	overflow:hidden;
+	display:inline-block;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	margin:0;
+	padding-left:10px;
+	padding-top:15px;
+	font-weight:normal;
+	font-family:'Source Sans Pro',sans-serif;
+	color:#FFF;
+}
+.fancybox-title-outside-wrap a {
+	float:right;
+	padding:0px 20px;
+	display:inline-block;
+	background-size:45px;
+	margin-top:0;
+	border-left:1px solid rgba(0,0,0,0.14);
+	height:100%;
+	border-right:1px solid rgba(255,255,255,0.2);
+	box-shadow:1px 0px 0px rgba(0,0,0,0.12);
+}
+.fancybox-title-outside-wrap a.open_doc {
+/*	background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-open.png) no-repeat center 4px; */
+    background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-open.png') no-repeat center 4px;
+	background-size:45px;
+}
+.fancybox-title-outside-wrap a.download_doc {
+/*	background:URL(https://googledrive.com/host/0BybYotsuLktyRHI0SnpjV2loelk/DriveListingGridview-img-download.png) no-repeat center center;*/
+	background:URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveListingGridview/DriveListingGridview-img-download.png') no-repeat center center;
+	background-position:center center;
+	background-size:35px;
+	margin-left:5px;
+}
+/*.fancybox-overlay-fixed{	height:100% !important;overflow: hidden !Important;}*/
+li.driveBox a {
+	background:#FFF;
+	display:block;
+	padding:0px 5px;
+	margin:1px;
+	overflow: hidden;
+}
+
+.ui-select{
+	width: 174.5px; 
+	display: inline;
+	float: right;
+	padding-right: 100px;
+}
+.ui-btn-up-a {
+	border-left: 31px solid transparent; 
+	border-top: 31px solid #e5791f;
+	border-bottom: 1px solid #ffffff;
+	/*border-right: 1px solid #ffffff;*/
+	display: inline-block;
+	height: 0;  
+	line-height: 10px;
+	width: 144px;
+	transition: all .2s ease;
+}
+.ui-btn-up-a:hover, .ui-btn-up-a:focus, .ui-btn-hover-a {
+	border-left: 31px solid transparent; 
+	border-top: 31px solid #5e2d61;
+	display: inline-block;
+	height: 0;  
+	width: 143.8px;
+	transition: all .2s ease;
+}
+#id_languageDropdown{
+	width: 144px;
+	margin-left: 29px;
+	height: 31px;
+}
+.ui-btn-inner{
+	line-height: 1.2em;
+	margin-bottom: 1px;
+	top: -31px;
+	height: 31 px;
+}

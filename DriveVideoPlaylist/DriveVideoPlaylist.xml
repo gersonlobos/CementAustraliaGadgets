@@ -1,0 +1,313 @@
+<Module>
+<ModulePrefs 
+	scrolling="true"
+	height="850" 
+	width="100%"
+	title="DriveVideoPlaylist"
+	title_url="http://www.whitestratus.com"
+	description="A Custom Google Gadget for Displaying a Google Drive Video Playlist Based on the Parent Folder ID."
+	author="White Stratus" 
+	author_email="support@whitestratus.com" 
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+	author_link="http://www.whitestratus.com" 
+	category="UAS"> 
+	
+	</ModulePrefs>
+	<UserPref name="parentFolderID" display_name="Highlest Level Parent Folder ID" required="true"></UserPref>
+	<UserPref name="title" display_name="Title to Display (if left blank, then the default title 'Video Gallery' will be diplayed)" required="false"></UserPref>
+<Content type="html">
+<![CDATA[ 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link href='https://fonts.googleapis.com/css?family=Arimo:400,700|Noto+Sans:400,700,400italic|Pontano+Sans' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" type="text/css"href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/foundation.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/style.common.cemaust.intranet.css"/>
+
+    <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/royalslider.min.css"/>
+
+    <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/rs-default.css"/>
+
+    <link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/style.tabbed.slider.css"/>
+
+	<link rel="stylesheet" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/style.drive.video.library.cemaust.intranet.css" />
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+	<script TYPE="text/javascript" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/DriveVideoPlaylist/jquery.royalslider.min.js"></script>
+	
+</head>
+<body>
+<div class="auth" id="auth" style="display: none">
+		<div class="authwrapper">
+			<div class="authTitle">
+				A Message from Cement Australia's Technical Support Team
+			</div>
+			<div class="authText">
+				In order for you to experience the enhanced features of the UAS site, you will need to Sign into Google the first time you use this gadget. You will only need to do this once.
+				<br /><br />
+				After clicking the button below, you will be presented with a second screen that will also prompt you to allow the intranet to access data from your Google Apps account.  Once you click through both screens, the feature will be enabled for your account.
+			</div>
+		</div>					
+		<button class="authButton red" id="authorize-button">Sign-in with <span>Google</span></button>
+	</div>
+    <div id="header_container">
+		<h2 class="gadget_title">
+		</h2>
+    </div>
+<div class="container">
+     <div class="row" id="contentMain">
+        <div class="large-7 large-centered columns" id="content_inner">
+                <iframe style="visibility:hidden;" onload="this.style.visibility='visible';" id="ifrm" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns">
+            <div id="content-slider-1" class="royalSlider contentSlider rsDefault rsHor" >
+            </div>
+        </div>
+    </div>
+    </div>		
+    <script type="text/javascript">
+    var CLIENT_ID = '291265929725-cv3nra9u6dqkuc4i478e17oir9pfkk85.apps.googleusercontent.com';
+	var API_KEY = 'AIzaSyCUVqz2InE5egrhGIOAUXsd4zgXck823tw';
+	var SCOPES = 'https://www.googleapis.com/auth/drive';
+	var DOMAIN = 'cemaust.com.au';
+	var VIDEOS = [];
+   	function handleClientLoad() {
+			gapi.client.setApiKey(API_KEY);
+			window.setTimeout(checkAuth, 1);
+		}
+
+		function checkAuth() {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: true,
+                                include_granted_scopes:false
+
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+		}
+
+		function handleAuthResult(authResult) {
+    		var authorizeWindow = document.getElementById('auth');
+    		var authorizeButton = document.getElementById('authorize-button');
+    		if (authResult && !authResult.error) {
+        			authorizeWindow.style.display = 'none';
+       				makeApiCall();
+       
+    			} 
+    		else {
+        		authorizeWindow.style.display = "block";
+        		authorizeButton.onclick = handleAuthClick;
+    		}
+		}
+
+		function handleAuthClick(event) {
+			var options = {
+				client_id: CLIENT_ID,
+				scope: SCOPES,
+				immediate: false
+			};
+			gapi.auth.authorize(options, handleAuthResult);
+			return false;
+		}
+
+	
+ 	function makeApiCall() {  
+     	var prefs = new gadgets.Prefs();
+		var driveParentId = prefs.getString("parentFolderID");
+    	gapi.client.load('drive', 'v2', makeRequest(driveParentId)); 
+		
+	}
+function sortVideos(a,b) {
+			if (a.title < b.title) return -1;
+			if (a.title > b.title) return 1;
+			return 0;
+		}
+
+var prefs = new gadgets.Prefs();
+var gadgetTitle = prefs.getString("title");
+$('.gadget_title').prepend(gadgetTitle);
+
+function makeRequest(folderID) {
+	var accessToken = gapi.auth.getToken().access_token;
+    var url = "https://www.googleapis.com/drive/v2/files?q='"+folderID+"'+in+parents&key="+API_KEY;
+	$.ajax({
+		type: 'GET',
+		url: url,
+		headers: {'Authorization': 'Bearer ' + accessToken},
+		async: true,
+		success: function(json) {
+			var items = json.items; 
+			//console.log(items);
+			
+			
+			for (i=0; i<items.length; i++) {
+				var type = items[i].mimeType;
+				if(type == "application/vnd.google-apps.folder")
+				{
+				  var folderID = items[i].id;
+				  makeRequest(folderID);
+				}else{
+					VIDEOS = VIDEOS.concat(items[i]);
+				}
+				
+			}
+			//console.dir(VIDEOS);
+		},
+		error: function(e) {
+		   //console.log(e.message);
+		}
+	});					
+}	
+
+function makeSlides(){
+	var length = VIDEOS.length;
+	var items = VIDEOS;
+	items.sort(sortVideos);
+	var count = 0;
+	var slideCount = parseInt(length/6);
+	if(length%6 > 0){
+		slideCount = slideCount + 1;
+	}
+	var slideNumber = 0;
+	//console.log("In Make slides!!");
+	//console.log(slideCount);
+	if(length > 0){
+		for(var i = 0; i < slideCount; i++){
+			
+			var currSlide = "slide"+slideNumber;
+			//console.log(currSlide);
+			var rsContent = document.createElement('div');
+			rsContent.className = "rsContent";
+			rsContent.id = currSlide;
+			rsContent.innerHTML = 	'<div class="rsTmb">'+
+									'<h2>'+ (slideNumber+1) + '</h2>'+
+									'</div>'
+			document.getElementById('content-slider-1').appendChild(rsContent);
+			for (var j = 0; j<6; j++){
+				//console.log(count);
+				if(count >= length)break;
+				var userTitle = items[count].title;
+							
+							
+				var dateModified = items[count].modifiedDate;
+				var date = new Date(dateModified);
+				var months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+				var dateString = months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+				var videoId = items[count].id;
+				var desc = "";
+				var shortDesc = "";
+				var text = items[count].description;
+				//console.log(text);
+				if(text == "" || text == null){}else{
+				desc = text.split(/\s+/, 19);
+				shortDesc = desc.join(" ");
+				if(desc.length == 19)
+				{
+					shortDesc = shortDesc + '...';
+				}
+				//console.log(shortDesc);
+				}
+				var userThumb = items[count].thumbnailLink;
+				if (userThumb == null) {
+					userThumb = "https://sites.google.com/a/dev.vopak.com/vopak-intranet-file-repository-dev/video-gallery/icon_drive_default.jpg";
+				}
+
+				var userWebView = items[count].webViewLink;
+				var userDocIcon = items[count].iconLink;
+
+				var fileInfo = document.createElement('div');
+				fileInfo.className = "four columns";
+				fileInfo.innerHTML =
+					'<a class="caption_holder" href="https://docs.google.com/a/'+DOMAIN+'/file/d/'+videoId+'/preview" target="ifrm">'+
+									'<div class="thumbHolder">'+
+										'<img src="'+ userThumb +'"/>'+
+									'</div>' +
+									'<div class="thumbnail_overlay">&nbsp;</div>' +
+								
+								'<span class="date_mod">'+dateString +'</span>'+
+								'<h2>' + userTitle + '</h2>'+
+								'<p>'+ shortDesc +'</p></a>';
+				//console.log(fileInfo);
+				document.getElementById(currSlide).appendChild(fileInfo);
+				
+				//console.log(count);
+				count++;
+			}
+			slideNumber++;
+		}
+	
+		// load the first video
+		var firstURL = items[0].id;
+		var el = document.getElementById('ifrm');
+		
+		el.src = 'https://docs.google.com/a/'+DOMAIN+'/file/d/' + firstURL + '/preview';
+		var $links = $('.caption_holder');
+			$links.click(function () {
+			$links.removeClass('selected');
+			$('#ifrm').removeClass('hidden');
+			$(this).addClass('selected');
+			$('#ifrm').addClass('hidden');
+		});
+	}
+	
+}
+
+    function initRS(){
+		//console.log('initRS started!');
+		$('#content-slider-1').royalSlider({
+						arrowsNav: true,
+						arrowsNavAutoHide: false,
+						fadeinLoadedSlide: true,
+						controlNavigationSpacing: 0,
+						controlNavigation: 'tabs',
+						navigateByClick: false,
+						keyboardNavEnabled: true,
+						imageScaleMode: 'fill',
+						imageAlignCenter:true,
+						slidesSpacing: 0,
+						loop: true,
+						loopRewind: false,
+						numImagesToPreload: 1,
+					   thumbs: {
+							  autoCenter: false,
+							  fitInViewport: true,
+							  spacing: 0,
+							  paddingBottom: 0,
+							  arrowsAutoHide: false,
+							  autoHideControlNav:false,
+							  autoHideBlocks: true
+							}
+					});	
+	}
+    // setup the click handler
+
+	$(document).ready(function() {
+		  $('#authorize-button').on('click', handleAuthClick);
+                  $('.thumbHolder').hover(function () {
+                     console.log('hovering!!!');
+                     $(this).find('.thumbnail_overlay').addClass('active');  //Add the active class to the area is hovered
+                     }, function () {
+                     $(this).find('.thumbnail_overlay').removeClass('active');
+                     });
+
+		  $.getScript('//apis.google.com/js/api.js', function() {
+				gapi.load('auth:client', handleClientLoad);
+		  });
+		  //console.log("In the Document Ready part");
+		  $(document).ajaxStop(function(){
+				//console.log("In AJAXSTOP!!");
+				makeSlides();
+				initRS();
+				document.getElementsByClassName("caption_holder")[0].className += " selected";
+			
+		  });
+	});
+    </script>
+
+]]> 
+</Content>
+</Module>

@@ -1,0 +1,528 @@
+body, html {
+	width:100%;
+	overflow-x:hidden;
+	background:transparent;
+	background-color:transparent !important;
+}
+
+.row {
+	max-width:none;
+}
+#tab-1, 
+#tab-2 {
+	float:none;
+}
+li { overflow:hidden; }
+
+ul { overflow:visible; }
+
+a {
+	text-decoration: none;
+	color:#555;
+}
+
+#header_container {
+	overflow:visible;
+	position:relative;
+	z-index:400000;
+}
+
+#results > h1 {
+	text-align: center;
+	font-weight: 500;
+	font-family: sans-serif;
+	color: #555;
+	letter-spacing: -1px;
+	font-size: 34px;
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+li:hover {
+	background: #F4F4F4; }
+
+a.driveLink, 
+li.sitesResult a {
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	padding: 0px 0px 0px;
+	font-weight: 400;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+	padding-right: 20px;
+	border-bottom: 1px solid transparent;
+	color: #333;
+	letter-spacing: 0.04em;
+	text-transform: capitalize;
+}
+a.driveLink:hover {
+	color:#000;
+	text-decoration:none;
+}
+
+li.driveResult {
+padding: 8px 10px;
+border-bottom: 1px solid rgba(0,0,0,0.05);
+border-top: 1px solid #FFF;
+border-left: 4px solid #FFF;
+}
+
+li.sitesResult {
+padding: 10px 10px 10px 20px;
+border-bottom: 1px solid #eee;
+border-top:1px solid #FFF;
+border-left: 4px solid #FFF;
+}
+
+li.sitesResult a {
+	text-transform: capitalize;
+	font-family: 'Arimo', sans-serif;
+}
+
+li.driveResult:hover,
+li.sitesResult:hover {
+	background: #F9f9f9;
+	border-top: 1px solid #f9f9f9 !important;
+	/*---------------------------- CSS Change -----------------------------------------*/
+	border-left: 4px solid #0066cc;
+	/*---------------------------- CSS Change -----------------------------------------*/
+}
+
+.pageResult {
+	margin:20px auto;
+	max-width:88%;
+	padding:5%;
+	background:#f9f9f9;
+	border:1px solid rgba(0,0,0,0.05);
+	color:#333;
+	font-family:'Arimo', sans-serif;
+	font-size:12px;
+	font-style:italic;
+}
+
+.results {
+	padding: 0;
+	background: transparent;
+	display: block;
+}
+
+/*------SELECT MENUS-----*/
+#drive_sorter {
+	border:none;
+	padding:10px 0px;
+	overflow:hidden;
+}
+
+form label {
+font-size: 14px;
+color: #333;
+cursor: pointer;
+display: block;
+font-weight: 400;
+line-height: 20px;
+padding-bottom: 5px;
+padding-top: 5px;
+font-family: 'Arimo', sans-serif;
+}
+.select_holder {
+background: #f9f9f9;
+padding: 5px 2%;
+border: 1px solid rgba(0,0,0,0.04);
+width: 31.7%;
+margin-right: 1.8%;
+float: none;
+display: inline-block;
+overflow: hidden;
+}
+
+.select_holder:last-child {
+margin-right: 0;
+float: none !important;
+}
+
+select {
+	border: none;
+	border-radius: 0;
+	color: #666;
+	display: block;
+	padding: 8px 32px 8px 10px;
+	position: relative;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+	background-image: URL(https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/dropdown-icon.png);
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.05),inset 1px 1px 1px rgba(0,0,0,0.1);
+	background-color:#FFF;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 20px;
+	width: 100%;
+	-webkit-appearance: none;
+	-webkit-callout-color: rgba(0,0,0,0);
+	background-repeat: no-repeat;
+	background-position: 101% -8px;
+	-webkit-outline: none;
+	outline: none;
+	margin: 0;
+	background-size: 38px;
+}
+select:focus {
+	box-shadow:none;
+	background-color:#FFF;
+	-webkit-box-shadow:none;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.15),inset 0px 0px 0px 1px rgba(0,0,0,0.4);
+	
+	
+}
+
+.select_holder select#dropdown_list:before {
+position: absolute;
+z-index: 2;
+top: 0;
+right: 0;
+width: 30px;
+height: 100%;
+background: #515050;
+content: '';
+}
+.select_holder select#dropdown_list:after {
+border-top: 6px solid #FFF;
+border-right: 6px solid transparent;
+border-left: 6px solid transparent;
+content: '';
+position: absolute;
+right: 10px;
+top: 16px;
+z-index: 3;
+}
+
+/*---------END SELECT MENUS-----*/
+
+.resultsTitle {
+	font-family: sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	padding: 20px 10px 10px 5px;
+	color: #555;
+	letter-spacing: 0;
+	right: 0;
+	left: 0;
+	top: 0;
+}
+
+.row .row {
+	width: auto;
+	margin-left: 0;
+	margin-right: 0;
+
+}
+
+#driveResults, .driveResults {
+}
+#driveContent {
+margin: 0;
+padding: 0;
+}
+#sitesContent {
+overflow-y: auto;
+bottom: 0;
+margin: 0;
+-webkit-overflow-scrolling:touch;
+
+}
+.sitesContent {
+	color: #fabb00;
+	font-family:sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 5px 0px 5px;
+	font-style: italic;
+}
+
+.driveDate, .sitesDateandCrumb {
+	color: #777;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: 10px;
+	letter-spacing: 1px;
+	line-height: 16px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.driveDate {
+	padding-top: 2px;
+}
+
+.sitesDateandCrumb span {
+margin-left: 0px;
+display: block;
+font-size: 9px;
+font-weight: 600;
+font-family: sans-serif;
+color: #666;
+padding-top: 2px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.docIcon {
+	width: 15px;
+	margin-right: 8px;
+	margin-top: 5px;
+	float:left;
+}
+
+.driveResults { margin-top:20px; }
+.driveResults strong {
+/*---------------------------- CSS Change -----------------------------------------*/
+color: #0066cc;
+/*---------------------------- CSS Change -----------------------------------------*/
+}
+
+.controls {
+background: #fafafa;
+overflow: hidden;
+padding: 10px;
+border: 1px solid #eee;
+display: block;
+float: none;
+margin: 15px 0px;
+}
+.nextLink, 
+.previousLink {
+	font-family: 'Arimo', sans-serif;
+	font-size: 13px;
+	text-decoration: none;
+	color: #555;
+	padding: 10px;
+}
+.nextLink, 
+.previousLink {
+font-family: 'Arimo', sans-serif;
+font-size: 13px;
+text-decoration: none;
+color: #555;
+padding: 6px 15px;
+border: 1px solid #ebebeb !important;
+background: #F2F2F2;
+background: -webkit-linear-gradient(top, #Fefefe, #F9f9f9);
+background: -moz-linear-gradient(top, #Fefefe, #F9f9f9);
+background: -ms-linear-gradient(top, #Fefefe, #F9f9f9);
+background: -o-linear-gradient(top, #Fefefe, #F9f9f9);
+-webkit-transition: border .20s;
+-moz-transition: border .20s;
+-o-transition: border .20s;
+transition: border .20s;
+border-radius: 2px;
+}
+.nextLink:hover, 
+.previousLink:hover { 
+border: 1px solid #C6C6C6 !important;
+color:#111 !important;
+background: #F3F3F3;
+background: -webkit-linear-gradient(top, #F8F8F8, #F1F1F1);
+background: -moz-linear-gradient(top, #F8F8F8, #F1F1F1);
+background: -ms-linear-gradient(top, #F8F8F8, #F1F1F1);
+background: -o-linear-gradient(top, #F8F8F8, #F1F1F1);
+ }
+.nextLink:visited, 
+.previousLink:visited { color: #555; }
+
+
+.nextLink { float: right; }
+.previousLink { float: left; }
+/*a.nextLink:hover, a.nextLink:focus,
+a.previousLink:hover, a.previousLink:focus {
+	color:#fabb00;
+}*/
+
+/*-----------------------------------------*/
+
+.loading {
+	position: absolute;
+	top: 20%;
+	left: 40%;
+	width: 200px;
+	text-align: center;
+	padding: 60px 5% 20px;
+	background: URL(https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/466.gif) center 10px no-repeat rgba(0,0,0,.7);
+	border: 1px solid #000;
+	font-size: 15px;
+	font-family: 'arimo', sans-serif;
+	font-weight: 600;
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.25);
+	color: #FFF;
+	z-index: 5000;
+	border-radius: 3px;
+}
+.sitesTitle {
+font-size: 18px;
+line-height: 22px;
+font-family: sans-serif;
+font-weight: 400;
+}
+
+.panels_container {
+margin:0;
+padding: 0;
+background: #FFF;
+border: none;
+}
+.tab-container {
+padding: 0;
+margin: 0 auto;
+display: block;
+overflow: hidden;
+}
+.tabSet {
+margin: 0;
+padding-left: 8px;
+list-style: none;
+display: block;
+overflow: hidden;
+}
+.tab {
+	background: transparent;
+	border: none;
+	border-bottom: none;
+	text-decoration: none;
+	display: inline-table;
+	margin-right: 4px;
+	line-height: 48px;
+	font-size: 36px;
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 1px;
+}
+.tab a {
+font-size: 40px;
+position: relative;
+padding: 0px;
+outline: none;
+font-family: sans-serif;
+color: #aaa;
+text-decoration: none;
+text-align: center;
+height: 0;
+display: block;
+line-height: 44px;
+float: none;
+z-index: 20;
+position: relative;
+text-transform: capitalize;
+font-weight: 200;
+}
+.tab a:hover { 
+
+	color:#003399;
+	background:none;
+	
+}
+.tab.active {
+background: none;
+
+z-index: 1000;
+}
+.tab.active a {
+/*---------------------------- CSS Change -----------------------------------------*/
+color: #0066cc;
+/*---------------------------- CSS Change -----------------------------------------*/
+height: auto;
+}
+.panel {
+padding: 0;
+margin: 0;
+text-align: left;
+}
+
+.panel {
+border-style: none;
+border-width: 0;
+border-color: #FFF;
+margin-bottom: 0;
+padding: 0;
+background: none;
+}
+
+.tab:hover {
+	background:none !important;
+}
+
+.row .row {
+width: 100%;
+margin-left: 0;
+margin-right: 0;
+}
+
+@media screen and (max-width:568px) {
+	.loading {
+position: absolute;
+top: 10%;
+left: 20%;
+	}
+	
+	body,html {
+		width:100%;
+		overflow-x:hidden;
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		
+	}
+	
+	.row, .row .row {
+		width:100% !important;
+		max-width:none !important;
+	}
+	
+.panel {
+	padding: 0;
+	margin: 0;
+	
+}
+	.column, .columns {
+		
+		width:100%;
+		padding:0;
+		overflow:hidden;
+	}
+	
+	.tab a {
+		font-size: 30px;
+	}
+.select_holder {
+	background: #f9f9f9;
+	padding: 5px 4%;
+	border: 1px solid rgba(0,0,0,0.04);
+	display: block !important;
+	margin-right: 0;
+	float: none !important;
+	margin-bottom: 10px;
+	width: 100%;
+}
+form label {
+font-size: 16px;
+font-family: sans-serif;
+}
+select {
+	font-size:13px;
+	line-height:18px;
+}
+}

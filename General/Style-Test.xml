@@ -1,0 +1,47 @@
+<Module>  
+<ModulePrefs 
+	scrolling="false"
+	height="60"
+	width="100%"
+	title="CIO Dashboard Charts Date picker"
+	description="A Custom Google Gadget for displaying Charts pulling data from a Google Spreadsheet."
+	author="White Stratus"
+	author_email="support@whitestratus.com"
+	author_aboutme="Google Apps Deployment Specialist Consultants and Cloud Computing Experts" 
+	author_link="http://www.whitestratus.com" 
+	category="CIO Dashboard" >
+	<Require feature="locked-domain"/>
+	<Require feature="dynamic-height"/>
+</ModulePrefs>
+
+<UserPref name="title" display_name="Title" required="true"/>
+
+<Content type="html">
+<![CDATA[
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+	<link href='https://googledrive.com/host/0Bz9aUgVgF_RZVDhZVmdOTlhpRlE/general-style.css' rel='stylesheet' type='text/css' />   
+</head>
+
+<body>
+	<div data-role="page" id="home">
+		<div data-role="header" id="header" class="generalHeader">
+			<h1 id="id_gadgetTitle">Gadget Title</h1>
+		</div>
+		<div>
+			This is random text to separate the 2 headers. This is random text to separate the 2 headers. This is random text to separate the 2 headers. This is random text to separate the 2 headers. This is random text to separate the 2 headers. 
+		</div>
+		<div data-role="header" id="header" class="generalHeader reverse">
+			<h1 id="id_gadgetTitle">Gadget Title Reverse</h1>
+		</div>
+		<div><a class="generalButton">General Button</a></div>
+		<div><a class="generalLink">General Link</a></div>
+		
+	</div><!--End page-->
+</body>
+</html>
+]]> 
+</Content>
+</Module>
