@@ -65,6 +65,7 @@
 	
 <script type='text/javascript'>
             $(window).load(function () {
+            // gerson lobos
                 var prefs = new gadgets.Prefs();
 
                 var item1Url = prefs.getString("item1Url");

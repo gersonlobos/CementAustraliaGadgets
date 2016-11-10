@@ -42,12 +42,15 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 		<link href='https://fonts.googleapis.com/css?family=Arimo:400,700|Noto+Sans:400,700,400italic|Pontano+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/foundation.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/style.common.randstad.intranet.css"/>
-		<link rel="stylesheet" type="text/css" href="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/unified.search.css"/>
+		<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/foundation.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/style.common.randstad.intranet.css"/>
+
+		<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/unified.search.css"/>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/foundation.min.js"></script>
+
+		<script type="text/javascript" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/foundation.min.js"></script>
 	</head>
     <body>
 		<div class="loading" id="loading">Searching... </div>
@@ -256,8 +259,8 @@
 			var pageNumber = 0;
 		//OAuth variables
 			//credentials
-			var API_KEY = 'AIzaSyBotRV7eyWrUg4QWeLfAcC_oFvN92Xf3RE';
-			var CLIENT_ID = '1058593784161.apps.googleusercontent.com';
+			var API_KEY = 'AIzaSyCUVqz2InE5egrhGIOAUXsd4zgXck823tw';
+			var CLIENT_ID = '291265929725-cv3nra9u6dqkuc4i478e17oir9pfkk85.apps.googleusercontent.com';
 
 			var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/ https://www.googleapis.com/auth/userinfo.email';
 			

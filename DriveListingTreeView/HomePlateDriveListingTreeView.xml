@@ -21,10 +21,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-	<script type="text/javascript" src="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-jquery-fancybox-script.js"></script>
+	<script type="text/javascript" src="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/drivelisting-jquery-fancybox-script.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-jquery-fancybox-style.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="https://sites.google.com/a/public.gfs.com/homeplate-assets/drivelisting-treeview-style.css"/>
+	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/drivelisting-jquery-fancybox-style.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/drivelisting-treeview-style.css"/>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:700italic,400,300,700,800' rel='stylesheet' type='text/css'/>
 	
 	<style type="text/css">
@@ -34,10 +34,10 @@
 	</style>
 	
     <script type='text/javascript'>
-		var CLIENT_ID = '161893176405.apps.googleusercontent.com';
-		var API_KEY = 'AIzaSyBCTegXmVN6DvdDzURiOuSxshAECoW0jkg';
+		var CLIENT_ID = '291265929725-cv3nra9u6dqkuc4i478e17oir9pfkk85.apps.googleusercontent.com';
+		var API_KEY = 'AIzaSyCUVqz2InE5egrhGIOAUXsd4zgXck823tw';
 		var SCOPES = 'https://www.googleapis.com/auth/drive https://sites.google.com/feeds/';
-		var DOMAIN = 'gfs.com';
+		var DOMAIN = 'cemaust.com';
 		var prefs = new gadgets.Prefs();
 		var _PARENT_FOLDER_ID_ = prefs.getString("driveParentId"); 
 		var _FOLDER_ID_ = ''; //store current subfolder ID

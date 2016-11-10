@@ -99,7 +99,7 @@ position: absolute;
 left: 0;
 top: 0;
 right: 0;
-background: URL(https://googledrive.com/host/0BybYotsuLktyUlNnS3JCdzA4YW8) left bottom no-repeat, #fff;
+background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/BackGroundTitleFix.jpg') left bottom no-repeat, #fff;
 background-size: 55% 200%;
 min-height: 35px;
 border-bottom: 3px solid #5E2D61;
@@ -167,7 +167,7 @@ color: #fff;
 .folderButton {
 right: 8px;
 background-color: #f2f2f2;
-background-image: url(https://sites.google.com/a/public.gfs.com/homeplate-assets/arrow-browser-right.png);
+background-image: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/arrow-browser-right.png');
 background-position: center -38px;
 background-repeat: no-repeat;
 padding: 6px 12px;
@@ -474,7 +474,7 @@ padding-top: 5px;
 }
 
 .fancybox-title-outside-wrap a {
-background: url(https://sites.google.com/a/public.gfs.com/homeplate-assets/icon-open-in-drive.png) no-repeat center center;
+background: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/icon-open-in-drive.png') no-repeat center center;
 float: right;
 padding: 8px 20px;
 display: inline-block;
@@ -482,7 +482,7 @@ background-size:45px;
 }
 
 .fancybox-title-outside-wrap a.download_doc {
-background: url(https://sites.google.com/a/public.gfs.com/homeplate-assets/icon-download.png) no-repeat center 0px;
+background: url('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/icon-download.png') no-repeat center 0px;
 background-size: 30px;
 }
 

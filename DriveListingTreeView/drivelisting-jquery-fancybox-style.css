@@ -169,7 +169,7 @@
 	overflow: hidden;
 	display: none;
 	z-index: 8010;
-	background: URL(https://googledrive.com/host/0BybYotsuLktyYmUxeXRfQlVmTVk/fancybox_overlay.png);
+	background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/DriveListingTreeView/fancybox_overlay.png');
 }
 
 .fancybox-overlay-fixed {

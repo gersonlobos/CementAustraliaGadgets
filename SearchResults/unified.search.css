@@ -158,7 +158,7 @@ select {
 	-webkit-user-select: none;
 	user-select: none;
 /*	background-image: URL(https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/dropdown-icon.png);*/
-	background-image: URL(https://googledrive.com/host/0BybYotsuLktyaFIyUVZCWjlFTzg);
+	background-image: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/dropdown-icon.png');
 	box-shadow: 1px 1px 1px rgba(0,0,0,0.05),inset 1px 1px 1px rgba(0,0,0,0.1);
 	background-color:#FFF;
 	font-weight: 400;
@@ -362,7 +362,7 @@ a.previousLink:hover, a.previousLink:focus {
 	text-align: center;
 	padding: 60px 5% 20px;
 /*	background: URL(https://googledrive.com/host/0BybYotsuLktyczFKR0daX29WeXc/466.gif) center 10px no-repeat rgba(0,0,0,.7);*/
-    background: URL(https://googledrive.com/host/0BybYotsuLktyZ0ZCNERpenY3bTA) center 10px no-repeat rgba(0,0,0,.7);
+    background: URL('https://storage.googleapis.com/gadgets-cloudstorage.appspot.com/0thers/SearchResults/466.gif') center 10px no-repeat rgba(0,0,0,.7);
 	border: 1px solid #000;
 	font-size: 15px;
 	font-family: 'arimo', sans-serif;
